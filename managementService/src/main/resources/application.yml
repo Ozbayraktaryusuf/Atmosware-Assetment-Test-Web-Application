@@ -1,0 +1,27 @@
+eureka:
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:5000/eureka
+  instance:
+    instance-id: ${spring.application.name}:${instanceId:${random.value}}
+    preferIpAddress: true
+server:
+  port: 5001
+spring:
+  application:
+    name: management-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/gyt_management
+    username: postgres
+    password: 12345
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      jakarta:
+        persistence:
+          validation:
+            mode: none
+    show-sql: true

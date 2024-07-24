@@ -1,0 +1,20 @@
+server:
+  port: 5002
+eureka:
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:5000/eureka
+  instance:
+    instance-id: ${spring.application.name}:${instanceId:${random.value}}
+    preferIpAddress: true
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      routes[0]:
+        id: management-service
+        predicates[0]: Path=/management-service/api/v1/**
+        uri: lb://management-service
