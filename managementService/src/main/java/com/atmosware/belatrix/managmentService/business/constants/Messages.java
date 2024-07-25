@@ -8,4 +8,13 @@ public class Messages {
     public static class OrganizationMessages{
         public static final String ORGANIZATION_NAME_CAN_NOT_BE_DUPLICATED="organizationNameCanNotBeDuplicated";
     }
+
+    public static class RoleMessages{
+        public static final String ROLE_CAN_NOT_BE_DUPLICATED="roleNameCanNotBeDuplicated";
+    }
+
+    public static class UserMessages{
+        public static final String USER_CAN_NOT_BE_DUPLICATED="userNameCanNotBeDuplicated";
+        public static final String USER_SHOULD_BE_EXISTS="userNotFound";
+    }
 }

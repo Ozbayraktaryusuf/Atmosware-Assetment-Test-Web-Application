@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-24T17:44:57+0300",
+    date = "2024-07-25T11:40:26+0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.2 (Oracle Corporation)"
 )
 @Component
@@ -42,8 +42,6 @@ public class OrganizationMapperImpl implements OrganizationMapper {
         Organization organization = new Organization();
 
         organization.setOrganizationName( createOrganizationRequest.organizationName() );
-        organization.setEmail( createOrganizationRequest.email() );
-        organization.setPassword( createOrganizationRequest.password() );
 
         return organization;
     }
@@ -56,17 +54,13 @@ public class OrganizationMapperImpl implements OrganizationMapper {
 
         UUID id = null;
         String organizationName = null;
-        String email = null;
-        String password = null;
         LocalDate createdDate = null;
 
         id = organization.getId();
         organizationName = organization.getOrganizationName();
-        email = organization.getEmail();
-        password = organization.getPassword();
         createdDate = xmlGregorianCalendarToLocalDate( localDateTimeToXmlGregorianCalendar( organization.getCreatedDate() ) );
 
-        CreateOrganizationResponse createOrganizationResponse = new CreateOrganizationResponse( id, organizationName, email, password, createdDate );
+        CreateOrganizationResponse createOrganizationResponse = new CreateOrganizationResponse( id, organizationName, createdDate );
 
         return createOrganizationResponse;
     }

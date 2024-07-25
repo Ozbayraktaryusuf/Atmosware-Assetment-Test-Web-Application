@@ -1,7 +1,10 @@
 package com.atmosware.belatrix.managmentService.entities.concretes;
 
 import com.atmosware.belatrix.managmentService.core.entities.BaseEntity;
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,13 +19,13 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = "organizations")
+@Table(name = "roles")
 @SQLRestriction(value = "deleted_date is null")
-public class Organization extends BaseEntity<UUID> {
-    @Column(name = "organization_name")
-    private String organizationName;
+public class Roles extends BaseEntity<UUID> {
 
-    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
-    private List<User> userList;
+    private String name;
+
+    @OneToMany(mappedBy = "role",cascade = CascadeType.ALL)
+    private List<UserRole> userRoles;
+
 }
-

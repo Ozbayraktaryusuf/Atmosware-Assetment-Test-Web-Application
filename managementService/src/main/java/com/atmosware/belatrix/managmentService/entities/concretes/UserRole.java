@@ -1,28 +1,30 @@
 package com.atmosware.belatrix.managmentService.entities.concretes;
 
 import com.atmosware.belatrix.managmentService.core.entities.BaseEntity;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.SQLRestriction;
 
-import java.util.List;
 import java.util.UUID;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table(name = "organizations")
+@Table(name = "user_roles")
 @SQLRestriction(value = "deleted_date is null")
-public class Organization extends BaseEntity<UUID> {
-    @Column(name = "organization_name")
-    private String organizationName;
+public class UserRole extends BaseEntity<UUID> {
+    @ManyToOne
+    @JoinColumn(name = "user_id",nullable = false)
+    private User user;
 
-    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
-    private List<User> userList;
+    @ManyToOne
+    @JoinColumn(name="role_id",nullable = false)
+    private Roles role;
 }
-
