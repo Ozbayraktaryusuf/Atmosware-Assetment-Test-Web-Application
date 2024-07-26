@@ -3,12 +3,12 @@ package com.atmosware.belatrix.managmentService.api.controllers;
 import com.atmosware.belatrix.managmentService.business.abstracts.RoleService;
 import com.atmosware.belatrix.managmentService.business.dto.requests.CreateRoleRequest;
 import com.atmosware.belatrix.managmentService.business.dto.responses.CreateRoleResponse;
+import com.atmosware.belatrix.managmentService.business.dto.responses.GetByIdRoleResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @AllArgsConstructor
@@ -18,5 +18,10 @@ public class RolesController {
     @PostMapping
     public CreateRoleResponse createRole(@Valid @RequestBody CreateRoleRequest createRoleRequest){
         return this.roleService.createRole(createRoleRequest);
+    }
+
+    @GetMapping("{id}")
+    public GetByIdRoleResponse getById(@PathVariable UUID id){
+        return this.roleService.getById(id);
     }
 }

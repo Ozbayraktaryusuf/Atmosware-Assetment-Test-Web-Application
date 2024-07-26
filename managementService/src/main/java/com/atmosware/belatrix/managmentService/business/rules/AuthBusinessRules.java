@@ -16,6 +16,7 @@ public class AuthBusinessRules {
     private final UserRepository userRepository;
     private final AuthenticationManager authenticationManager;
     private final MessageService messageService;
+    //TODO: Don't return wanted message take a look
     public void emailAndPasswordShouldBeMatch(String email, String password) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
         if (!authentication.isAuthenticated()) {

@@ -4,6 +4,7 @@ import com.atmosware.belatrix.managmentService.business.abstracts.RoleService;
 import com.atmosware.belatrix.managmentService.business.abstracts.UserService;
 import com.atmosware.belatrix.managmentService.business.dto.requests.CreateRoleRequest;
 import com.atmosware.belatrix.managmentService.business.dto.responses.CreateRoleResponse;
+import com.atmosware.belatrix.managmentService.business.dto.responses.GetByIdRoleResponse;
 import com.atmosware.belatrix.managmentService.business.mappers.RoleMapper;
 import com.atmosware.belatrix.managmentService.business.rules.RoleBusinessRules;
 import com.atmosware.belatrix.managmentService.dataAccess.RoleRepository;
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Locale;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -34,4 +36,14 @@ public class RoleManager implements RoleService {
 
         return this.roleMapper.toCreateRoleResponse(createdRole);
     }
+
+    @Override
+    public GetByIdRoleResponse getById(UUID id) {
+        //TODO add business roles
+        Roles role=this.roleRepository.findById(id).get();
+
+        return this.roleMapper.toGetByIdRoleResponse(role);
+    }
+
+
 }
