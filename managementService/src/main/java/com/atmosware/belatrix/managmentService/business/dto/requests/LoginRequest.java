@@ -10,7 +10,7 @@ public record LoginRequest(
         String email,
 
         @NotNull
-        @Size(min = 8, max = 16)
+        @Size(min = 6, max = 16)
         String password
 ) {
 }

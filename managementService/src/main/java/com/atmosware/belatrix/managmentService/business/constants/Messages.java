@@ -16,5 +16,7 @@ public class Messages {
     public static class UserMessages{
         public static final String USER_CAN_NOT_BE_DUPLICATED="userNameCanNotBeDuplicated";
         public static final String USER_SHOULD_BE_EXISTS="userNotFound";
+
+        public static final String LOGIN_FAILED= "loginFailed";
     }
 }

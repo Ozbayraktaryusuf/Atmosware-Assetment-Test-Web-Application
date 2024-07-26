@@ -30,4 +30,10 @@ public class UserBusinessRules {
             throw new NotFoundException(this.messageService.getMessage(Messages.UserMessages.USER_SHOULD_BE_EXISTS));
         }
     }
+    public void userShouldBeExists(UUID id){
+        Optional<User> optionalUser = this.userRepository.findById(id);
+        if (optionalUser.isEmpty()){
+            throw new NotFoundException(this.messageService.getMessage(Messages.UserMessages.LOGIN_FAILED));
+        }
+    }
 }

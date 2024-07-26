@@ -2,13 +2,20 @@ package com.atmosware.belatrix.managmentService.business.concretes;
 
 import com.atmosware.belatrix.managmentService.business.abstracts.UserService;
 import com.atmosware.belatrix.managmentService.business.dto.dtos.RegisterUserDto;
+import com.atmosware.belatrix.managmentService.business.dto.requests.UpdateUserRequest;
 import com.atmosware.belatrix.managmentService.business.dto.responses.GetByIdUserResponse;
+import com.atmosware.belatrix.managmentService.business.dto.responses.UpdateUserResponse;
 import com.atmosware.belatrix.managmentService.business.mappers.UserMapper;
 import com.atmosware.belatrix.managmentService.business.rules.UserBusinessRules;
+import com.atmosware.belatrix.managmentService.core.service.JwtService;
 import com.atmosware.belatrix.managmentService.dataAccess.UserRepository;
 import com.atmosware.belatrix.managmentService.entities.concretes.Organization;
 import com.atmosware.belatrix.managmentService.entities.concretes.User;
+import io.jsonwebtoken.Claims;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,6 +32,7 @@ public class UserManager implements UserService {
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
     private final UserBusinessRules userBusinessRules;
+    private final JwtService jwtService;
     @Override
     public void addOrganization(RegisterUserDto registerUserDto, Organization organization) {
         this.userBusinessRules.userCanNotBeDuplicated(registerUserDto.email());
@@ -41,11 +49,11 @@ public class UserManager implements UserService {
 
     @Override
     public GetByIdUserResponse getById(UUID id) {
-        Optional<User> user = this.userRepository.findById(id);
+        this.userBusinessRules.userShouldBeExists(id);
 
-        this.userBusinessRules.userShouldBeExists(user);
+        User user = this.userRepository.findById(id).get();
 
-        return this.userMapper.toGetByIdUserResponse(user.get());
+        return this.userMapper.toGetByIdUserResponse(user);
     }
 
     @Override
@@ -57,5 +65,19 @@ public class UserManager implements UserService {
         Optional<User> userOptional = this.userRepository.findByEmail(email);
         this.userBusinessRules.userShouldBeExists(userOptional);
         return userOptional.get();
+    }
+
+    @Override
+    public UpdateUserResponse updateUser(UpdateUserRequest updateUserRequest, @NonNull HttpServletRequest httpServletRequest) {
+        String token = httpServletRequest.getHeader(HttpHeaders.AUTHORIZATION).substring(7);
+        Claims aaa=jwtService.getClaims(token);
+
+        Object bbb = aaa.get("id");
+
+        User user = this.userRepository.findById(UUID.fromString(bbb.toString())).get();
+
+        user.setPassword(this.passwordEncoder.encode(updateUserRequest.password()));
+
+        return this.userMapper.toUpdateUserResponse(this.userRepository.save(user));
     }
 }

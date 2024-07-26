@@ -1,12 +1,13 @@
 package com.atmosware.belatrix.managmentService.api.controllers;
 
 import com.atmosware.belatrix.managmentService.business.abstracts.UserService;
+import com.atmosware.belatrix.managmentService.business.dto.requests.UpdateUserRequest;
 import com.atmosware.belatrix.managmentService.business.dto.responses.GetByIdUserResponse;
+import com.atmosware.belatrix.managmentService.business.dto.responses.UpdateUserResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -18,5 +19,10 @@ public class UsersController {
     @GetMapping("{id}")
     public GetByIdUserResponse getById(@PathVariable UUID id){
         return this.userService.getById(id);
+    }
+
+    @PutMapping()
+    public UpdateUserResponse update(@Valid @RequestBody UpdateUserRequest updateUserRequest, HttpServletRequest request){
+        return this.userService.updateUser(updateUserRequest,request);
     }
 }
