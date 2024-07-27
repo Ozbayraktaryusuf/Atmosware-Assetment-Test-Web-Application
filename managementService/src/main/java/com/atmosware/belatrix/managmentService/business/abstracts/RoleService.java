@@ -9,4 +9,5 @@ import java.util.UUID;
 public interface RoleService {
     CreateRoleResponse createRole(CreateRoleRequest createRoleRequest);
     GetByIdRoleResponse getById(UUID id);
+
 }

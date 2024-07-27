@@ -11,6 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 @AllArgsConstructor
@@ -27,11 +28,11 @@ public class User extends BaseEntity<UUID> implements UserDetails {
     private String email;
 
     @ManyToOne()
-    @JoinColumn(name = "organization_id",nullable = false)
+    @JoinColumn(name = "organization_id")
     private Organization organization;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    private List<UserRole> userRoles;
+    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER ,cascade = CascadeType.ALL)
+    private List<UserRole> authorities;
 
     @Override
     public String getUsername() {
@@ -40,7 +41,11 @@ public class User extends BaseEntity<UUID> implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        if (this.authorities==null)
+            return new HashSet<>();
+        return authorities.stream().
+                map(UserRole::getRole)
+                .toList();
     }
 
     @Override

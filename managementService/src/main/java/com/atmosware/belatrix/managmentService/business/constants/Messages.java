@@ -19,4 +19,7 @@ public class Messages {
 
         public static final String LOGIN_FAILED= "loginFailed";
     }
+    public static class UserRoleMessages{
+        public static final String USER_ROLE_SHOULD_BE_EXISTS="userRoleNotFound";
+    }
 }

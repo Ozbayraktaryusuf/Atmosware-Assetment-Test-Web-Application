@@ -38,8 +38,8 @@ public class AuthManager implements AuthService {
         claims.put("id", user.getId());
         claims.put("username", user.getEmail());
         claims.put("organizationId",user.getOrganization().getId());
-        //List<String> authorities = user.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList();
-        //claims.put("roles", authorities);
+        List<String> authorities = user.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList();
+        claims.put("roles", authorities);
         return this.jwtService.generateToken(user.getEmail(), claims);
     }
 }

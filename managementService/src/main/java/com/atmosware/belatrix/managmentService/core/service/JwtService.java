@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -50,6 +51,9 @@ public class JwtService
                 .parseClaimsJws(token)
                 .getBody();
 }
+    public List<String> extractRoles(String token) {
+        return getClaims(token).get("roles", List.class);
+    }
     public String extractUser(String token) {
         Claims claims = Jwts
                 .parser()

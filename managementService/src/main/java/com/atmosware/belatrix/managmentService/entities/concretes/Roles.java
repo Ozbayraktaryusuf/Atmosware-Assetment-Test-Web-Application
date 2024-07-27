@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.SQLRestriction;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.util.List;
 import java.util.UUID;
@@ -21,11 +22,19 @@ import java.util.UUID;
 @Entity
 @Table(name = "roles")
 @SQLRestriction(value = "deleted_date is null")
-public class Roles extends BaseEntity<UUID> {
+public class Roles extends BaseEntity<UUID> implements GrantedAuthority {
 
     private String name;
 
     @OneToMany(mappedBy = "role",cascade = CascadeType.ALL)
     private List<UserRole> userRoles;
 
+    public Roles(UUID id){
+        setId(id);
+    }
+
+    @Override
+    public String getAuthority() {
+        return getName();
+    }
 }

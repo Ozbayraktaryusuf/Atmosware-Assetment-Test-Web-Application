@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface UserRoleRepository extends JpaRepository<UserRole, Integer> {
+public interface UserRoleRepository extends JpaRepository<UserRole, UUID> {
     List<UserRole> findAllByUserId(UUID userId);
 
     boolean existsByUserIdAndRoleId(UUID userId, UUID roleId);

@@ -2,8 +2,11 @@ package com.atmosware.belatrix.managmentService.business.dto.requests;
 
 import jakarta.validation.constraints.NotNull;
 
-public record UpdateUserRequest(
+import java.util.UUID;
+
+public record UpdateUserRoleRequest(
         @NotNull
-        String password
+        UUID roleId
 ) {
+
 }
