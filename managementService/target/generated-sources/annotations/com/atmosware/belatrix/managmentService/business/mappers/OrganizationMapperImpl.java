@@ -1,7 +1,9 @@
 package com.atmosware.belatrix.managmentService.business.mappers;
 
-import com.atmosware.belatrix.managmentService.business.dto.requests.CreateOrganizationRequest;
-import com.atmosware.belatrix.managmentService.business.dto.responses.CreateOrganizationResponse;
+import com.atmosware.belatrix.managmentService.business.dto.requests.organization.CreateOrganizationRequest;
+import com.atmosware.belatrix.managmentService.business.dto.requests.organization.UpdateOrganizationRequest;
+import com.atmosware.belatrix.managmentService.business.dto.responses.organization.CreateOrganizationResponse;
+import com.atmosware.belatrix.managmentService.business.dto.responses.organization.UpdateOrganizationResponse;
 import com.atmosware.belatrix.managmentService.entities.concretes.Organization;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,7 +18,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-25T11:40:26+0300",
+    date = "2024-07-28T22:44:16+0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.2 (Oracle Corporation)"
 )
 @Component
@@ -63,6 +65,40 @@ public class OrganizationMapperImpl implements OrganizationMapper {
         CreateOrganizationResponse createOrganizationResponse = new CreateOrganizationResponse( id, organizationName, createdDate );
 
         return createOrganizationResponse;
+    }
+
+    @Override
+    public Organization toOrganization(UpdateOrganizationRequest updateOrganizationRequest) {
+        if ( updateOrganizationRequest == null ) {
+            return null;
+        }
+
+        Organization organization = new Organization();
+
+        organization.setOrganizationName( updateOrganizationRequest.organizationName() );
+
+        return organization;
+    }
+
+    @Override
+    public UpdateOrganizationResponse toUpdateOrganizationResponse(Organization organization) {
+        if ( organization == null ) {
+            return null;
+        }
+
+        UUID id = null;
+        String organizationName = null;
+        LocalDateTime createdDate = null;
+        LocalDateTime updatedDate = null;
+
+        id = organization.getId();
+        organizationName = organization.getOrganizationName();
+        createdDate = organization.getCreatedDate();
+        updatedDate = organization.getUpdatedDate();
+
+        UpdateOrganizationResponse updateOrganizationResponse = new UpdateOrganizationResponse( id, organizationName, createdDate, updatedDate );
+
+        return updateOrganizationResponse;
     }
 
     private XMLGregorianCalendar localDateTimeToXmlGregorianCalendar( LocalDateTime localDateTime ) {

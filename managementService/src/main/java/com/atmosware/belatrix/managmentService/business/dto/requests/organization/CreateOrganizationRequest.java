@@ -1,4 +1,4 @@
-package com.atmosware.belatrix.managmentService.business.dto.requests;
+package com.atmosware.belatrix.managmentService.business.dto.requests.organization;
 
 import com.atmosware.belatrix.managmentService.business.dto.dtos.RegisterUserDto;
 import jakarta.validation.Valid;

@@ -7,6 +7,7 @@ public class Messages {
 
     public static class OrganizationMessages{
         public static final String ORGANIZATION_NAME_CAN_NOT_BE_DUPLICATED="organizationNameCanNotBeDuplicated";
+        public static final String ORGANIZATION_SHOULD_BE_EXISTS="organizationNotFound";
     }
 
     public static class RoleMessages{

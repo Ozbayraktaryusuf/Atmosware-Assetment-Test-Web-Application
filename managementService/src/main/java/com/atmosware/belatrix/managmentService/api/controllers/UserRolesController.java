@@ -1,10 +1,10 @@
 package com.atmosware.belatrix.managmentService.api.controllers;
 
 import com.atmosware.belatrix.managmentService.business.abstracts.UserRoleService;
-import com.atmosware.belatrix.managmentService.business.dto.requests.CreateUserRoleRequest;
-import com.atmosware.belatrix.managmentService.business.dto.requests.UpdateUserRoleRequest;
-import com.atmosware.belatrix.managmentService.business.dto.responses.CreateUserRoleResponse;
-import com.atmosware.belatrix.managmentService.business.dto.responses.UpdateUserRoleResponse;
+import com.atmosware.belatrix.managmentService.business.dto.requests.userRole.CreateUserRoleRequest;
+import com.atmosware.belatrix.managmentService.business.dto.requests.userRole.UpdateUserRoleRequest;
+import com.atmosware.belatrix.managmentService.business.dto.responses.userRole.CreateUserRoleResponse;
+import com.atmosware.belatrix.managmentService.business.dto.responses.userRole.UpdateUserRoleResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;

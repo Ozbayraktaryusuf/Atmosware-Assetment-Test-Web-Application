@@ -1,7 +1,7 @@
 package com.atmosware.belatrix.managmentService.api.controllers;
 
 import com.atmosware.belatrix.managmentService.business.abstracts.AuthService;
-import com.atmosware.belatrix.managmentService.business.dto.requests.LoginRequest;
+import com.atmosware.belatrix.managmentService.business.dto.requests.auth.LoginRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;

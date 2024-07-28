@@ -2,14 +2,12 @@ package com.atmosware.belatrix.managmentService.business.concretes;
 
 import com.atmosware.belatrix.managmentService.business.abstracts.AuthService;
 import com.atmosware.belatrix.managmentService.business.abstracts.UserService;
-import com.atmosware.belatrix.managmentService.business.dto.requests.LoginRequest;
+import com.atmosware.belatrix.managmentService.business.dto.requests.auth.LoginRequest;
 import com.atmosware.belatrix.managmentService.business.rules.AuthBusinessRules;
 import com.atmosware.belatrix.managmentService.core.service.JwtService;
 import com.atmosware.belatrix.managmentService.entities.concretes.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;

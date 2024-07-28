@@ -1,4 +1,4 @@
-package com.atmosware.belatrix.managmentService.business.dto.responses;
+package com.atmosware.belatrix.managmentService.business.dto.responses.organization;
 
 import java.time.LocalDate;
 import java.util.UUID;

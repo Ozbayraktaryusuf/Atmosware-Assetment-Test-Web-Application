@@ -2,9 +2,9 @@ package com.atmosware.belatrix.managmentService.business.concretes;
 
 import com.atmosware.belatrix.managmentService.business.abstracts.UserService;
 import com.atmosware.belatrix.managmentService.business.dto.dtos.RegisterUserDto;
-import com.atmosware.belatrix.managmentService.business.dto.requests.UpdateUserRequest;
-import com.atmosware.belatrix.managmentService.business.dto.responses.GetByIdUserResponse;
-import com.atmosware.belatrix.managmentService.business.dto.responses.UpdateUserResponse;
+import com.atmosware.belatrix.managmentService.business.dto.requests.user.UpdateUserRequest;
+import com.atmosware.belatrix.managmentService.business.dto.responses.user.GetByIdUserResponse;
+import com.atmosware.belatrix.managmentService.business.dto.responses.user.UpdateUserResponse;
 import com.atmosware.belatrix.managmentService.business.mappers.UserMapper;
 import com.atmosware.belatrix.managmentService.business.rules.UserBusinessRules;
 import com.atmosware.belatrix.managmentService.core.service.JwtService;
@@ -70,11 +70,13 @@ public class UserManager implements UserService {
     @Override
     public UpdateUserResponse updateUser(UpdateUserRequest updateUserRequest, @NonNull HttpServletRequest httpServletRequest) {
         String token = httpServletRequest.getHeader(HttpHeaders.AUTHORIZATION).substring(7);
-        Claims aaa=jwtService.getClaims(token);
 
-        Object bbb = aaa.get("id");
-
-        User user = this.userRepository.findById(UUID.fromString(bbb.toString())).get();
+        User user = this.userRepository
+                .findById
+                        (UUID.fromString
+                                (jwtService.getClaims(token)
+                                        .get("id")
+                                        .toString())).get();
 
         user.setPassword(this.passwordEncoder.encode(updateUserRequest.password()));
 

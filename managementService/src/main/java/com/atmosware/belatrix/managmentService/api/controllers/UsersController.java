@@ -1,9 +1,9 @@
 package com.atmosware.belatrix.managmentService.api.controllers;
 
 import com.atmosware.belatrix.managmentService.business.abstracts.UserService;
-import com.atmosware.belatrix.managmentService.business.dto.requests.UpdateUserRequest;
-import com.atmosware.belatrix.managmentService.business.dto.responses.GetByIdUserResponse;
-import com.atmosware.belatrix.managmentService.business.dto.responses.UpdateUserResponse;
+import com.atmosware.belatrix.managmentService.business.dto.requests.user.UpdateUserRequest;
+import com.atmosware.belatrix.managmentService.business.dto.responses.user.GetByIdUserResponse;
+import com.atmosware.belatrix.managmentService.business.dto.responses.user.UpdateUserResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;

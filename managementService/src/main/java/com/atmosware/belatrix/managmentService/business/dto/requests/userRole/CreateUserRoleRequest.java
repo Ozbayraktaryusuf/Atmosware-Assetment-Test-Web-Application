@@ -1,4 +1,4 @@
-package com.atmosware.belatrix.managmentService.business.dto.requests;
+package com.atmosware.belatrix.managmentService.business.dto.requests.userRole;
 
 import jakarta.validation.constraints.NotNull;
 

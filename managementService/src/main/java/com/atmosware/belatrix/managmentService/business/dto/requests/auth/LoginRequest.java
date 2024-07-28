@@ -1,4 +1,4 @@
-package com.atmosware.belatrix.managmentService.business.dto.requests;
+package com.atmosware.belatrix.managmentService.business.dto.requests.auth;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;

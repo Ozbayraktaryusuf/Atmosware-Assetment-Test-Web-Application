@@ -1,10 +1,9 @@
 package com.atmosware.belatrix.managmentService.business.concretes;
 
 import com.atmosware.belatrix.managmentService.business.abstracts.RoleService;
-import com.atmosware.belatrix.managmentService.business.abstracts.UserService;
-import com.atmosware.belatrix.managmentService.business.dto.requests.CreateRoleRequest;
-import com.atmosware.belatrix.managmentService.business.dto.responses.CreateRoleResponse;
-import com.atmosware.belatrix.managmentService.business.dto.responses.GetByIdRoleResponse;
+import com.atmosware.belatrix.managmentService.business.dto.requests.role.CreateRoleRequest;
+import com.atmosware.belatrix.managmentService.business.dto.responses.role.CreateRoleResponse;
+import com.atmosware.belatrix.managmentService.business.dto.responses.role.GetByIdRoleResponse;
 import com.atmosware.belatrix.managmentService.business.mappers.RoleMapper;
 import com.atmosware.belatrix.managmentService.business.rules.RoleBusinessRules;
 import com.atmosware.belatrix.managmentService.dataAccess.RoleRepository;

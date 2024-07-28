@@ -1,4 +1,4 @@
-package com.atmosware.belatrix.managmentService.business.dto.responses;
+package com.atmosware.belatrix.managmentService.business.dto.responses.userRole;
 
 import java.util.UUID;
 

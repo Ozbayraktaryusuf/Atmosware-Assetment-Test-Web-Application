@@ -1,9 +1,8 @@
 package com.atmosware.belatrix.managmentService.business.mappers;
 
-import com.atmosware.belatrix.managmentService.business.dto.requests.CreateUserRoleRequest;
-import com.atmosware.belatrix.managmentService.business.dto.requests.UpdateUserRoleRequest;
-import com.atmosware.belatrix.managmentService.business.dto.responses.CreateUserRoleResponse;
-import com.atmosware.belatrix.managmentService.business.dto.responses.UpdateUserRoleResponse;
+import com.atmosware.belatrix.managmentService.business.dto.requests.userRole.CreateUserRoleRequest;
+import com.atmosware.belatrix.managmentService.business.dto.responses.userRole.CreateUserRoleResponse;
+import com.atmosware.belatrix.managmentService.business.dto.responses.userRole.UpdateUserRoleResponse;
 import com.atmosware.belatrix.managmentService.core.mappping.MapstructService;
 import com.atmosware.belatrix.managmentService.entities.concretes.UserRole;
 import org.mapstruct.Mapper;
