@@ -3,6 +3,7 @@ package com.atmosware.belatrix.managmentService.business.constants;
 public class Messages {
     public static class AuthenticationMessages {
         public static final String INVALID_USER_OR_PASSWORD = "Invalid username or password.";
+        public static final String USER_SHOULD_HAVE_AN_ORGANIZATION="userShouldHaveAnOrganization";
     }
 
     public static class OrganizationMessages{

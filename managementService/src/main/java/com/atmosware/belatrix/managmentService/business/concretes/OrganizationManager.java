@@ -37,7 +37,7 @@ public class OrganizationManager implements OrganizationService {
         Organization organization = this.organizationMapper.toOrganization(createOrganizationRequest);
         Organization createdOrganization = this.organizationRepository.save(organization);
 
-        this.userService.addOrganization(createOrganizationRequest.registerUserDto(),createdOrganization
+        this.userService.add(createOrganizationRequest.registerUserDto(),createdOrganization
         );
 
         return this.organizationMapper.toCreateOrganizationResponse(createdOrganization);

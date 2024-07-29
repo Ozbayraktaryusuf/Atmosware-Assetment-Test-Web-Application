@@ -2,6 +2,7 @@ package com.atmosware.belatrix.managmentService.business.concretes;
 
 import com.atmosware.belatrix.managmentService.business.abstracts.UserService;
 import com.atmosware.belatrix.managmentService.business.dto.dtos.RegisterUserDto;
+import com.atmosware.belatrix.managmentService.business.dto.requests.user.CreateAdminRequest;
 import com.atmosware.belatrix.managmentService.business.dto.requests.user.UpdateUserRequest;
 import com.atmosware.belatrix.managmentService.business.dto.responses.user.GetByIdUserResponse;
 import com.atmosware.belatrix.managmentService.business.dto.responses.user.UpdateUserResponse;
@@ -34,7 +35,7 @@ public class UserManager implements UserService {
     private final UserBusinessRules userBusinessRules;
     private final JwtService jwtService;
     @Override
-    public void addOrganization(RegisterUserDto registerUserDto, Organization organization) {
+    public void add(RegisterUserDto registerUserDto, Organization organization) {
         this.userBusinessRules.userCanNotBeDuplicated(registerUserDto.email());
 
         User user = this.userMapper.toUser(registerUserDto);
@@ -45,6 +46,32 @@ public class UserManager implements UserService {
         user.setOrganization(organization);
 
         this.userRepository.save(user);
+    }
+
+    @Override
+    public void add(RegisterUserDto registerUserDto, UUID organizationId) {
+        this.userBusinessRules.userCanNotBeDuplicated(registerUserDto.email());
+
+        User user = this.userMapper.toUser(registerUserDto);
+
+        String encodedPassword =this.passwordEncoder.encode(registerUserDto.password());
+        user.setPassword(encodedPassword);
+
+        user.setOrganization(new Organization(organizationId));
+
+        this.userRepository.save(user);
+    }
+
+    @Override
+    public void createAdmin(CreateAdminRequest createAdminRequest) {
+        this.userBusinessRules.userCanNotBeDuplicated(createAdminRequest.email());
+
+        User user = this.userMapper.toUser(createAdminRequest);
+        String encodedPassword=this.passwordEncoder.encode(createAdminRequest.password());
+        user.setPassword(encodedPassword);
+
+        this.userRepository.save(user);
+
     }
 
     @Override

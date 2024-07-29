@@ -3,12 +3,15 @@ package com.atmosware.belatrix.managmentService.business.rules;
 import com.atmosware.belatrix.managmentService.business.constants.Messages;
 import com.atmosware.belatrix.managmentService.core.business.abstracts.MessageService;
 import com.atmosware.belatrix.managmentService.core.exceptions.types.AuthenticationException;
+import com.atmosware.belatrix.managmentService.core.exceptions.types.BusinessException;
 import com.atmosware.belatrix.managmentService.dataAccess.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -22,5 +25,10 @@ public class AuthBusinessRules {
         if (!authentication.isAuthenticated()) {
             throw new AuthenticationException(messageService.getMessage(Messages.AuthenticationMessages.INVALID_USER_OR_PASSWORD));
         }
+    }
+    public void userShouldHaveAnOrganization(UUID organizationId){
+     if (organizationId==null){
+         throw new BusinessException(messageService.getMessage(Messages.AuthenticationMessages.USER_SHOULD_HAVE_AN_ORGANIZATION));
+     }
     }
 }

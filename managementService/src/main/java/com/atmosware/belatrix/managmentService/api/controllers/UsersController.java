@@ -1,6 +1,7 @@
 package com.atmosware.belatrix.managmentService.api.controllers;
 
 import com.atmosware.belatrix.managmentService.business.abstracts.UserService;
+import com.atmosware.belatrix.managmentService.business.dto.requests.user.CreateAdminRequest;
 import com.atmosware.belatrix.managmentService.business.dto.requests.user.UpdateUserRequest;
 import com.atmosware.belatrix.managmentService.business.dto.responses.user.GetByIdUserResponse;
 import com.atmosware.belatrix.managmentService.business.dto.responses.user.UpdateUserResponse;
@@ -24,5 +25,9 @@ public class UsersController {
     @PutMapping()
     public UpdateUserResponse update(@Valid @RequestBody UpdateUserRequest updateUserRequest, HttpServletRequest request){
         return this.userService.updateUser(updateUserRequest,request);
+    }
+    @PostMapping("/create-admin")
+    public void createAdmin(@Valid @RequestBody CreateAdminRequest createAdminRequest){
+        this.userService.createAdmin(createAdminRequest);
     }
 }

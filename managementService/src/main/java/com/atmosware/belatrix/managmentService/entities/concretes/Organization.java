@@ -24,5 +24,9 @@ public class Organization extends BaseEntity<UUID> {
 
     @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
     private List<User> userList;
+
+    public Organization(UUID id) {
+         setId(id);
+    }
 }
 
