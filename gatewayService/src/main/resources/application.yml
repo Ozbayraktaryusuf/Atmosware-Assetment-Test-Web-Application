@@ -18,3 +18,8 @@ spring:
         id: management-service
         predicates[0]: Path=/management-service/api/v1/**
         uri: lb://management-service
+      routes[1]:
+        id: question-service
+        predicates[0]: Path=/question-service/api/v1/**
+        uri: lb://question-service
+
