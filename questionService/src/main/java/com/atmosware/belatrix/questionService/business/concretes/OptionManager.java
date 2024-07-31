@@ -4,6 +4,7 @@ import com.atmosware.belatrix.questionService.business.abstracts.OptionService;
 import com.atmosware.belatrix.questionService.business.dto.requests.option.CreateOptionRequest;
 import com.atmosware.belatrix.questionService.business.dto.responses.option.CreatedOptionResponse;
 import com.atmosware.belatrix.questionService.business.mappers.OptionMapper;
+import com.atmosware.belatrix.questionService.business.rules.OptionsBusinessRules;
 import com.atmosware.belatrix.questionService.dataAccess.OptionRepository;
 import com.atmosware.belatrix.questionService.entities.concretes.Option;
 import com.atmosware.belatrix.questionService.entities.concretes.Question;
@@ -18,10 +19,12 @@ import java.util.List;
 public class OptionManager implements OptionService {
     private final OptionMapper optionMapper;
     private final OptionRepository optionRepository;
+    private final OptionsBusinessRules optionsBusinessRules;
     @Override
     @Transactional
     public List<CreatedOptionResponse> add(List<CreateOptionRequest> createOptionRequest, Question question) {
         List<Option> options = this.optionMapper.toOption( createOptionRequest);
+        this.optionsBusinessRules.oneAnswerShouldBeTrue(options);
 
         for(Option option:options){
             option.setQuestion(question);

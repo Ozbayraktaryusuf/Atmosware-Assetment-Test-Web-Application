@@ -4,6 +4,7 @@ import com.atmosware.belatrix.managmentService.business.abstracts.OrganizationSe
 import com.atmosware.belatrix.managmentService.business.dto.requests.organization.CreateOrganizationRequest;
 import com.atmosware.belatrix.managmentService.business.dto.requests.organization.UpdateOrganizationRequest;
 import com.atmosware.belatrix.managmentService.business.dto.responses.organization.CreateOrganizationResponse;
+import com.atmosware.belatrix.managmentService.business.dto.responses.organization.DeleteOrganizationResponse;
 import com.atmosware.belatrix.managmentService.business.dto.responses.organization.UpdateOrganizationResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -29,5 +30,9 @@ public class OrganizationsController {
     @PutMapping("/organization")
     public UpdateOrganizationResponse update(@Valid @RequestBody UpdateOrganizationRequest updateOrganizationRequest, HttpServletRequest request){
         return this.organizationService.update_organization(request,updateOrganizationRequest);
+    }
+    @DeleteMapping("{id}")
+    public DeleteOrganizationResponse delete(@PathVariable UUID id){
+        return this.organizationService.delete(id);
     }
 }

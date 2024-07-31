@@ -1,4 +1,4 @@
-package com.atmosware.belatrix.managmentService.core.responses;
+package com.atmosware.belatrix.core.responses;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

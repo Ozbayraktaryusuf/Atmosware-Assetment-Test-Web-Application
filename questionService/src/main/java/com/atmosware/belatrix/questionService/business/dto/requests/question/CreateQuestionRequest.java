@@ -13,8 +13,6 @@ public record CreateQuestionRequest(
         @NotNull
         @Size(max = 2000,min = 5)
         String text,
-        @NotNull
-        UUID organizationId,
         @Size(min = 2,max = 5)
         @Valid
         @NotEmpty

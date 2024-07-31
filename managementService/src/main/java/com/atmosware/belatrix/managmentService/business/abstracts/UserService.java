@@ -10,6 +10,7 @@ import com.atmosware.belatrix.managmentService.entities.concretes.User;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface UserService extends UserDetailsService {
@@ -19,4 +20,5 @@ public interface UserService extends UserDetailsService {
     GetByIdUserResponse getById(UUID id);
     User findByEmail(String username);
     UpdateUserResponse updateUser(UpdateUserRequest updateUserRequest, HttpServletRequest httpServletRequest);
+    void delete(List<User> user);
 }

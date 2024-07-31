@@ -3,6 +3,7 @@ package com.atmosware.belatrix.managmentService.business.mappers;
 import com.atmosware.belatrix.managmentService.business.dto.requests.organization.CreateOrganizationRequest;
 import com.atmosware.belatrix.managmentService.business.dto.requests.organization.UpdateOrganizationRequest;
 import com.atmosware.belatrix.managmentService.business.dto.responses.organization.CreateOrganizationResponse;
+import com.atmosware.belatrix.managmentService.business.dto.responses.organization.DeleteOrganizationResponse;
 import com.atmosware.belatrix.managmentService.business.dto.responses.organization.UpdateOrganizationResponse;
 import com.atmosware.belatrix.managmentService.core.mappping.MapstructService;
 import com.atmosware.belatrix.managmentService.entities.concretes.Organization;
@@ -19,4 +20,7 @@ public interface OrganizationMapper {
     Organization toOrganization(UpdateOrganizationRequest updateOrganizationRequest);
 
     UpdateOrganizationResponse toUpdateOrganizationResponse(Organization organization);
+
+    DeleteOrganizationResponse toDeleteOrganizationResponse(Organization organization);
+
 }

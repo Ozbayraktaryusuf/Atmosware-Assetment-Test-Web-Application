@@ -16,12 +16,16 @@ public class SecurityManager implements SecurityService {
             "management-service/api/v1/auth/**",
     };
     @Override
+    //TODO: roleleri constanta çek
     public HttpSecurity configureSecurity(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(x-> x
                 .requestMatchers(WHITE_LIST_URLS).permitAll()
                 .requestMatchers(HttpMethod.GET).permitAll()
                 .requestMatchers(HttpMethod.PUT,"management-service/api/v1/organizations/admin/{id}").hasAnyAuthority("admin")
+                .requestMatchers(HttpMethod.DELETE, "management-service/api/v1/organizations/{id}").hasAnyAuthority("admin")
+                .requestMatchers(HttpMethod.POST, "management-service/api/v1/organizations").hasAnyAuthority("admin")
                 .requestMatchers(HttpMethod.POST, "management-service/api/v1/roles").hasAnyAuthority("admin")
+                .requestMatchers(HttpMethod.POST, "management-service/api/v1/auth/register").hasAnyAuthority("organization")
                 .anyRequest().authenticated()
         );
         return http;

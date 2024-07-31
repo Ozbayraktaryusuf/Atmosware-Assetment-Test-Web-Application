@@ -1,12 +1,11 @@
 package com.atmosware.belatrix.managmentService.business.concretes;
 
+import com.atmosware.belatrix.core.services.JwtService;
 import com.atmosware.belatrix.managmentService.business.abstracts.AuthService;
-import com.atmosware.belatrix.managmentService.business.abstracts.UserRoleService;
 import com.atmosware.belatrix.managmentService.business.abstracts.UserService;
 import com.atmosware.belatrix.managmentService.business.dto.dtos.RegisterUserDto;
 import com.atmosware.belatrix.managmentService.business.dto.requests.auth.LoginRequest;
 import com.atmosware.belatrix.managmentService.business.rules.AuthBusinessRules;
-import com.atmosware.belatrix.managmentService.core.service.JwtService;
 import com.atmosware.belatrix.managmentService.entities.concretes.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
@@ -55,7 +54,6 @@ public class AuthManager implements AuthService {
     private String generateJwt(User user) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("id", user.getId());
-        claims.put("username", user.getEmail());
         if (!((user.getAuthorities().stream().map(x->x.getAuthority().equals("admin")).toList().get(0)))) {
             claims.put("organizationId", user.getOrganization().getId());
         }

@@ -1,4 +1,4 @@
-package com.atmosware.belatrix.managmentService.core.service;
+package com.atmosware.belatrix.core.services;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -27,10 +27,9 @@ public class JwtService
         return createToken(claims, userName);
     }
 
-    public Boolean validateToken(String token, UserDetails userDetails) {
-        String username = extractUser(token);
+    public Boolean validateToken(String token) {
         Date expirationDate = extractExpiration(token);
-        return userDetails.getUsername().equals(username) && !expirationDate.before(new Date());
+        return !expirationDate.before(new Date());
     }
 
     private Date extractExpiration(String token) {
@@ -63,6 +62,7 @@ public class JwtService
                 .getBody();
         return claims.getSubject();
     }
+
     private String createToken(Map<String, Object> claims, String userName) {
         return Jwts.builder()
                 .setClaims(claims)

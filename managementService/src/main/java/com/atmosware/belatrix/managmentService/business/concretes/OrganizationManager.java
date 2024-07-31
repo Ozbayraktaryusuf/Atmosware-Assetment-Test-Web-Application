@@ -1,14 +1,15 @@
 package com.atmosware.belatrix.managmentService.business.concretes;
 
+import com.atmosware.belatrix.core.services.JwtService;
 import com.atmosware.belatrix.managmentService.business.abstracts.OrganizationService;
 import com.atmosware.belatrix.managmentService.business.abstracts.UserService;
 import com.atmosware.belatrix.managmentService.business.dto.requests.organization.CreateOrganizationRequest;
 import com.atmosware.belatrix.managmentService.business.dto.requests.organization.UpdateOrganizationRequest;
 import com.atmosware.belatrix.managmentService.business.dto.responses.organization.CreateOrganizationResponse;
+import com.atmosware.belatrix.managmentService.business.dto.responses.organization.DeleteOrganizationResponse;
 import com.atmosware.belatrix.managmentService.business.dto.responses.organization.UpdateOrganizationResponse;
 import com.atmosware.belatrix.managmentService.business.mappers.OrganizationMapper;
 import com.atmosware.belatrix.managmentService.business.rules.OrganizationBusinessRules;
-import com.atmosware.belatrix.managmentService.core.service.JwtService;
 import com.atmosware.belatrix.managmentService.dataAccess.OrganizationRepository;
 import com.atmosware.belatrix.managmentService.entities.concretes.Organization;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,7 +19,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -66,6 +66,18 @@ public class OrganizationManager implements OrganizationService {
         organization.setUpdatedDate(LocalDateTime.now());
 
         return this.organizationMapper.toUpdateOrganizationResponse(this.organizationRepository.save(organization));
+    }
+
+    @Override
+    @Transactional
+    public DeleteOrganizationResponse delete(UUID id) {
+        this.organizationBusinessRules.organizationShouldBeExists(id);
+
+        Organization organization = this.organizationRepository.findById(id).get();
+        organization.setDeletedDate(LocalDateTime.now());
+        this.userService.delete(organization.getUserList());
+
+        return this.organizationMapper.toDeleteOrganizationResponse(organization);
     }
 }
 

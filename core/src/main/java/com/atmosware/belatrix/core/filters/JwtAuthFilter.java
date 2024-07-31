@@ -1,9 +1,10 @@
-package com.atmosware.belatrix.managmentService.core.filters;
+package com.atmosware.belatrix.core.filters;
 
-import com.atmosware.belatrix.managmentService.business.abstracts.UserService;
-import com.atmosware.belatrix.managmentService.core.responses.SecurityResponse;
-import com.atmosware.belatrix.managmentService.core.service.JwtService;
+
+import com.atmosware.belatrix.core.responses.SecurityResponse;
+import com.atmosware.belatrix.core.services.JwtService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,19 +13,22 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
 public class JwtAuthFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
-    private final UserService userService;
+    private final UserDetailsService userService;
     private final ObjectMapper objectMapper;
 
     @Override
@@ -36,14 +40,21 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             String jwtHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
             if (jwtHeader != null && jwtHeader.startsWith("Bearer ")) {
                 String jwt = jwtHeader.substring(7);
-                String username = jwtService.extractUser(jwt);
+                List<String> roles = jwtService.extractRoles(jwt);
+
+                List<SimpleGrantedAuthority> authorities = roles.stream()
+                        .map(SimpleGrantedAuthority::new)
+                        .toList();
+
+                Claims claims = jwtService.getClaims(jwt);
+                String username = claims.getSubject();
 
                 if (username != null) {
-                    UserDetails user = userService.loadUserByUsername(username);
 
-                    if (jwtService.validateToken(jwt, user)) {
+                    if (jwtService.validateToken(jwt)) {
+
                         UsernamePasswordAuthenticationToken authenticationToken =
-                                new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+                                new UsernamePasswordAuthenticationToken(username, null, authorities);
                         authenticationToken
                                 .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 

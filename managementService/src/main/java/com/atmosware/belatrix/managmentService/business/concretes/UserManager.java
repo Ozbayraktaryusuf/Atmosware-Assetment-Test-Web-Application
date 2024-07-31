@@ -1,5 +1,6 @@
 package com.atmosware.belatrix.managmentService.business.concretes;
 
+import com.atmosware.belatrix.core.services.JwtService;
 import com.atmosware.belatrix.managmentService.business.abstracts.UserService;
 import com.atmosware.belatrix.managmentService.business.dto.dtos.RegisterUserDto;
 import com.atmosware.belatrix.managmentService.business.dto.requests.user.CreateAdminRequest;
@@ -8,12 +9,11 @@ import com.atmosware.belatrix.managmentService.business.dto.responses.user.GetBy
 import com.atmosware.belatrix.managmentService.business.dto.responses.user.UpdateUserResponse;
 import com.atmosware.belatrix.managmentService.business.mappers.UserMapper;
 import com.atmosware.belatrix.managmentService.business.rules.UserBusinessRules;
-import com.atmosware.belatrix.managmentService.core.service.JwtService;
 import com.atmosware.belatrix.managmentService.dataAccess.UserRepository;
 import com.atmosware.belatrix.managmentService.entities.concretes.Organization;
 import com.atmosware.belatrix.managmentService.entities.concretes.User;
-import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.transaction.Transactional;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -22,6 +22,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -35,6 +37,7 @@ public class UserManager implements UserService {
     private final UserBusinessRules userBusinessRules;
     private final JwtService jwtService;
     @Override
+    @Transactional
     public void add(RegisterUserDto registerUserDto, Organization organization) {
         this.userBusinessRules.userCanNotBeDuplicated(registerUserDto.email());
 
@@ -49,6 +52,7 @@ public class UserManager implements UserService {
     }
 
     @Override
+    @Transactional
     public void add(RegisterUserDto registerUserDto, UUID organizationId) {
         this.userBusinessRules.userCanNotBeDuplicated(registerUserDto.email());
 
@@ -108,5 +112,11 @@ public class UserManager implements UserService {
         user.setPassword(this.passwordEncoder.encode(updateUserRequest.password()));
 
         return this.userMapper.toUpdateUserResponse(this.userRepository.save(user));
+    }
+
+    @Override
+    public void delete(List<User> users) {
+        users.stream().forEach(x-> x.setDeletedDate(LocalDateTime.now()));
+        this.userRepository.saveAll(users);
     }
 }
