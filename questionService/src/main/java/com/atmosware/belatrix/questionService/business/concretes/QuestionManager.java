@@ -3,11 +3,20 @@ package com.atmosware.belatrix.questionService.business.concretes;
 import com.atmosware.belatrix.core.services.JwtService;
 import com.atmosware.belatrix.questionService.business.abstracts.OptionService;
 import com.atmosware.belatrix.questionService.business.abstracts.QuestionService;
+import com.atmosware.belatrix.questionService.business.dto.requests.option.AddOptionRequest;
+import com.atmosware.belatrix.questionService.business.dto.requests.option.DeleteOptionRequest;
 import com.atmosware.belatrix.questionService.business.dto.requests.question.CreateQuestionRequest;
+import com.atmosware.belatrix.questionService.business.dto.requests.question.UpdateQuestionRequest;
+import com.atmosware.belatrix.questionService.business.dto.responses.option.AddOptionResponse;
 import com.atmosware.belatrix.questionService.business.dto.responses.option.CreatedOptionResponse;
+import com.atmosware.belatrix.questionService.business.dto.responses.option.DeletedOptionResponse;
+import com.atmosware.belatrix.questionService.business.dto.responses.option.UpdatedOptionResponse;
 import com.atmosware.belatrix.questionService.business.dto.responses.question.CreatedQuestionResponse;
+import com.atmosware.belatrix.questionService.business.dto.responses.question.DeleteQuestionResponse;
 import com.atmosware.belatrix.questionService.business.dto.responses.question.GetAllQuestionResponse;
+import com.atmosware.belatrix.questionService.business.dto.responses.question.UpdatedQuestionResponse;
 import com.atmosware.belatrix.questionService.business.mappers.QuestionMapper;
+import com.atmosware.belatrix.questionService.business.rules.QuestionBusinessRules;
 import com.atmosware.belatrix.questionService.dataAccess.QuestionRepository;
 import com.atmosware.belatrix.questionService.entities.concretes.Question;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,10 +36,10 @@ public class QuestionManager implements QuestionService {
     private final QuestionRepository questionRepository;
     private final OptionService optionService;
     private final JwtService jwtService;
+    private final QuestionBusinessRules questionBusinessRules;
     @Override
     @Transactional
     public CreatedQuestionResponse add(CreateQuestionRequest createQuestionRequest, HttpServletRequest request) {
-        //TODO:En az bir doğru cevap olması lazım bunun kontrol mekanizması
         Question question = this.questionMapper.toQuestion(createQuestionRequest);
 
         String token = request.getHeader(HttpHeaders.AUTHORIZATION).substring(7);
@@ -57,5 +67,150 @@ public class QuestionManager implements QuestionService {
         List<Question> questionList = this.questionRepository.findAll();
 
         return this.questionMapper.toGetAllQuestionResponse(questionList);
+    }
+
+    @Override
+    public List<GetAllQuestionResponse> getAll(HttpServletRequest request) {
+        UUID id= UUID.fromString(jwtService
+                .getClaims(
+                        request
+                                .getHeader(HttpHeaders.AUTHORIZATION)
+                                .substring(7))
+                .get("organizationId")
+                .toString());
+
+        List<Question> questionList = this.questionRepository.findByOrganizationIdOrOrganizationIdIsNull(id);
+
+        return this.questionMapper.toGetAllQuestionResponse(questionList);
+    }
+
+    @Override
+    @Transactional
+    public UpdatedQuestionResponse update(UpdateQuestionRequest updateQuestionRequest,Long id) {
+        this.questionBusinessRules.questionShouldBeExists(id);
+        Question question = this.questionRepository.findById(id).get();
+        this.questionBusinessRules.questionShouldBeUpdatable(question);
+
+        List<UpdatedOptionResponse> updatedOptionResponses = this.optionService.update(updateQuestionRequest.updateOptionRequests(),question);
+
+        this.questionMapper.updateQuestionFromRequest(updateQuestionRequest,question);
+        this.questionRepository.save(question);
+
+        UpdatedQuestionResponse updatedQuestionResponse = this.questionMapper.toUpdateQuestionResponse(question);
+        updatedQuestionResponse.setUpdatedOptionResponses(updatedOptionResponses);
+
+        return updatedQuestionResponse;
+    }
+
+    @Override
+    public UpdatedQuestionResponse update(UpdateQuestionRequest updateQuestionRequest, Long id, HttpServletRequest request) {
+        this.questionBusinessRules.questionShouldBeExists(id);
+
+        UUID organizationId= UUID.fromString(jwtService
+                .getClaims(
+                        request
+                                .getHeader(HttpHeaders.AUTHORIZATION)
+                                .substring(7))
+                .get("organizationId")
+                .toString());
+
+        this.questionBusinessRules.questionShouldBelongToSameOrganization(id,organizationId);
+        Question question = this.questionRepository.findById(id).get();
+        this.questionBusinessRules.questionShouldBeUpdatable(question);
+
+        List<UpdatedOptionResponse> updatedOptionResponses = this.optionService.update(updateQuestionRequest.updateOptionRequests(),question);
+
+        this.questionMapper.updateQuestionFromRequest(updateQuestionRequest,question);
+        this.questionRepository.save(question);
+
+        UpdatedQuestionResponse updatedQuestionResponse = this.questionMapper.toUpdateQuestionResponse(question);
+        updatedQuestionResponse.setUpdatedOptionResponses(updatedOptionResponses);
+
+        return updatedQuestionResponse;
+    }
+
+    @Override
+    public DeleteQuestionResponse delete(Long id) {
+        this.questionBusinessRules.questionShouldBeExists(id);
+
+        Question question = this.questionRepository.findById(id).get();
+        question.setDeletedDate(LocalDateTime.now());
+        this.optionService.delete(question);
+
+        return this.questionMapper.toDeleteQuestionResponse(this.questionRepository.save(question));
+    }
+
+    @Override
+    @Transactional
+    public DeleteQuestionResponse delete(Long id, HttpServletRequest request) {
+        this.questionBusinessRules.questionShouldBeExists(id);
+
+        UUID organizationId= UUID.fromString(jwtService
+                .getClaims(
+                        request
+                                .getHeader(HttpHeaders.AUTHORIZATION)
+                                .substring(7))
+                .get("organizationId")
+                .toString());
+
+        this.questionBusinessRules.questionShouldBelongToSameOrganization(id,organizationId);
+
+        Question question = this.questionRepository.findByIdAndOrganizationId(id,organizationId).get();
+        question.setDeletedDate(LocalDateTime.now());
+        this.optionService.delete(question);
+
+        return this.questionMapper.toDeleteQuestionResponse(question);
+    }
+
+    @Override
+    public AddOptionResponse addOptionToQuestion(AddOptionRequest request, Long id) {
+        this.questionBusinessRules.questionShouldBeExists(id);
+        Question question = this.questionRepository.findById(id).get();
+
+        return this.optionService.addOption(request,question);
+    }
+
+    @Override
+    public AddOptionResponse addOptionToQuestion(AddOptionRequest addOptionRequest, Long id, HttpServletRequest httpServletRequest) {
+        this.questionBusinessRules.questionShouldBeExists(id);
+
+        UUID organizationId= UUID.fromString(jwtService
+                .getClaims(
+                        httpServletRequest
+                                .getHeader(HttpHeaders.AUTHORIZATION)
+                                .substring(7))
+                .get("organizationId")
+                .toString());
+
+        this.questionBusinessRules.questionShouldBelongToSameOrganization(id,organizationId);
+        Question question = this.questionRepository.findById(id).get();
+
+        return this.optionService.addOption(addOptionRequest,question);
+    }
+
+    @Override
+    public DeletedOptionResponse deleteOptionOfQuestion(DeleteOptionRequest deleteOptionRequest, Long id) {
+        this.questionBusinessRules.questionShouldBeExists(id);
+
+        Question question = this.questionRepository.findById(id).get();
+        return this.optionService.deleteOption(deleteOptionRequest,question);
+    }
+
+    @Override
+    public DeletedOptionResponse deleteOptionOfQuestion(DeleteOptionRequest deleteOptionRequest, Long id, HttpServletRequest httpServletRequest) {
+        this.questionBusinessRules.questionShouldBeExists(id);
+
+        UUID organizationId= UUID.fromString(jwtService
+                .getClaims(
+                        httpServletRequest
+                                .getHeader(HttpHeaders.AUTHORIZATION)
+                                .substring(7))
+                .get("organizationId")
+                .toString());
+
+        this.questionBusinessRules.questionShouldBelongToSameOrganization(id,organizationId);
+        Question question = this.questionRepository.findById(id).get();
+
+        return this.optionService.deleteOption(deleteOptionRequest,question);
     }
 }

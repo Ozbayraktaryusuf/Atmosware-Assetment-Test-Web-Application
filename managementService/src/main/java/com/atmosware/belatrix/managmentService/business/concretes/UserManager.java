@@ -1,6 +1,7 @@
 package com.atmosware.belatrix.managmentService.business.concretes;
 
 import com.atmosware.belatrix.core.services.JwtService;
+import com.atmosware.belatrix.managmentService.business.abstracts.UserRoleService;
 import com.atmosware.belatrix.managmentService.business.abstracts.UserService;
 import com.atmosware.belatrix.managmentService.business.dto.dtos.RegisterUserDto;
 import com.atmosware.belatrix.managmentService.business.dto.requests.user.CreateAdminRequest;
@@ -115,8 +116,9 @@ public class UserManager implements UserService {
     }
 
     @Override
+    @Transactional
     public void delete(List<User> users) {
-        users.stream().forEach(x-> x.setDeletedDate(LocalDateTime.now()));
+        users.forEach(x-> x.setDeletedDate(LocalDateTime.now()));
         this.userRepository.saveAll(users);
     }
 }

@@ -11,11 +11,14 @@ import com.atmosware.belatrix.managmentService.business.mappers.UserRoleMapper;
 import com.atmosware.belatrix.managmentService.business.rules.UserRoleBusinessRules;
 import com.atmosware.belatrix.managmentService.dataAccess.UserRoleRepository;
 import com.atmosware.belatrix.managmentService.entities.concretes.Roles;
+import com.atmosware.belatrix.managmentService.entities.concretes.User;
 import com.atmosware.belatrix.managmentService.entities.concretes.UserRole;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 

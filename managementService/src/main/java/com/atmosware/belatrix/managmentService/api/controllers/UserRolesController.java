@@ -5,10 +5,12 @@ import com.atmosware.belatrix.managmentService.business.dto.requests.userRole.Cr
 import com.atmosware.belatrix.managmentService.business.dto.requests.userRole.UpdateUserRoleRequest;
 import com.atmosware.belatrix.managmentService.business.dto.responses.userRole.CreateUserRoleResponse;
 import com.atmosware.belatrix.managmentService.business.dto.responses.userRole.UpdateUserRoleResponse;
+import com.atmosware.belatrix.managmentService.entities.concretes.UserRole;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
