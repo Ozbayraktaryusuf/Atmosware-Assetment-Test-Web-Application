@@ -1,5 +1,6 @@
 package com.atmosware.belatrix.questionService.business.abstracts;
 
+import com.atmosware.belatrix.questionService.business.dto.dtos.OptionDto;
 import com.atmosware.belatrix.questionService.business.dto.requests.option.AddOptionRequest;
 import com.atmosware.belatrix.questionService.business.dto.requests.option.CreateOptionRequest;
 import com.atmosware.belatrix.questionService.business.dto.requests.option.DeleteOptionRequest;
@@ -19,4 +20,5 @@ public interface OptionService {
     List<UpdatedOptionResponse> update(List<UpdateOptionRequest> updateOptionRequests,Question question);
     AddOptionResponse addOption(AddOptionRequest request,Question question);
     DeletedOptionResponse deleteOption(DeleteOptionRequest deleteOptionRequest, Question question);
+    List<OptionDto> optionDtoForQuestionGetById(Question question);
 }

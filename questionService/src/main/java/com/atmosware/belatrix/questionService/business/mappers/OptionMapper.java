@@ -1,5 +1,6 @@
 package com.atmosware.belatrix.questionService.business.mappers;
 
+import com.atmosware.belatrix.questionService.business.dto.dtos.OptionDto;
 import com.atmosware.belatrix.questionService.business.dto.requests.option.AddOptionRequest;
 import com.atmosware.belatrix.questionService.business.dto.requests.option.CreateOptionRequest;
 import com.atmosware.belatrix.questionService.business.dto.requests.option.UpdateOptionRequest;
@@ -38,4 +39,5 @@ public interface OptionMapper {
 
     @Mapping(target = "questionId",source = "question.id")
     DeletedOptionResponse toDeleteOptionsResponse(Option option);
+    OptionDto toOptionDto(Option option);
 }

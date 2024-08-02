@@ -6,10 +6,7 @@ import com.atmosware.belatrix.questionService.business.dto.requests.question.Cre
 import com.atmosware.belatrix.questionService.business.dto.requests.question.UpdateQuestionRequest;
 import com.atmosware.belatrix.questionService.business.dto.responses.option.AddOptionResponse;
 import com.atmosware.belatrix.questionService.business.dto.responses.option.DeletedOptionResponse;
-import com.atmosware.belatrix.questionService.business.dto.responses.question.CreatedQuestionResponse;
-import com.atmosware.belatrix.questionService.business.dto.responses.question.DeleteQuestionResponse;
-import com.atmosware.belatrix.questionService.business.dto.responses.question.GetAllQuestionResponse;
-import com.atmosware.belatrix.questionService.business.dto.responses.question.UpdatedQuestionResponse;
+import com.atmosware.belatrix.questionService.business.dto.responses.question.*;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.List;
@@ -36,4 +33,6 @@ public interface QuestionService {
     DeletedOptionResponse deleteOptionOfQuestion(DeleteOptionRequest deleteOptionRequest, Long id);
 
     DeletedOptionResponse deleteOptionOfQuestion(DeleteOptionRequest deleteOptionRequest, Long id, HttpServletRequest httpServletRequest);
+    GetByIdQuestionResponse getById(Long id);
+    GetByIdQuestionResponse getById(Long id,HttpServletRequest request);
 }

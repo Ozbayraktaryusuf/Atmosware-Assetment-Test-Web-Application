@@ -26,7 +26,7 @@ public class SecurityConfiguration {
                 .requestMatchers(WHITE_LIST_URLS).permitAll()
                 .requestMatchers(HttpMethod.PUT,"question-service/api/v1/questions/{id}","question-service/api/v1/questions/add-option/{id}").hasAnyAuthority("admin")
                 .requestMatchers(HttpMethod.DELETE,"question-service/api/v1/questions/{id}","question-service/api/v1/questions/delete-option/{id}").hasAnyAuthority("admin")
-                .requestMatchers(HttpMethod.GET,"question-service/api/v1/questions").hasAnyAuthority("admin")
+                .requestMatchers(HttpMethod.GET,"question-service/api/v1/questions","question-service/api/v1/questions/{id}").hasAnyAuthority("admin")
                 .anyRequest().authenticated()
         );
         return http.build();

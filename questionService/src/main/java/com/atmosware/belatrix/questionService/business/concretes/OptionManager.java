@@ -1,6 +1,7 @@
 package com.atmosware.belatrix.questionService.business.concretes;
 
 import com.atmosware.belatrix.questionService.business.abstracts.OptionService;
+import com.atmosware.belatrix.questionService.business.dto.dtos.OptionDto;
 import com.atmosware.belatrix.questionService.business.dto.requests.option.AddOptionRequest;
 import com.atmosware.belatrix.questionService.business.dto.requests.option.CreateOptionRequest;
 import com.atmosware.belatrix.questionService.business.dto.requests.option.DeleteOptionRequest;
@@ -56,13 +57,13 @@ public class OptionManager implements OptionService {
     @Transactional
     public List<UpdatedOptionResponse> update(List<UpdateOptionRequest> updateOptionRequests, Question question) {
         List<Option> options = this.optionRepository.findByQuestionId(question.getId());
-        this.optionsBusinessRules.optionsAndRequestSizeShouldMatch(options,updateOptionRequests);
+        this.optionsBusinessRules.optionsAndRequestSizeShouldMatch(options, updateOptionRequests);
 
-            for (int i = 0; i < updateOptionRequests.size(); i++) {
-                if (i < options.size()) {
-                    this.optionMapper.updateOptionFromRequest(updateOptionRequests.get(i), options.get(i));
-                }
+        for (int i = 0; i < updateOptionRequests.size(); i++) {
+            if (i < options.size()) {
+                this.optionMapper.updateOptionFromRequest(updateOptionRequests.get(i), options.get(i));
             }
+        }
         this.optionsBusinessRules.oneAnswerShouldBeTrue(options);
 
         for (Option option : options) {
@@ -87,13 +88,20 @@ public class OptionManager implements OptionService {
     @Override
     public DeletedOptionResponse deleteOption(DeleteOptionRequest deleteOptionRequest, Question question) {
         this.optionsBusinessRules.optionShouldBeExists(deleteOptionRequest.id());
-        this.optionsBusinessRules.optionAndQuestionIdShouldMatch(deleteOptionRequest.id(),question);
-        this.optionsBusinessRules.onlyRightOptionCanNotBeDeleted(question,deleteOptionRequest.id());
+        this.optionsBusinessRules.optionAndQuestionIdShouldMatch(deleteOptionRequest.id(), question);
+        this.optionsBusinessRules.onlyRightOptionCanNotBeDeleted(question, deleteOptionRequest.id());
         this.optionsBusinessRules.questionCanNotObtainOptionsLessThanTwo(question.getOptions());
 
         Option option = this.optionRepository.findById(deleteOptionRequest.id()).get();
         option.setDeletedDate(LocalDateTime.now());
 
         return this.optionMapper.toDeleteOptionsResponse(this.optionRepository.save(option));
+    }
+
+    @Override
+    public List<OptionDto> optionDtoForQuestionGetById(Question question) {
+        List<Option> options = question.getOptions();
+
+        return options.stream().map(this.optionMapper::toOptionDto).toList();
     }
 }

@@ -7,10 +7,7 @@ import com.atmosware.belatrix.questionService.business.dto.requests.question.Cre
 import com.atmosware.belatrix.questionService.business.dto.requests.question.UpdateQuestionRequest;
 import com.atmosware.belatrix.questionService.business.dto.responses.option.AddOptionResponse;
 import com.atmosware.belatrix.questionService.business.dto.responses.option.DeletedOptionResponse;
-import com.atmosware.belatrix.questionService.business.dto.responses.question.CreatedQuestionResponse;
-import com.atmosware.belatrix.questionService.business.dto.responses.question.DeleteQuestionResponse;
-import com.atmosware.belatrix.questionService.business.dto.responses.question.GetAllQuestionResponse;
-import com.atmosware.belatrix.questionService.business.dto.responses.question.UpdatedQuestionResponse;
+import com.atmosware.belatrix.questionService.business.dto.responses.question.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -67,5 +64,13 @@ public class QuestionController {
     @DeleteMapping("delete-option/organization/{id}")
     public DeletedOptionResponse deleteOption(@Valid @RequestBody DeleteOptionRequest deleteOptionRequest , @PathVariable Long id, HttpServletRequest request){
         return this.questionService.deleteOptionOfQuestion(deleteOptionRequest,id,request);
+    }
+    @GetMapping("{id}")
+    public GetByIdQuestionResponse  getById(@PathVariable Long id){
+        return this.questionService.getById(id);
+    }
+    @GetMapping("/organization/{id}")
+    public GetByIdQuestionResponse  getById(@PathVariable Long id,HttpServletRequest request){
+        return this.questionService.getById(id,request);
     }
 }
