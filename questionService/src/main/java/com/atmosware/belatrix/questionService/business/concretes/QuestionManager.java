@@ -16,7 +16,6 @@ import com.atmosware.belatrix.questionService.business.dto.responses.question.*;
 import com.atmosware.belatrix.questionService.business.mappers.QuestionMapper;
 import com.atmosware.belatrix.questionService.business.rules.QuestionBusinessRules;
 import com.atmosware.belatrix.questionService.dataAccess.QuestionRepository;
-import com.atmosware.belatrix.questionService.entities.concretes.Option;
 import com.atmosware.belatrix.questionService.entities.concretes.Question;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
@@ -51,7 +50,7 @@ public class QuestionManager implements QuestionService {
             question.setOrganizationId(organizationId);
         }
 
-        Question createdQuestion = this.questionRepository.save(question);
+        this.questionRepository.save(question);
 
         List<CreatedOptionResponse> createdOptionResponse = this.optionService.add(createQuestionRequest.createOptionRequests(), question);
 

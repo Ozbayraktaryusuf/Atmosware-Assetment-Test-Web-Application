@@ -22,4 +22,8 @@ spring:
         id: question-service
         predicates[0]: Path=/question-service/api/v1/**
         uri: lb://question-service
+      routes[2]:
+        id: exam-service
+        predicates[0]: Path=/exam-service/api/v1/**
+        uri: lb://exam-service
 

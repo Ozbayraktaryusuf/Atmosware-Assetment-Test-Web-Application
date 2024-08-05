@@ -25,7 +25,7 @@ public class Question extends BaseEntity<Long> {
     @Size(max = 2000,min = 10)
     private String text;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "question",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @Size(min = 2, max = 5, message = "A question must have between 2 and 5 options")
     private List<Option> options;
 
