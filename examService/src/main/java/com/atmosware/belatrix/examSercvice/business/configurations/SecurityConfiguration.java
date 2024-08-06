@@ -22,7 +22,19 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         this.baseSecurityService.securityFilterChain(http);
-
+        http.authorizeHttpRequests(x->x
+                .requestMatchers(WHITE_LIST_URLS).permitAll()
+                .requestMatchers(HttpMethod.PUT,"exam-service/api/v1/rules/{id}").hasAnyAuthority("admin")
+                .requestMatchers(HttpMethod.DELETE,"exam-service/api/v1/rules/{id}").hasAnyAuthority("admin")
+                .requestMatchers(HttpMethod.POST,"exam-service/api/v1/rules").hasAnyAuthority("admin")
+                .requestMatchers(HttpMethod.PUT,"exam-service/api/v1/tests/organization","exam-service/api/v1/tests/organization{id}","exam-service/api/v1/tests/extend-end-date/organization/{id}").hasAnyAuthority("admin")
+                .requestMatchers(HttpMethod.PUT,"exam-service/api/v1/tests","exam-service/api/v1/tests/{id}","exam-service/api/v1/tests/extend-end-date/{id}").hasAnyAuthority("admin")
+                .requestMatchers(HttpMethod.GET,"exam-service/api/v1/tests/organization/{id}","exam-service/api/v1/tests/organization").hasAnyAuthority("organization")
+                .requestMatchers(HttpMethod.GET,"exam-service/api/v1/tests/{id}","exam-service/api/v1/tests").hasAnyAuthority("admin")
+                .requestMatchers(HttpMethod.DELETE,"exam-service/api/v1/tests/organization/{id}","exam-service/api/v1/tests/organization").hasAnyAuthority("organization")
+                .requestMatchers(HttpMethod.DELETE,"exam-service/api/v1/tests","exam-service/api/v1/tests/{id}").hasAnyAuthority("admin")
+                .anyRequest().authenticated()
+        );
         return http.build();
     }
 }

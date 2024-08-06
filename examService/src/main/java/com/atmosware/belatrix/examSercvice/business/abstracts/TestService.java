@@ -1,10 +1,45 @@
 package com.atmosware.belatrix.examSercvice.business.abstracts;
 
 import com.atmosware.belatrix.examSercvice.business.dtos.requests.test.CreateTestRequest;
-import com.atmosware.belatrix.examSercvice.business.dtos.responses.test.CreatedTestResponse;
-import com.atmosware.belatrix.examSercvice.business.dtos.responses.testQuestion.CreatedTestQuestionResponse;
+import com.atmosware.belatrix.examSercvice.business.dtos.requests.test.ExtendEndDateRequest;
+import com.atmosware.belatrix.examSercvice.business.dtos.requests.test.UpdateTestRequest;
+import com.atmosware.belatrix.examSercvice.business.dtos.requests.testQuestion.AddQuestionToTestRequest;
+import com.atmosware.belatrix.examSercvice.business.dtos.requests.testQuestion.DeleteQuestionFromTestRequest;
+import com.atmosware.belatrix.examSercvice.business.dtos.responses.test.*;
+import com.atmosware.belatrix.examSercvice.business.dtos.responses.testQuestion.AddedQuestionToTestResponse;
+import com.atmosware.belatrix.examSercvice.business.dtos.responses.testQuestion.DeletedQuestionFromTestResponse;
+import com.atmosware.belatrix.examSercvice.entities.concretes.Test;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.data.domain.Page;
 
 public interface TestService {
-    CreatedTestResponse add(CreateTestRequest createTestRequest,HttpServletRequest httpServletRequest);
+    CreatedTestResponse add(CreateTestRequest createTestRequest, HttpServletRequest httpServletRequest);
+
+    Page<GetAllTestResponse> getAll(int size, int page);
+
+    Page<GetAllTestResponse> getAllOrganization(int size, int page, HttpServletRequest httpServletRequest);
+
+    GetByIdTestResponse getById(Long id);
+
+    GetByIdTestResponse getByIdOrganization(Long id, HttpServletRequest httpServletRequest);
+
+    DeleteTestResponse delete(Long id);
+
+    DeleteTestResponse deleteOrganization(Long id, HttpServletRequest httpServletRequest);
+
+    AddedQuestionToTestResponse addQuestionToResponse(AddQuestionToTestRequest addQuestionToTestRequest);
+
+    AddedQuestionToTestResponse addQuestionToResponseOrganization(AddQuestionToTestRequest addQuestionToTestRequest, HttpServletRequest httpServletRequest);
+
+    DeletedQuestionFromTestResponse deleteQuestionFromTest(DeleteQuestionFromTestRequest deleteQuestionFromTestRequest);
+
+    DeletedQuestionFromTestResponse deleteQuestionFromTestOrganization(DeleteQuestionFromTestRequest deleteQuestionFromTestRequest, HttpServletRequest httpServletRequest);
+
+    UpdatedTestResponse update(Long id, UpdateTestRequest updateTestRequest);
+
+    UpdatedTestResponse updateOrganization(Long id, UpdateTestRequest updateTestRequest, HttpServletRequest httpServletRequest);
+
+    ExtendedEndDateResponse extendEndDate(Long id, ExtendEndDateRequest extendEndDateRequest);
+
+    ExtendedEndDateResponse extendEndDateOrganization(Long id, ExtendEndDateRequest extendEndDateRequest, HttpServletRequest httpServletRequest);
 }

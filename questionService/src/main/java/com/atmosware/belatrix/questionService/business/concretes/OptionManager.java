@@ -15,7 +15,6 @@ import com.atmosware.belatrix.questionService.business.rules.OptionsBusinessRule
 import com.atmosware.belatrix.questionService.dataAccess.OptionRepository;
 import com.atmosware.belatrix.questionService.entities.concretes.Option;
 import com.atmosware.belatrix.questionService.entities.concretes.Question;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
