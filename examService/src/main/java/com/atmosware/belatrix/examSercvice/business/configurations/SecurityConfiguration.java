@@ -27,12 +27,12 @@ public class SecurityConfiguration {
                 .requestMatchers(HttpMethod.PUT,"exam-service/api/v1/rules/{id}").hasAnyAuthority("admin")
                 .requestMatchers(HttpMethod.DELETE,"exam-service/api/v1/rules/{id}").hasAnyAuthority("admin")
                 .requestMatchers(HttpMethod.POST,"exam-service/api/v1/rules").hasAnyAuthority("admin")
-                .requestMatchers(HttpMethod.PUT,"exam-service/api/v1/tests/organization","exam-service/api/v1/tests/organization{id}","exam-service/api/v1/tests/extend-end-date/organization/{id}").hasAnyAuthority("admin")
-                .requestMatchers(HttpMethod.PUT,"exam-service/api/v1/tests","exam-service/api/v1/tests/{id}","exam-service/api/v1/tests/extend-end-date/{id}").hasAnyAuthority("admin")
-                .requestMatchers(HttpMethod.GET,"exam-service/api/v1/tests/organization/{id}","exam-service/api/v1/tests/organization").hasAnyAuthority("organization")
-                .requestMatchers(HttpMethod.GET,"exam-service/api/v1/tests/{id}","exam-service/api/v1/tests").hasAnyAuthority("admin")
-                .requestMatchers(HttpMethod.DELETE,"exam-service/api/v1/tests/organization/{id}","exam-service/api/v1/tests/organization").hasAnyAuthority("organization")
-                .requestMatchers(HttpMethod.DELETE,"exam-service/api/v1/tests","exam-service/api/v1/tests/{id}").hasAnyAuthority("admin")
+                .requestMatchers(HttpMethod.PUT,"exam-service/api/v1/tests/organization","exam-service/api/v1/tests/organization/{id}","exam-service/api/v1/tests/organization/extend-end-date/{id}","exam-service/api/v1/tests/organization/add-test-rule").hasAnyAuthority("organization")
+                .requestMatchers(HttpMethod.PUT,"exam-service/api/v1/tests","exam-service/api/v1/tests/{id}","exam-service/api/v1/tests/extend-end-date/{id}","exam-service/api/v1/tests/add-test-rule").hasAnyAuthority("admin")
+                .requestMatchers(HttpMethod.GET,"exam-service/api/v1/tests/organization/{id}","exam-service/api/v1/tests/organization","exam-service/api/v1/tests/organization/get-all-test-rule-for-test/{id}").hasAnyAuthority("organization")
+                .requestMatchers(HttpMethod.GET,"exam-service/api/v1/tests/{id}","exam-service/api/v1/tests","exam-service/api/v1/tests/get-all-test-rule-for-test/{id}").hasAnyAuthority("admin")
+                .requestMatchers(HttpMethod.DELETE,"exam-service/api/v1/tests/organization/{id}","exam-service/api/v1/tests/organization","exam-service/api/v1/tests/organization/remove-test-rule").hasAnyAuthority("organization")
+                .requestMatchers(HttpMethod.DELETE,"exam-service/api/v1/tests","exam-service/api/v1/tests/{id}","exam-service/api/v1/tests/remove-test-rule").hasAnyAuthority("admin")
                 .anyRequest().authenticated()
         );
         return http.build();

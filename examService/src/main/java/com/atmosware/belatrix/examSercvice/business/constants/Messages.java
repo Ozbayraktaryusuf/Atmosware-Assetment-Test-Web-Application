@@ -15,4 +15,8 @@ public class Messages {
     public static class RuleMessages{
         public static final String RULE_NOT_FOUND = "ruleNotFound";
     }
+    public static class TestRuleMessages{
+        public static final String TEST_RULE_NOT_FOUND = "testRuleNotFound";
+        public static final String TEST_RULE_ALREADY_EXISTS = "testRuleAlreadyExists";
+    }
 }

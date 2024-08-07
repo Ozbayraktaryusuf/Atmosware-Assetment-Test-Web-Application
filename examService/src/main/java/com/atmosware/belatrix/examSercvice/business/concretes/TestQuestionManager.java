@@ -10,6 +10,7 @@ import com.atmosware.belatrix.examSercvice.business.rules.TestQuestionBusinessRu
 import com.atmosware.belatrix.examSercvice.dataAccess.TestQuestionRepository;
 import com.atmosware.belatrix.examSercvice.entities.concretes.Test;
 import com.atmosware.belatrix.examSercvice.entities.concretes.TestQuestion;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,7 @@ public class TestQuestionManager implements TestQuestionService {
 
 
     @Override
+    @Transactional
     public List<CreatedTestQuestionResponse> createTestQuestion(List<CreateTestQuestionRequest> createTestQuestionRequests, Test test) {
         List<TestQuestion> testQuestions = this.testQuestionMapper.toTestQuestion(createTestQuestionRequests);
 
@@ -39,6 +41,7 @@ public class TestQuestionManager implements TestQuestionService {
     }
 
     @Override
+    @Transactional
     public AddedQuestionToTestResponse addQuestionToTest(Long questionId, Test test) {
         TestQuestion testQuestion = new TestQuestion(questionId, test);
 
@@ -46,6 +49,7 @@ public class TestQuestionManager implements TestQuestionService {
     }
 
     @Override
+    @Transactional
     public DeletedQuestionFromTestResponse deleteQuestionFromTest(Long questionId, Test test) {
         Optional<TestQuestion> optionalTestQuestion = this.testQuestionRepository.findByTestIdAndQuestionId(questionId, test.getId());
         this.testQuestionBusinessRule.testQuestionShouldBeExists(optionalTestQuestion);
@@ -58,6 +62,7 @@ public class TestQuestionManager implements TestQuestionService {
     }
 
     @Override
+    @Transactional
     public void deleteAll(List<TestQuestion> testQuestions) {
         testQuestions.forEach(testQuestion -> testQuestion.setDeletedDate(LocalDateTime.now()));
 

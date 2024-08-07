@@ -8,6 +8,7 @@ import com.atmosware.belatrix.examSercvice.business.mappers.RuleMapper;
 import com.atmosware.belatrix.examSercvice.business.rules.RuleManagerBusinessRules;
 import com.atmosware.belatrix.examSercvice.dataAccess.RuleRepository;
 import com.atmosware.belatrix.examSercvice.entities.concretes.Rule;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,6 +27,7 @@ public class RuleManager implements RuleService{
     private final RuleRepository ruleRepository;
     private final RuleManagerBusinessRules ruleManagerBusinessRules;
     @Override
+    @Transactional
     public CreateRuleResponse createRule(CreateRuleRequest createRuleRequest) {
         Rule rule = this.ruleMapper.toRule(createRuleRequest);
 
@@ -33,6 +35,7 @@ public class RuleManager implements RuleService{
     }
 
     @Override
+    @Transactional
     public Page<GetAllRuleResponse> getAll(int page, int size) {
         Pageable pageable = PageRequest.of(page,size, Sort.by("id"));
 
@@ -44,6 +47,7 @@ public class RuleManager implements RuleService{
     }
 
     @Override
+    @Transactional
     public GetByIdRuleResponse getById(Long id) {
         Optional<Rule> optionalRule = this.ruleRepository.findById(id);
 
@@ -53,6 +57,7 @@ public class RuleManager implements RuleService{
     }
 
     @Override
+    @Transactional
     public UpdatedRuleResponse update(Long id, UpdateRuleRequest updateRuleRequest) {
         Optional<Rule> optionalRule = this.ruleRepository.findById(id);
 
@@ -66,6 +71,7 @@ public class RuleManager implements RuleService{
     }
 
     @Override
+    @Transactional
     public DeletedRuleResponse delete(Long id) {
         Optional<Rule> optionalRule = this.ruleRepository.findById(id);
 
@@ -75,5 +81,15 @@ public class RuleManager implements RuleService{
         rule.setDeletedDate(LocalDateTime.now());
 
         return this.ruleMapper.toDeletedRuleResponse(this.ruleRepository.save(rule));
+    }
+
+    @Override
+    @Transactional
+    public Rule findByIdForTestRule(Long id) {
+        Optional<Rule> optionalRule = this.ruleRepository.findById(id);
+
+        this.ruleManagerBusinessRules.testShouldBeExists(optionalRule);
+
+        return optionalRule.get();
     }
 }

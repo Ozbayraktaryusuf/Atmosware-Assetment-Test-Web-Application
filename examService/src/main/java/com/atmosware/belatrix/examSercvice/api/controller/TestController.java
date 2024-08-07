@@ -6,9 +6,14 @@ import com.atmosware.belatrix.examSercvice.business.dtos.requests.test.ExtendEnd
 import com.atmosware.belatrix.examSercvice.business.dtos.requests.test.UpdateTestRequest;
 import com.atmosware.belatrix.examSercvice.business.dtos.requests.testQuestion.AddQuestionToTestRequest;
 import com.atmosware.belatrix.examSercvice.business.dtos.requests.testQuestion.DeleteQuestionFromTestRequest;
+import com.atmosware.belatrix.examSercvice.business.dtos.requests.testRule.AddRuleToTestRequest;
+import com.atmosware.belatrix.examSercvice.business.dtos.requests.testRule.RemoveRuleFromTestRequest;
 import com.atmosware.belatrix.examSercvice.business.dtos.responses.test.*;
 import com.atmosware.belatrix.examSercvice.business.dtos.responses.testQuestion.AddedQuestionToTestResponse;
 import com.atmosware.belatrix.examSercvice.business.dtos.responses.testQuestion.DeletedQuestionFromTestResponse;
+import com.atmosware.belatrix.examSercvice.business.dtos.responses.testRule.AddRuleToTestResponse;
+import com.atmosware.belatrix.examSercvice.business.dtos.responses.testRule.GetAllTestRuleForTestResponse;
+import com.atmosware.belatrix.examSercvice.business.dtos.responses.testRule.RemoveRuleFromTestResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -98,5 +103,37 @@ public class TestController {
     @DeleteMapping("organization")
     public DeletedQuestionFromTestResponse deleteQuestionFrom(@Valid @RequestBody DeleteQuestionFromTestRequest deleteQuestionFromTestRequest, HttpServletRequest httpServletRequest) {
         return this.testService.deleteQuestionFromTestOrganization(deleteQuestionFromTestRequest, httpServletRequest);
+    }
+
+    @PutMapping("add-test-rule")
+    public AddRuleToTestResponse addRuleToTest(@Valid @RequestBody AddRuleToTestRequest addRuleToTestRequest) {
+        return this.testService.addRuleToTest(addRuleToTestRequest);
+    }
+
+    @PutMapping("organization/add-test-rule")
+    public AddRuleToTestResponse addRuleToTest(@Valid @RequestBody AddRuleToTestRequest addRuleToTestRequest,HttpServletRequest httpServletRequest) {
+        return this.testService.addRuleToTestOrganization(addRuleToTestRequest,httpServletRequest);
+    }
+    @DeleteMapping("remove-test-rule")
+    public RemoveRuleFromTestResponse removeRuleFromTest(@Valid @RequestBody RemoveRuleFromTestRequest removeRuleFromTestRequest){
+        return this.testService.removeRuleFromTest(removeRuleFromTestRequest);
+    }
+    @DeleteMapping("organization/remove-test-rule")
+    public RemoveRuleFromTestResponse removeRuleFromTest(@Valid @RequestBody RemoveRuleFromTestRequest removeRuleFromTestRequest,HttpServletRequest httpServletRequest){
+        return this.testService.removeRuleFromTestOrganization(removeRuleFromTestRequest,httpServletRequest);
+    }
+    @GetMapping("get-all-test-rule-for-test/{id}")
+    public  Page<GetAllTestRuleForTestResponse> getAllTestRuleForTest(@PathVariable Long id,
+                                                                      @RequestParam(name = "page", defaultValue = "0") int page,
+                                                                      @RequestParam(name = "size", defaultValue = "10") int size){
+        return this.testService.getAllTestRuleForTest(id,page,size);
+    }
+
+    @GetMapping("organization/get-all-test-rule-for-test/{id}")
+    public  Page<GetAllTestRuleForTestResponse> getAllTestRuleForTest(@PathVariable Long id,
+                                                                      @RequestParam(name = "page", defaultValue = "0") int page,
+                                                                      @RequestParam(name = "size", defaultValue = "10") int size,
+                                                                      HttpServletRequest httpServletRequest){
+        return this.testService.getAllTestRuleForTestOrganization(id,page,size,httpServletRequest);
     }
 }
