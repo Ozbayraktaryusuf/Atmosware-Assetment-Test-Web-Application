@@ -22,6 +22,7 @@ import com.atmosware.belatrix.examSercvice.business.mappers.TestMapper;
 import com.atmosware.belatrix.examSercvice.business.rules.TestBusinessRules;
 import com.atmosware.belatrix.examSercvice.dataAccess.TestRepository;
 import com.atmosware.belatrix.examSercvice.entities.concretes.Test;
+import com.atmosware.belatrix.examSercvice.grpc.clients.abstacts.QuestionClientService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -45,6 +46,7 @@ public class TestManager implements TestService {
     private final TestRepository testRepository;
     private final JwtService jwtService;
     private final TestBusinessRules testBusinessRules;
+    private final QuestionClientService questionClientService;
     private final TestRuleService testRuleService;
 
     @Override
@@ -59,6 +61,9 @@ public class TestManager implements TestService {
         if (roles.get(0).equals("organization")) {
             UUID organizationId = UUID.fromString(this.jwtService.getClaims(token).get("organizationId").toString());
             test.setOrganizationId(organizationId);
+
+            List<Long> questionsId = this.questionClientService.getQuestionsId(organizationId);
+            this.testBusinessRules.testMustNotObtainAnotherOrganizationsQuestions(createTestRequest.createTestQuestionRequests(),questionsId);
         }
         this.testRepository.save(test);
         List<CreatedTestQuestionResponse> createdTestQuestionResponses =

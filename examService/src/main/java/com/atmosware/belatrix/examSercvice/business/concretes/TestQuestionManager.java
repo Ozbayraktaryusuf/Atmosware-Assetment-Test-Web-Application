@@ -14,7 +14,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.lang.ref.PhantomReference;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -40,9 +40,26 @@ public class TestQuestionManager implements TestQuestionService {
         return this.testQuestionMapper.toCreatedTestQuestionResponse(testQuestions);
     }
 
+//    @Override
+//    @Transactional
+//    public List<CreatedTestQuestionResponse> createTestQuestionOrganization(List<CreateTestQuestionRequest> createTestQuestionRequests, Test test, List<Long> questionsId) {
+//        List<TestQuestion> testQuestions = this.testQuestionMapper.toTestQuestion(createTestQuestionRequests);
+//
+//        for (TestQuestion testQuestion : testQuestions) {
+//            testQuestion.setTest(test);
+//        }
+//        this.testQuestionRepository.saveAll(testQuestions);
+//
+//        return this.testQuestionMapper.toCreatedTestQuestionResponse(testQuestions);
+//
+//    }
+
     @Override
     @Transactional
     public AddedQuestionToTestResponse addQuestionToTest(Long questionId, Test test) {
+        Optional<TestQuestion> optionalTestQuestion = this.testQuestionRepository.findByTestIdAndQuestionId(questionId, test.getId());
+        this.testQuestionBusinessRule.questionCanNotBeDuplicated(optionalTestQuestion);
+
         TestQuestion testQuestion = new TestQuestion(questionId, test);
 
         return this.testQuestionMapper.toAddedQuestionToTestResponse(this.testQuestionRepository.save(testQuestion));

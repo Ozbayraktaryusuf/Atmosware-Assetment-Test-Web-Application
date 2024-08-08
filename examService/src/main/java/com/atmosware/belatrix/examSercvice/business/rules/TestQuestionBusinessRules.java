@@ -27,4 +27,9 @@ public class TestQuestionBusinessRules {
             throw new BusinessException(messageService.getMessage(Messages.TestQuestionMessages.TEST_CAN_NOT_OBTAIN_QUESTION_LESS_THAN_ONE));
         }
     }
+    public void questionCanNotBeDuplicated(Optional<TestQuestion> optionalTestQuestion){
+        if (optionalTestQuestion.isPresent()){
+            throw new NotFoundException(messageService.getMessage(Messages.TestQuestionMessages.TEST_QUESTION_CAN_NOT_BE_DUPLICATED));
+        }
+    }
 }

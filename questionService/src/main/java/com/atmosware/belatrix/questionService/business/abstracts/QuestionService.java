@@ -7,9 +7,11 @@ import com.atmosware.belatrix.questionService.business.dto.requests.question.Upd
 import com.atmosware.belatrix.questionService.business.dto.responses.option.AddOptionResponse;
 import com.atmosware.belatrix.questionService.business.dto.responses.option.DeletedOptionResponse;
 import com.atmosware.belatrix.questionService.business.dto.responses.question.*;
+import com.atmosware.belatrix.questionService.entities.concretes.Question;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface QuestionService {
     CreatedQuestionResponse add(CreateQuestionRequest createQuestionRequest, HttpServletRequest request);
@@ -35,4 +37,5 @@ public interface QuestionService {
     DeletedOptionResponse deleteOptionOfQuestion(DeleteOptionRequest deleteOptionRequest, Long id, HttpServletRequest httpServletRequest);
     GetByIdQuestionResponse getById(Long id);
     GetByIdQuestionResponse getById(Long id,HttpServletRequest request);
+    List<Question> getAllQuestionsWithSpecificOrganizationIdForGrpc(UUID organizationId);
 }

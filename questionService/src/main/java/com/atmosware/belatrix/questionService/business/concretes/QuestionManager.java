@@ -213,6 +213,11 @@ public class QuestionManager implements QuestionService {
         return getByIdQuestionResponse;
     }
 
+    @Override
+    public List<Question> getAllQuestionsWithSpecificOrganizationIdForGrpc(UUID organizationId) {
+        return this.questionRepository.findByOrganizationIdOrOrganizationIdIsNull(organizationId);
+    }
+
     private UUID extractOrganizationIdFromToken(HttpServletRequest httpServletRequest) {
         return UUID.fromString(jwtService
                 .getClaims(

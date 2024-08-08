@@ -1,6 +1,7 @@
 package com.atmosware.belatrix.examSercvice.business.rules;
 
 import com.atmosware.belatrix.examSercvice.business.constants.Messages;
+import com.atmosware.belatrix.examSercvice.business.dtos.requests.testQuestion.CreateTestQuestionRequest;
 import com.atmosware.belatrix.examSercvice.core.business.abstracts.MessageService;
 import com.atmosware.belatrix.examSercvice.core.exceptions.types.BusinessException;
 import com.atmosware.belatrix.examSercvice.core.exceptions.types.NotFoundException;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -42,6 +44,13 @@ public class TestBusinessRules {
     public void testShouldBeStartedButNotEnded(Test test) {
         if (test.getStartDate().isBefore(LocalDateTime.now()) && test.getEndDate().isAfter(LocalDateTime.now())) {
             throw new BusinessException(messageService.getMessage(Messages.TestMessages.TEST_SHOULD_BE_STARTED_BUT_NOT_ENDED));
+        }
+    }
+    public void testMustNotObtainAnotherOrganizationsQuestions(List<CreateTestQuestionRequest> createTestQuestionRequests, List<Long> questionsId){
+        for(CreateTestQuestionRequest createTestQuestionRequest : createTestQuestionRequests){
+            if (!questionsId.contains(createTestQuestionRequest.questionId())){
+                throw new BusinessException(messageService.getMessage(Messages.TestMessages.TEST_MUST_NOT_OBTAIN_ANOTHER_ORGANIZATIONS_QUESTION));
+            }
         }
     }
 }
