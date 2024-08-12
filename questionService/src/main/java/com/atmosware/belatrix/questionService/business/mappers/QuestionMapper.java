@@ -18,8 +18,6 @@ public interface QuestionMapper {
 
     GetAllQuestionResponse toGetAllQuestionResponse  (Question question);
 
-    List<GetAllQuestionResponse> toGetAllQuestionResponse(List<Question> question);
-
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateQuestionFromRequest(UpdateQuestionRequest updateQuestionRequest, @MappingTarget Question question);
 

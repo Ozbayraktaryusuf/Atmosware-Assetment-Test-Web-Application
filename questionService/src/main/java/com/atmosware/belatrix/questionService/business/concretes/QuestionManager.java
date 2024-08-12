@@ -20,6 +20,10 @@ import com.atmosware.belatrix.questionService.entities.concretes.Question;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
@@ -61,19 +65,21 @@ public class QuestionManager implements QuestionService {
     }
 
     @Override
-    public List<GetAllQuestionResponse> getAll() {
-        //TODO: paging yapmayı unutma
-        List<Question> questionList = this.questionRepository.findAll();
+    public Page<GetAllQuestionResponse> getAll(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("id"));
+        Page<Question> questionList = this.questionRepository.findAll(pageable);
 
-        return this.questionMapper.toGetAllQuestionResponse(questionList);
+        return questionList.map(this.questionMapper::toGetAllQuestionResponse);
     }
 
     @Override
-    public List<GetAllQuestionResponse> getAll(HttpServletRequest request) {
+    public Page<GetAllQuestionResponse> getAll(int size, int page ,HttpServletRequest request) {
+        Pageable pageable = PageRequest.of(page,size,Sort.by("id"));
         UUID id = this.extractOrganizationIdFromToken(request);
-        List<Question> questionList = this.questionRepository.findByOrganizationIdOrOrganizationIdIsNull(id);
 
-        return this.questionMapper.toGetAllQuestionResponse(questionList);
+        Page<Question> questionList = this.questionRepository.findByOrganizationIdOrOrganizationIdIsNull(id,pageable);
+
+        return questionList.map(this.questionMapper::toGetAllQuestionResponse);
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.atmosware.belatrix.managmentService.business.dto.requests.organizatio
 import com.atmosware.belatrix.managmentService.business.dto.requests.organization.UpdateOrganizationRequest;
 import com.atmosware.belatrix.managmentService.business.dto.responses.organization.CreateOrganizationResponse;
 import com.atmosware.belatrix.managmentService.business.dto.responses.organization.DeleteOrganizationResponse;
+import com.atmosware.belatrix.managmentService.business.dto.responses.organization.GetAllOrganizationResponse;
 import com.atmosware.belatrix.managmentService.business.dto.responses.organization.UpdateOrganizationResponse;
 import com.atmosware.belatrix.managmentService.entities.concretes.Organization;
 import java.time.LocalDate;
@@ -19,7 +20,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-07-31T17:24:29+0300",
+    date = "2024-08-09T14:48:31+0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.2 (Oracle Corporation)"
 )
 @Component
@@ -123,6 +124,27 @@ public class OrganizationMapperImpl implements OrganizationMapper {
         DeleteOrganizationResponse deleteOrganizationResponse = new DeleteOrganizationResponse( id, organizationName, createdDate, updatedDate, deletedDate );
 
         return deleteOrganizationResponse;
+    }
+
+    @Override
+    public GetAllOrganizationResponse toGetAllOrganizationResponse(Organization organization) {
+        if ( organization == null ) {
+            return null;
+        }
+
+        UUID id = null;
+        String organizationName = null;
+        LocalDateTime createdDate = null;
+        LocalDateTime updatedDate = null;
+
+        id = organization.getId();
+        organizationName = organization.getOrganizationName();
+        createdDate = organization.getCreatedDate();
+        updatedDate = organization.getUpdatedDate();
+
+        GetAllOrganizationResponse getAllOrganizationResponse = new GetAllOrganizationResponse( id, organizationName, createdDate, updatedDate );
+
+        return getAllOrganizationResponse;
     }
 
     private XMLGregorianCalendar localDateTimeToXmlGregorianCalendar( LocalDateTime localDateTime ) {

@@ -7,6 +7,7 @@ import com.atmosware.belatrix.managmentService.business.dto.requests.organizatio
 import com.atmosware.belatrix.managmentService.business.dto.requests.organization.UpdateOrganizationRequest;
 import com.atmosware.belatrix.managmentService.business.dto.responses.organization.CreateOrganizationResponse;
 import com.atmosware.belatrix.managmentService.business.dto.responses.organization.DeleteOrganizationResponse;
+import com.atmosware.belatrix.managmentService.business.dto.responses.organization.GetAllOrganizationResponse;
 import com.atmosware.belatrix.managmentService.business.dto.responses.organization.UpdateOrganizationResponse;
 import com.atmosware.belatrix.managmentService.business.mappers.OrganizationMapper;
 import com.atmosware.belatrix.managmentService.business.rules.OrganizationBusinessRules;
@@ -15,6 +16,10 @@ import com.atmosware.belatrix.managmentService.entities.concretes.Organization;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
@@ -78,6 +83,15 @@ public class OrganizationManager implements OrganizationService {
         this.userService.delete(organization.getUserList());
 
         return this.organizationMapper.toDeleteOrganizationResponse(organization);
+    }
+
+    @Override
+    public Page<GetAllOrganizationResponse> getAll(int page, int size) {
+        Pageable pageable = PageRequest.of(page,size, Sort.by("id"));
+
+        Page<Organization> organizations = this.organizationRepository.findAll(pageable);
+
+        return organizations.map(this.organizationMapper::toGetAllOrganizationResponse);
     }
 }
 

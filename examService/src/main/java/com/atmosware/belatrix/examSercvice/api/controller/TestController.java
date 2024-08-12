@@ -87,12 +87,12 @@ public class TestController {
 
     @PutMapping
     public AddedQuestionToTestResponse addQuestionToTest(@Valid @RequestBody AddQuestionToTestRequest addQuestionToTestRequest) {
-        return this.testService.addQuestionToResponse(addQuestionToTestRequest);
+        return this.testService.addQuestionToTestResponse(addQuestionToTestRequest);
     }
 
     @PutMapping("organization")
     public AddedQuestionToTestResponse addQuestionToTest(@Valid @RequestBody AddQuestionToTestRequest addQuestionToTestRequest, HttpServletRequest httpServletRequest) {
-        return this.testService.addQuestionToResponse(addQuestionToTestRequest);
+        return this.testService.addQuestionToTestResponseOrganization(addQuestionToTestRequest,httpServletRequest);
     }
 
     @DeleteMapping

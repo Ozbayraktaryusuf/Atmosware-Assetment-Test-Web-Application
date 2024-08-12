@@ -9,10 +9,17 @@ import "google/protobuf/empty.proto";
 
 service QuestionService {
   rpc GetQuestionsWithOrganizationIdAndNullOrganization(GetQuestionsRequest) returns(GetQuestionsResponse){}
+  rpc ControlQuestion(ControlQuestionRequest) returns(Empty);
 }
 message GetQuestionsRequest{
   string organizationId = 1;
 }
 message GetQuestionsResponse{
   repeated int64 questionId = 1;
+}
+message ControlQuestionRequest{
+  repeated int64 questionId=1;
+}
+message Empty{
+
 }

@@ -65,6 +65,7 @@ public class TestManager implements TestService {
             List<Long> questionsId = this.questionClientService.getQuestionsId(organizationId);
             this.testBusinessRules.testMustNotObtainAnotherOrganizationsQuestions(createTestRequest.createTestQuestionRequests(),questionsId);
         }
+        this.testBusinessRules.controlQuestions(createTestRequest.createTestQuestionRequests());
         this.testRepository.save(test);
         List<CreatedTestQuestionResponse> createdTestQuestionResponses =
                 this.testQuestionService.createTestQuestion(createTestRequest.createTestQuestionRequests(), test);
@@ -163,7 +164,7 @@ public class TestManager implements TestService {
     @Override
     @Transactional
     //TODO: test id'yi PathVariable olarak almak mı daha iyi yoksa request içinde mi?
-    public AddedQuestionToTestResponse addQuestionToResponse(AddQuestionToTestRequest addQuestionToTestRequest) {
+    public AddedQuestionToTestResponse addQuestionToTestResponse(AddQuestionToTestRequest addQuestionToTestRequest) {
         Optional<Test> optionalTest = this.testRepository.findById(addQuestionToTestRequest.testId());
 
         this.testBusinessRules.testShouldBeExists(optionalTest);
@@ -174,7 +175,7 @@ public class TestManager implements TestService {
 
     @Override
     @Transactional
-    public AddedQuestionToTestResponse addQuestionToResponseOrganization(AddQuestionToTestRequest addQuestionToTestRequest, HttpServletRequest httpServletRequest) {
+    public AddedQuestionToTestResponse addQuestionToTestResponseOrganization(AddQuestionToTestRequest addQuestionToTestRequest, HttpServletRequest httpServletRequest) {
         Optional<Test> optionalTest = this.testRepository.findById(addQuestionToTestRequest.testId());
 
         this.testBusinessRules.testShouldBeExists(optionalTest);

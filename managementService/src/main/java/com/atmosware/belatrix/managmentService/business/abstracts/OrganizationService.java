@@ -4,8 +4,10 @@ import com.atmosware.belatrix.managmentService.business.dto.requests.organizatio
 import com.atmosware.belatrix.managmentService.business.dto.requests.organization.UpdateOrganizationRequest;
 import com.atmosware.belatrix.managmentService.business.dto.responses.organization.CreateOrganizationResponse;
 import com.atmosware.belatrix.managmentService.business.dto.responses.organization.DeleteOrganizationResponse;
+import com.atmosware.belatrix.managmentService.business.dto.responses.organization.GetAllOrganizationResponse;
 import com.atmosware.belatrix.managmentService.business.dto.responses.organization.UpdateOrganizationResponse;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.data.domain.Page;
 
 import java.util.UUID;
 
@@ -14,4 +16,5 @@ public interface OrganizationService {
     UpdateOrganizationResponse update_organization(HttpServletRequest request, UpdateOrganizationRequest updateOrganizationRequest);
     UpdateOrganizationResponse update_admin(UUID id, UpdateOrganizationRequest updateOrganizationRequest);
     DeleteOrganizationResponse delete(UUID id);
+    Page<GetAllOrganizationResponse> getAll(int page,int size);
 }

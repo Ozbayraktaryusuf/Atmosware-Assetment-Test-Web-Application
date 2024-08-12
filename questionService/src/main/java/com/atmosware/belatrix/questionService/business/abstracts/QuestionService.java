@@ -9,6 +9,7 @@ import com.atmosware.belatrix.questionService.business.dto.responses.option.Dele
 import com.atmosware.belatrix.questionService.business.dto.responses.question.*;
 import com.atmosware.belatrix.questionService.entities.concretes.Question;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.UUID;
@@ -16,9 +17,9 @@ import java.util.UUID;
 public interface QuestionService {
     CreatedQuestionResponse add(CreateQuestionRequest createQuestionRequest, HttpServletRequest request);
 
-    List<GetAllQuestionResponse> getAll();
+    Page<GetAllQuestionResponse> getAll(int page ,int size);
 
-    List<GetAllQuestionResponse> getAll(HttpServletRequest request);
+    Page<GetAllQuestionResponse> getAll(int page,int size,HttpServletRequest request);
 
     UpdatedQuestionResponse update(UpdateQuestionRequest updateQuestionRequest, Long id);
 

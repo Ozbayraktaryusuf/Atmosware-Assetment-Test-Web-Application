@@ -11,6 +11,7 @@ import com.atmosware.belatrix.questionService.business.dto.responses.question.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,12 +27,15 @@ public class QuestionController {
        return this.questionService.add(createQuestionRequest, request);
     }
     @GetMapping
-    public List<GetAllQuestionResponse> getAll(){
-        return this.questionService.getAll();
+    public Page<GetAllQuestionResponse> getAll(@RequestParam(name = "page", defaultValue = "0") int page,
+                                               @RequestParam(name = "size", defaultValue = "10") int size){
+        return this.questionService.getAll(page,size);
     }
     @GetMapping("/organization")
-    public List<GetAllQuestionResponse> getAll(HttpServletRequest request){
-        return this.questionService.getAll(request);
+    public Page<GetAllQuestionResponse> getAll(@RequestParam int page,
+                                               @RequestParam(name = "size", defaultValue = "10") int size,
+                                               HttpServletRequest request){
+        return this.questionService.getAll(page,size,request);//TODO: page=0 diyince validation hatası veriyor sor?
     }
     @DeleteMapping("{id}")
     public DeleteQuestionResponse delete(@PathVariable Long id){

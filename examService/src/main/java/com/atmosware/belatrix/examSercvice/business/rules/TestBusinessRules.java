@@ -7,6 +7,7 @@ import com.atmosware.belatrix.examSercvice.core.exceptions.types.BusinessExcepti
 import com.atmosware.belatrix.examSercvice.core.exceptions.types.NotFoundException;
 import com.atmosware.belatrix.examSercvice.dataAccess.TestRepository;
 import com.atmosware.belatrix.examSercvice.entities.concretes.Test;
+import com.atmosware.belatrix.examSercvice.grpc.clients.abstacts.QuestionClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ import java.util.UUID;
 public class TestBusinessRules {
     private final TestRepository testRepository;
     private final MessageService messageService;
+    private final QuestionClientService questionClientService;
 
     public void testShouldBeExists(Optional<Test> optionalTest) {
         if (optionalTest.isEmpty()) {
@@ -52,5 +54,9 @@ public class TestBusinessRules {
                 throw new BusinessException(messageService.getMessage(Messages.TestMessages.TEST_MUST_NOT_OBTAIN_ANOTHER_ORGANIZATIONS_QUESTION));
             }
         }
+    }
+    public void controlQuestions(List<CreateTestQuestionRequest> createTestQuestionRequest){
+        List<Long> questionsIds= createTestQuestionRequest.stream().map(CreateTestQuestionRequest::questionId).toList();
+        this.questionClientService.controlQuestions(questionsIds);
     }
 }
