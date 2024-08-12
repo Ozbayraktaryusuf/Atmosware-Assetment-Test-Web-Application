@@ -14,6 +14,7 @@ public class SecurityManager implements SecurityService {
             "/v3/api-docs",
             "/v3/api-docs/**",
             "management-service/api/v1/auth/**",
+            "/actuator/prometheus",
     };
     @Override
     //TODO: roleleri constanta çek

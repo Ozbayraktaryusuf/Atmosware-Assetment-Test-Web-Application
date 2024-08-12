@@ -17,6 +17,7 @@ public class SecurityConfiguration {
             "/v2/api-docs",
             "/v3/api-docs",
             "/v3/api-docs/**",
+            "/actuator/prometheus",
     };
 
     @Bean
