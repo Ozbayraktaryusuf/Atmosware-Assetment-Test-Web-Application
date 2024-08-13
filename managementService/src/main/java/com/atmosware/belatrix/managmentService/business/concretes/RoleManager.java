@@ -10,6 +10,7 @@ import com.atmosware.belatrix.managmentService.dataAccess.RoleRepository;
 import com.atmosware.belatrix.managmentService.entities.concretes.Roles;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Locale;
@@ -17,6 +18,7 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
+@Slf4j
 public class RoleManager implements RoleService {
     private final RoleRepository roleRepository;
     private final RoleMapper roleMapper;
@@ -25,6 +27,7 @@ public class RoleManager implements RoleService {
     @Override
     @Transactional
     public CreateRoleResponse createRole(CreateRoleRequest createRoleRequest) {
+        log.info("Create role method started.");
         this.roleBusinessRules.roleCanNotBeDuplicated(createRoleRequest.name().toLowerCase(Locale.ROOT));
 
         Roles role = this.roleMapper.toRole(createRoleRequest);
@@ -38,6 +41,7 @@ public class RoleManager implements RoleService {
 
     @Override
     public GetByIdRoleResponse getById(UUID id) {
+        log.info("Get rule by id method started.");
         //TODO add business roles
         Roles role=this.roleRepository.findById(id).get();
 

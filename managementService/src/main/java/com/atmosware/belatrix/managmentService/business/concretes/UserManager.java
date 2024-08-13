@@ -17,6 +17,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -31,6 +32,7 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
+@Slf4j
 public class UserManager implements UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
@@ -40,6 +42,7 @@ public class UserManager implements UserService {
     @Override
     @Transactional
     public void add(RegisterUserDto registerUserDto, Organization organization) {
+        log.info("Add user method started when create organization method summon.");
         this.userBusinessRules.userCanNotBeDuplicated(registerUserDto.email());
 
         User user = this.userMapper.toUser(registerUserDto);
@@ -55,6 +58,7 @@ public class UserManager implements UserService {
     @Override
     @Transactional
     public void add(RegisterUserDto registerUserDto, UUID organizationId) {
+        log.info("Add user method started when register method summon.");
         this.userBusinessRules.userCanNotBeDuplicated(registerUserDto.email());
 
         User user = this.userMapper.toUser(registerUserDto);
@@ -69,6 +73,7 @@ public class UserManager implements UserService {
 
     @Override
     public void createAdmin(CreateAdminRequest createAdminRequest) {
+        log.info("Create Admin method started.");
         this.userBusinessRules.userCanNotBeDuplicated(createAdminRequest.email());
 
         User user = this.userMapper.toUser(createAdminRequest);
@@ -81,6 +86,8 @@ public class UserManager implements UserService {
 
     @Override
     public GetByIdUserResponse getById(UUID id) {
+        log.info("Get user by id method started.");
+
         this.userBusinessRules.userShouldBeExists(id);
 
         User user = this.userRepository.findById(id).get();
@@ -94,6 +101,8 @@ public class UserManager implements UserService {
     }
     @Override
     public User findByEmail(String email) {
+        log.info("Load by user name method started.");
+
         Optional<User> userOptional = this.userRepository.findByEmail(email);
         this.userBusinessRules.userShouldBeExists(userOptional);
         return userOptional.get();
@@ -101,6 +110,7 @@ public class UserManager implements UserService {
 
     @Override
     public UpdateUserResponse updateUser(UpdateUserRequest updateUserRequest, @NonNull HttpServletRequest httpServletRequest) {
+        log.info("Update user method started.");
         String token = httpServletRequest.getHeader(HttpHeaders.AUTHORIZATION).substring(7);
 
         User user = this.userRepository
@@ -118,6 +128,7 @@ public class UserManager implements UserService {
     @Override
     @Transactional
     public void delete(List<User> users) {
+        log.info("Delete user method started when delete organization method summon.");
         users.forEach(x-> x.setDeletedDate(LocalDateTime.now()));
         this.userRepository.saveAll(users);
     }

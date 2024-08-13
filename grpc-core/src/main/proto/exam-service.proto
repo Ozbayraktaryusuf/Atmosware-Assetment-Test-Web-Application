@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package tr.com.atmosware.gyt.grpc;
+
+option java_multiple_files = true;
+option java_package = "tr.com.atmosware.gyt.grpc";
+
+import "google/protobuf/empty.proto";
+
+service ExamService{
+  rpc GetExam(GetExamRequest) returns(GetExamResponse);
+}
+message GetExamRequest{
+  int64 examId=1;
+}
+message GetExamResponse{
+  string examName=1;
+  string startDate=2;
+  string endDate=3;
+  string duration=4;
+}

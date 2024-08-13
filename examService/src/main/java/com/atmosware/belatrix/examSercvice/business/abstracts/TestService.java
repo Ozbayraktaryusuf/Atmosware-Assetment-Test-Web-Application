@@ -55,4 +55,5 @@ public interface TestService {
     RemoveRuleFromTestResponse removeRuleFromTestOrganization(RemoveRuleFromTestRequest removeRuleFromTestRequest,HttpServletRequest httpServletRequest);
     Page<GetAllTestRuleForTestResponse> getAllTestRuleForTest(Long testId, int page,int size);
     Page<GetAllTestRuleForTestResponse> getAllTestRuleForTestOrganization(Long testId, int page,int size,HttpServletRequest httpServletRequest);
+    Test getTextForInvitation(Long id);
 }

@@ -29,6 +29,7 @@ public class SecurityManager implements SecurityService {
                 .requestMatchers(HttpMethod.POST, "management-service/api/v1/roles").hasAnyAuthority("admin")
                 .requestMatchers("management-service/api/v1/user-role").hasAnyAuthority("admin")
                 .requestMatchers(HttpMethod.POST, "management-service/api/v1/auth/register").hasAnyAuthority("organization")
+                .requestMatchers(HttpMethod.POST,"management-service/api/v1/invitations").hasAnyAuthority("organization")
                 .anyRequest().authenticated()
         );
         return http;

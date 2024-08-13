@@ -25,6 +25,13 @@ spring:
           validation:
             mode: none
     show-sql: true
+grpc:
+  server:
+    port: 7678
+  client:
+    examService:
+      address: static://localhost:7677
+      negotiation-type: plaintext
 management:
   endpoints:
     web:

@@ -353,6 +353,15 @@ public class TestManager implements TestService {
         return this.testRuleService.getAll(page, size, testId);
     }
 
+    @Override
+    public Test getTextForInvitation(Long id) {
+        Optional<Test> optionalTest = this.testRepository.findById(id);
+
+        this.testBusinessRules.testShouldBeExists(optionalTest);
+
+        return optionalTest.get();
+    }
+
     private UUID extractOrganizationIdFromToken(HttpServletRequest httpServletRequest) {
         return UUID.fromString(jwtService
                 .getClaims(

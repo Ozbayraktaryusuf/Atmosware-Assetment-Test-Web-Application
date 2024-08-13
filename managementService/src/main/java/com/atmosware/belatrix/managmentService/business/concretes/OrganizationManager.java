@@ -16,6 +16,7 @@ import com.atmosware.belatrix.managmentService.entities.concretes.Organization;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +28,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @RequiredArgsConstructor
+@Slf4j
 @Service
 public class OrganizationManager implements OrganizationService {
     private final OrganizationRepository organizationRepository;
@@ -37,6 +39,7 @@ public class OrganizationManager implements OrganizationService {
     @Override
     @Transactional
     public CreateOrganizationResponse add(CreateOrganizationRequest createOrganizationRequest) {
+        log.info("Add organization method started.");
         this.organizationBusinessRules.organizationNameCanNotBeDuplicated(createOrganizationRequest.organizationName());
 
         Organization organization = this.organizationMapper.toOrganization(createOrganizationRequest);
@@ -50,6 +53,7 @@ public class OrganizationManager implements OrganizationService {
     @Override
     @Transactional
     public UpdateOrganizationResponse update_organization(HttpServletRequest request, UpdateOrganizationRequest updateOrganizationRequest){
+        log.info("Update organization method for organization role started.");
         String token = request.getHeader(HttpHeaders.AUTHORIZATION).substring(7);
         UUID id = UUID.fromString(jwtService.getClaims(token).get("organizationId").toString());
 
@@ -64,6 +68,7 @@ public class OrganizationManager implements OrganizationService {
     @Override
     @Transactional
     public UpdateOrganizationResponse update_admin(UUID id,UpdateOrganizationRequest updateOrganizationRequest){
+        log.info("Update organization method for admin role started.");
         this.organizationBusinessRules.organizationShouldBeExists(id);
 
         Organization organization = this.organizationRepository.findById(id).get();
@@ -76,6 +81,7 @@ public class OrganizationManager implements OrganizationService {
     @Override
     @Transactional
     public DeleteOrganizationResponse delete(UUID id) {
+        log.info("Delete organization method started.");
         this.organizationBusinessRules.organizationShouldBeExists(id);
 
         Organization organization = this.organizationRepository.findById(id).get();
@@ -87,11 +93,17 @@ public class OrganizationManager implements OrganizationService {
 
     @Override
     public Page<GetAllOrganizationResponse> getAll(int page, int size) {
+        log.info("Get all organizations method started");
         Pageable pageable = PageRequest.of(page,size, Sort.by("id"));
 
         Page<Organization> organizations = this.organizationRepository.findAll(pageable);
 
         return organizations.map(this.organizationMapper::toGetAllOrganizationResponse);
+    }
+
+    @Override
+    public Organization getById(UUID id) {
+        return this.organizationRepository.findById(id).get();
     }
 }
 

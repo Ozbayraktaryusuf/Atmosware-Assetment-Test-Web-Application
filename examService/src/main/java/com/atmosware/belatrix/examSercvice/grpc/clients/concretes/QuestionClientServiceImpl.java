@@ -5,7 +5,6 @@ import com.atmosware.belatrix.examSercvice.core.exceptions.types.NotFoundExcepti
 import com.atmosware.belatrix.examSercvice.grpc.clients.abstacts.QuestionClientService;
 import io.grpc.Status;
 import io.grpc.StatusRuntimeException;
-import lombok.RequiredArgsConstructor;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.stereotype.Service;
 import tr.com.atmosware.gyt.grpc.ControlQuestionRequest;
