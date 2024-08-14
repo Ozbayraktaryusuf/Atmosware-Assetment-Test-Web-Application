@@ -12,6 +12,7 @@ import com.atmosware.belatrix.examSercvice.entities.concretes.Test;
 import com.atmosware.belatrix.examSercvice.entities.concretes.TestQuestion;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 
@@ -21,6 +22,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class TestQuestionManager implements TestQuestionService {
     private final TestQuestionMapper testQuestionMapper;
     private final TestQuestionRepository testQuestionRepository;
@@ -30,6 +32,8 @@ public class TestQuestionManager implements TestQuestionService {
     @Override
     @Transactional
     public List<CreatedTestQuestionResponse> createTestQuestion(List<CreateTestQuestionRequest> createTestQuestionRequests, Test test) {
+        log.info("Create test questions method summoned create test method.");
+
         List<TestQuestion> testQuestions = this.testQuestionMapper.toTestQuestion(createTestQuestionRequests);
 
         for (TestQuestion testQuestion : testQuestions) {
@@ -40,23 +44,11 @@ public class TestQuestionManager implements TestQuestionService {
         return this.testQuestionMapper.toCreatedTestQuestionResponse(testQuestions);
     }
 
-//    @Override
-//    @Transactional
-//    public List<CreatedTestQuestionResponse> createTestQuestionOrganization(List<CreateTestQuestionRequest> createTestQuestionRequests, Test test, List<Long> questionsId) {
-//        List<TestQuestion> testQuestions = this.testQuestionMapper.toTestQuestion(createTestQuestionRequests);
-//
-//        for (TestQuestion testQuestion : testQuestions) {
-//            testQuestion.setTest(test);
-//        }
-//        this.testQuestionRepository.saveAll(testQuestions);
-//
-//        return this.testQuestionMapper.toCreatedTestQuestionResponse(testQuestions);
-//
-//    }
-
     @Override
     @Transactional
     public AddedQuestionToTestResponse addQuestionToTest(Long questionId, Test test) {
+        log.info("Add question to test method summoned.");
+
         Optional<TestQuestion> optionalTestQuestion = this.testQuestionRepository.findByTestIdAndQuestionId(questionId, test.getId());
         this.testQuestionBusinessRule.questionCanNotBeDuplicated(optionalTestQuestion);
 
@@ -68,6 +60,8 @@ public class TestQuestionManager implements TestQuestionService {
     @Override
     @Transactional
     public DeletedQuestionFromTestResponse deleteQuestionFromTest(Long questionId, Test test) {
+        log.info("Delete question from test method summoned.");
+
         Optional<TestQuestion> optionalTestQuestion = this.testQuestionRepository.findByTestIdAndQuestionId(questionId, test.getId());
         this.testQuestionBusinessRule.testQuestionShouldBeExists(optionalTestQuestion);
         this.testQuestionBusinessRule.questionCanNotObtainOptionsLessThanTwo(test.getTestQuestions());
@@ -81,6 +75,8 @@ public class TestQuestionManager implements TestQuestionService {
     @Override
     @Transactional
     public void deleteAll(List<TestQuestion> testQuestions) {
+        log.info("Delete all test questions method summoned.");
+
         testQuestions.forEach(testQuestion -> testQuestion.setDeletedDate(LocalDateTime.now()));
 
         this.testQuestionRepository.saveAll(testQuestions);

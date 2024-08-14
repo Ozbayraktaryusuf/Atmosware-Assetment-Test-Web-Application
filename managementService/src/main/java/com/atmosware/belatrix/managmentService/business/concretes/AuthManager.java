@@ -30,7 +30,7 @@ public class AuthManager implements AuthService {
 
     @Override// TODO:Login Response döndür
     public String login(LoginRequest loginRequest) {
-        log.info("Sending login request for "+loginRequest.email());
+        log.info("Sending login request for {}.",loginRequest.email());
         this.authBusinessRules.emailAndPasswordShouldBeMatch(loginRequest.email(), loginRequest.password());
 
         User user = this.userService.findByEmail(loginRequest.email());
@@ -41,7 +41,7 @@ public class AuthManager implements AuthService {
     @Override
     @Transactional
     public void register(RegisterUserDto registerUserDto, HttpServletRequest request) {
-        log.info("Sending register request for "+registerUserDto.email());
+        log.info("Sending register request for {},",registerUserDto.email());
         UUID organizationId = UUID.fromString(this.jwtService.
                 getClaims(
                         request
@@ -56,7 +56,7 @@ public class AuthManager implements AuthService {
     }
 
     private String generateJwt(User user) {
-        log.info("Creating jwt for "+user.getEmail());
+        log.info("Creating jwt for {}.",user.getEmail());
         Map<String, Object> claims = new HashMap<>();
         claims.put("id", user.getId());
         if (!((user.getAuthorities().stream().map(x->x.getAuthority().equals("admin")).toList().get(0)))) {

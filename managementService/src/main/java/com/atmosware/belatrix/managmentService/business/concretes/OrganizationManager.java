@@ -52,7 +52,7 @@ public class OrganizationManager implements OrganizationService {
     }
     @Override
     @Transactional
-    public UpdateOrganizationResponse update_organization(HttpServletRequest request, UpdateOrganizationRequest updateOrganizationRequest){
+    public UpdateOrganizationResponse updateOrganization(HttpServletRequest request, UpdateOrganizationRequest updateOrganizationRequest){
         log.info("Update organization method for organization role started.");
         String token = request.getHeader(HttpHeaders.AUTHORIZATION).substring(7);
         UUID id = UUID.fromString(jwtService.getClaims(token).get("organizationId").toString());
@@ -67,7 +67,7 @@ public class OrganizationManager implements OrganizationService {
     }
     @Override
     @Transactional
-    public UpdateOrganizationResponse update_admin(UUID id,UpdateOrganizationRequest updateOrganizationRequest){
+    public UpdateOrganizationResponse updateAdmin(UUID id, UpdateOrganizationRequest updateOrganizationRequest){
         log.info("Update organization method for admin role started.");
         this.organizationBusinessRules.organizationShouldBeExists(id);
 

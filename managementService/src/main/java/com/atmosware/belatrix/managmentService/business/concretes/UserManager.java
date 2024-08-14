@@ -10,6 +10,7 @@ import com.atmosware.belatrix.managmentService.business.dto.responses.user.GetBy
 import com.atmosware.belatrix.managmentService.business.dto.responses.user.UpdateUserResponse;
 import com.atmosware.belatrix.managmentService.business.mappers.UserMapper;
 import com.atmosware.belatrix.managmentService.business.rules.UserBusinessRules;
+import com.atmosware.belatrix.managmentService.core.exceptions.types.NotFoundException;
 import com.atmosware.belatrix.managmentService.dataAccess.UserRepository;
 import com.atmosware.belatrix.managmentService.entities.concretes.Organization;
 import com.atmosware.belatrix.managmentService.entities.concretes.User;

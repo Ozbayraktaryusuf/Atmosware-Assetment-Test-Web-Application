@@ -1,0 +1,46 @@
+2024-08-14 09:20:18,576 INFO c.a.b.m.b.c.UserManager [main] Delete user method started when delete organization method summon.
+2024-08-14 09:20:18,667 INFO c.a.b.m.b.c.UserManager [main] Add user method started when create organization method summon.
+2024-08-14 09:20:18,676 INFO c.a.b.m.b.c.UserManager [main] Add user method started when register method summon.
+2024-08-14 09:20:18,692 INFO c.a.b.m.b.c.UserManager [main] Load by user name method started.
+2024-08-14 09:20:18,865 INFO c.a.b.m.b.c.UserManager [main] Update user method started.
+2024-08-14 09:20:18,872 INFO c.a.b.m.b.c.UserManager [main] Load by user name method started.
+2024-08-14 09:20:18,893 INFO c.a.b.m.b.c.UserManager [main] Create Admin method started.
+2024-08-14 09:20:18,914 INFO c.a.b.m.b.c.UserManager [main] Get user by id method started.
+2024-08-14 09:21:55,350 INFO c.a.b.m.b.c.UserManager [main] Load by user name method started.
+2024-08-14 09:23:59,131 INFO c.a.b.m.b.c.UserManager [main] Load by user name method started.
+2024-08-14 09:24:45,530 INFO c.a.b.m.b.c.UserManager [main] Load by user name method started.
+2024-08-14 09:30:27,920 INFO c.a.b.m.b.c.UserManager [main] Load by user name method started.
+2024-08-14 09:34:16,156 INFO c.a.b.m.b.c.UserManager [main] Load by user name method started.
+2024-08-14 09:47:29,315 INFO c.a.b.m.b.c.UserManager [main] Update user method started.
+2024-08-14 09:49:25,120 INFO c.a.b.m.b.c.UserManager [main] Update user method started.
+2024-08-14 09:53:36,285 INFO c.a.b.m.b.c.UserManager [main] Update user method started.
+2024-08-14 10:08:07,702 INFO c.a.b.m.b.c.UserManager [main] Update user method started.
+2024-08-14 10:10:17,515 INFO c.a.b.m.b.c.UserManager [main] Update user method started.
+2024-08-14 10:12:26,071 INFO c.a.b.m.b.c.UserManager [main] Update user method started.
+2024-08-14 10:14:00,865 INFO c.a.b.m.b.c.UserManager [main] Delete user method started when delete organization method summon.
+2024-08-14 10:14:00,999 INFO c.a.b.m.b.c.UserManager [main] Update user method started.
+2024-08-14 10:14:01,058 INFO c.a.b.m.b.c.UserManager [main] Add user method started when create organization method summon.
+2024-08-14 10:14:01,067 INFO c.a.b.m.b.c.UserManager [main] Add user method started when register method summon.
+2024-08-14 10:14:01,074 INFO c.a.b.m.b.c.UserManager [main] Load by user name method started.
+2024-08-14 10:14:01,099 INFO c.a.b.m.b.c.UserManager [main] Create Admin method started.
+2024-08-14 10:14:01,107 INFO c.a.b.m.b.c.UserManager [main] Load by user name method started.
+2024-08-14 10:14:01,130 INFO c.a.b.m.b.c.UserManager [main] Get user by id method started.
+2024-08-14 10:25:54,806 INFO c.a.b.m.b.c.RoleManager [main] Create role method started.
+2024-08-14 10:25:54,856 INFO c.a.b.m.b.c.RoleManager [main] Get rule by id method started.
+2024-08-14 10:26:00,598 INFO c.a.b.m.b.c.RoleManager [main] Create role method started.
+2024-08-14 10:26:00,635 INFO c.a.b.m.b.c.RoleManager [main] Get rule by id method started.
+2024-08-14 10:34:13,229 INFO c.a.b.m.b.c.AuthManager [main] Sending register request for user@example.com
+2024-08-14 10:36:37,750 INFO c.a.b.m.b.c.AuthManager [main] Sending register request for user@example.com
+2024-08-14 10:36:37,756 INFO c.a.b.m.b.c.AuthManager [main] Register successful.
+2024-08-14 10:36:37,780 INFO c.a.b.m.b.c.AuthManager [main] Sending login request for user@example.com
+2024-08-14 10:36:37,781 INFO c.a.b.m.b.c.AuthManager [main] Creating jwt for user@example.com
+2024-08-14 10:43:11,224 INFO c.a.b.m.b.c.AuthManager [main] Sending register request for user@example.com
+2024-08-14 10:43:11,230 INFO c.a.b.m.b.c.AuthManager [main] Register successful.
+2024-08-14 10:43:11,268 INFO c.a.b.m.b.c.AuthManager [main] Sending login request for user@example.com
+2024-08-14 10:43:11,269 INFO c.a.b.m.b.c.AuthManager [main] Creating jwt for user@example.com
+2024-08-14 10:45:21,794 INFO c.a.b.m.b.c.AuthManager [main] Sending login request for user@example.com
+2024-08-14 10:45:21,799 INFO c.a.b.m.b.c.AuthManager [main] Creating jwt for user@example.com
+2024-08-14 10:54:43,283 INFO c.a.b.m.b.c.AuthManager [main] Sending login request for user@example.com
+2024-08-14 10:54:43,288 INFO c.a.b.m.b.c.AuthManager [main] Creating jwt for user@example.com
+2024-08-14 11:07:40,867 INFO c.a.b.m.b.c.UserRoleManager [main] Create user role method started.
+2024-08-14 11:07:40,894 INFO c.a.b.m.b.c.UserRoleManager [main] Update user role method started.

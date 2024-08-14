@@ -26,6 +26,7 @@ import com.atmosware.belatrix.examSercvice.grpc.clients.abstacts.QuestionClientS
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -40,6 +41,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class TestManager implements TestService {
     private final TestQuestionService testQuestionService;
     private final TestMapper testMapper;
@@ -52,7 +54,8 @@ public class TestManager implements TestService {
     @Override
     @Transactional
     public CreatedTestResponse add(CreateTestRequest createTestRequest, HttpServletRequest httpServletRequest) {
-        //TODO: organization sadece kendi sorularını ekleyebilir.
+        log.info("Create test method started.");
+
         Test test = this.testMapper.toTest(createTestRequest);
         String token = httpServletRequest.getHeader(HttpHeaders.AUTHORIZATION).substring(7);
 
@@ -79,6 +82,8 @@ public class TestManager implements TestService {
     @Override
     @Transactional
     public Page<GetAllTestResponse> getAll(int page, int size) {
+        log.info("Get all tests method started.");
+
         Pageable pageable = PageRequest.of(page, size, Sort.by("id"));
 
         Page<Test> tests = this.testRepository.findAll(pageable);
@@ -89,6 +94,8 @@ public class TestManager implements TestService {
     @Override
     @Transactional
     public Page<GetAllTestResponse> getAllOrganization(int page, int size, HttpServletRequest httpServletRequest) {
+        log.info("Get all methods for specific organization method started.");
+
         Pageable pageable = PageRequest.of(page, size, Sort.by("id"));
 
         UUID organizationId = extractOrganizationIdFromToken(httpServletRequest);
@@ -101,7 +108,8 @@ public class TestManager implements TestService {
     @Override
     @Transactional
     public GetByIdTestResponse getById(Long id) {
-        //TODO: Tüm sorularıda döndürmeli miyim?
+        log.info("Get test by id method started.");
+
         Optional<Test> optionalTest = this.testRepository.findById(id);
 
         this.testBusinessRules.testShouldBeExists(optionalTest);
@@ -112,6 +120,8 @@ public class TestManager implements TestService {
     @Override
     @Transactional
     public GetByIdTestResponse getByIdOrganization(Long id, HttpServletRequest httpServletRequest) {
+        log.info("Get test for specific organization method started.");
+
         Optional<Test> optionalTest = this.testRepository.findById(id);
 
         this.testBusinessRules.testShouldBeExists(optionalTest);
@@ -125,6 +135,8 @@ public class TestManager implements TestService {
     @Override
     @Transactional
     public DeleteTestResponse delete(Long id) {
+        log.info("Delete test method started.");
+
         Optional<Test> optionalTest = this.testRepository.findById(id);
 
         this.testBusinessRules.testShouldBeExists(optionalTest);
@@ -143,6 +155,8 @@ public class TestManager implements TestService {
     @Override
     @Transactional
     public DeleteTestResponse deleteOrganization(Long id, HttpServletRequest httpServletRequest) {
+        log.info("Delete test for specific organization method started.");
+
         Optional<Test> optionalTest = this.testRepository.findById(id);
 
         this.testBusinessRules.testShouldBeExists(optionalTest);
@@ -165,6 +179,8 @@ public class TestManager implements TestService {
     @Transactional
     //TODO: test id'yi PathVariable olarak almak mı daha iyi yoksa request içinde mi?
     public AddedQuestionToTestResponse addQuestionToTestResponse(AddQuestionToTestRequest addQuestionToTestRequest) {
+        log.info("Add question to test method started.");
+
         Optional<Test> optionalTest = this.testRepository.findById(addQuestionToTestRequest.testId());
 
         this.testBusinessRules.testShouldBeExists(optionalTest);
@@ -176,6 +192,7 @@ public class TestManager implements TestService {
     @Override
     @Transactional
     public AddedQuestionToTestResponse addQuestionToTestResponseOrganization(AddQuestionToTestRequest addQuestionToTestRequest, HttpServletRequest httpServletRequest) {
+        log.info("Add question to test for specific organization method started.");
         Optional<Test> optionalTest = this.testRepository.findById(addQuestionToTestRequest.testId());
 
         this.testBusinessRules.testShouldBeExists(optionalTest);
@@ -191,6 +208,8 @@ public class TestManager implements TestService {
     @Override
     @Transactional
     public DeletedQuestionFromTestResponse deleteQuestionFromTest(DeleteQuestionFromTestRequest deleteQuestionFromTestRequest) {
+        log.info("Delete question from test method started.");
+
         Optional<Test> optionalTest = this.testRepository.findById(deleteQuestionFromTestRequest.testId());
 
         this.testBusinessRules.testShouldBeExists(optionalTest);
@@ -202,6 +221,8 @@ public class TestManager implements TestService {
     @Override
     @Transactional
     public DeletedQuestionFromTestResponse deleteQuestionFromTestOrganization(DeleteQuestionFromTestRequest deleteQuestionFromTestRequest, HttpServletRequest httpServletRequest) {
+        log.info("Delete question from test for specific organization method started.");
+
         Optional<Test> optionalTest = this.testRepository.findById(deleteQuestionFromTestRequest.testId());
 
         this.testBusinessRules.testShouldBeExists(optionalTest);
@@ -217,6 +238,8 @@ public class TestManager implements TestService {
     @Override
     @Transactional
     public UpdatedTestResponse update(Long id, UpdateTestRequest updateTestRequest) {
+        log.info("Update test method started.");
+
         Optional<Test> optionalTest = this.testRepository.findById(id);
 
         this.testBusinessRules.testShouldBeExists(optionalTest);
@@ -232,6 +255,8 @@ public class TestManager implements TestService {
     @Override
     @Transactional
     public UpdatedTestResponse updateOrganization(Long id, UpdateTestRequest updateTestRequest, HttpServletRequest httpServletRequest) {
+        log.info("Update test for specific organization method started.");
+
         Optional<Test> optionalTest = this.testRepository.findById(id);
 
         this.testBusinessRules.testShouldBeExists(optionalTest);
@@ -251,6 +276,8 @@ public class TestManager implements TestService {
     @Override
     @Transactional
     public ExtendedEndDateResponse extendEndDate(Long id, ExtendEndDateRequest extendEndDateRequest) {
+        log.info("Extend end date method started.");
+
         Optional<Test> optionalTest = this.testRepository.findById(id);
 
         this.testBusinessRules.testShouldBeExists(optionalTest);
@@ -265,6 +292,8 @@ public class TestManager implements TestService {
     @Override
     @Transactional
     public ExtendedEndDateResponse extendEndDateOrganization(Long id, ExtendEndDateRequest extendEndDateRequest, HttpServletRequest httpServletRequest) {
+        log.info("Extend end date for specific organization method started.");
+
         Optional<Test> optionalTest = this.testRepository.findById(id);
 
         this.testBusinessRules.testShouldBeExists(optionalTest);
@@ -283,6 +312,8 @@ public class TestManager implements TestService {
     @Override
     @Transactional
     public AddRuleToTestResponse addRuleToTest(AddRuleToTestRequest addRuleToTestRequest) {
+        log.info("Add rule to test method started.");
+
         Optional<Test> optionalTest = this.testRepository.findById(addRuleToTestRequest.testId());
 
         this.testBusinessRules.testShouldBeExists(optionalTest);
@@ -294,6 +325,8 @@ public class TestManager implements TestService {
     @Override
     @Transactional
     public AddRuleToTestResponse addRuleToTestOrganization(AddRuleToTestRequest addRuleToTestRequest, HttpServletRequest httpServletRequest) {
+        log.info("Add rule to test for specific organization method started.");
+
         Optional<Test> optionalTest = this.testRepository.findById(addRuleToTestRequest.testId());
 
         this.testBusinessRules.testShouldBeExists(optionalTest);
@@ -309,6 +342,8 @@ public class TestManager implements TestService {
     @Override
     @Transactional
     public RemoveRuleFromTestResponse removeRuleFromTest(RemoveRuleFromTestRequest removeRuleFromTestRequest) {
+        log.info("Remove rule from test method started.");
+
         Optional<Test> optionalTest = this.testRepository.findById(removeRuleFromTestRequest.testId());
 
         this.testBusinessRules.testShouldBeExists(optionalTest);
@@ -320,6 +355,8 @@ public class TestManager implements TestService {
     @Override
     @Transactional
     public RemoveRuleFromTestResponse removeRuleFromTestOrganization(RemoveRuleFromTestRequest removeRuleFromTestRequest, HttpServletRequest httpServletRequest) {
+        log.info("Remove rule from test for specific organization method started.");
+
         Optional<Test> optionalTest = this.testRepository.findById(removeRuleFromTestRequest.testId());
 
         this.testBusinessRules.testShouldBeExists(optionalTest);
@@ -334,6 +371,8 @@ public class TestManager implements TestService {
 
     @Override
     public Page<GetAllTestRuleForTestResponse> getAllTestRuleForTest(Long testId, int page, int size) {
+        log.info("Get all test rules method started.");
+
         Optional<Test> optionalTest = this.testRepository.findById(testId);
 
         this.testBusinessRules.testShouldBeExists(optionalTest);
@@ -343,6 +382,8 @@ public class TestManager implements TestService {
 
     @Override
     public Page<GetAllTestRuleForTestResponse> getAllTestRuleForTestOrganization(Long testId, int page, int size, HttpServletRequest httpServletRequest) {
+        log.info("Get all test rules for specific organization method started.");
+
         Optional<Test> optionalTest = this.testRepository.findById(testId);
 
         this.testBusinessRules.testShouldBeExists(optionalTest);
@@ -355,6 +396,7 @@ public class TestManager implements TestService {
 
     @Override
     public Test getTextForInvitation(Long id) {
+        log.info("Get text for invitation method started.");
         Optional<Test> optionalTest = this.testRepository.findById(id);
 
         this.testBusinessRules.testShouldBeExists(optionalTest);

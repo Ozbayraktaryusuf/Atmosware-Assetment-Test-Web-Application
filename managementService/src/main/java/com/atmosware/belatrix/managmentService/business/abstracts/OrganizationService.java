@@ -14,8 +14,8 @@ import java.util.UUID;
 
 public interface OrganizationService {
     CreateOrganizationResponse add(CreateOrganizationRequest createOrganizationRequest);
-    UpdateOrganizationResponse update_organization(HttpServletRequest request, UpdateOrganizationRequest updateOrganizationRequest);
-    UpdateOrganizationResponse update_admin(UUID id, UpdateOrganizationRequest updateOrganizationRequest);
+    UpdateOrganizationResponse updateOrganization(HttpServletRequest request, UpdateOrganizationRequest updateOrganizationRequest);
+    UpdateOrganizationResponse updateAdmin(UUID id, UpdateOrganizationRequest updateOrganizationRequest);
     DeleteOrganizationResponse delete(UUID id);
     Page<GetAllOrganizationResponse> getAll(int page,int size);
     Organization getById(UUID id);

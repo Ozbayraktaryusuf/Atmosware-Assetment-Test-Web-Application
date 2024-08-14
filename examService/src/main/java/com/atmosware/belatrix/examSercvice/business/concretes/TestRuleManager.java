@@ -13,6 +13,7 @@ import com.atmosware.belatrix.examSercvice.entities.concretes.Test;
 import com.atmosware.belatrix.examSercvice.entities.concretes.TestRule;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -25,6 +26,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class TestRuleManager implements TestRuleService {
     private final RuleService ruleService;
     private final TestRuleRepository testRuleRepository;
@@ -35,6 +37,8 @@ public class TestRuleManager implements TestRuleService {
     @Override
     @Transactional
     public AddRuleToTestResponse addRuleToTest(Long ruleId, Test test) {
+        log.info("Add rule to test method summoned.");
+
         this.testRuleBusinessRules.testRuleShouldNotBeExists(test.getId(),ruleId);
         Rule rule = this.ruleService.findByIdForTestRule(ruleId);
 
@@ -46,6 +50,8 @@ public class TestRuleManager implements TestRuleService {
     @Override
     @Transactional
     public void deleteAll(List<TestRule> testRules) {
+        log.info("Delete all test's rule method summoned.");
+
         testRules.forEach(testRule -> testRule.setDeletedDate(LocalDateTime.now()));
 
         this.testRuleRepository.saveAll(testRules);
@@ -54,6 +60,8 @@ public class TestRuleManager implements TestRuleService {
     @Override
     @Transactional
     public RemoveRuleFromTestResponse removeRuleFromTest(Long ruleId, Test test) {
+        log.info("Remove rule from test method summoned.");
+
         Optional<TestRule> optionalTestRule = this.testRuleRepository.findByTestIdAndRuleId(test.getId(),ruleId);
 
         TestRule testRule = optionalTestRule.get();
@@ -64,6 +72,8 @@ public class TestRuleManager implements TestRuleService {
 
     @Override
     public Page<GetAllTestRuleForTestResponse> getAll(int page, int size,Long testId) {
+        log.info("Get all test's rule method summoned.");
+
         Pageable pageable = PageRequest.of(page,size, Sort.by("id"));
 
         Page<TestRule> testRules = this.testRuleRepository.findByTestId(testId,pageable);

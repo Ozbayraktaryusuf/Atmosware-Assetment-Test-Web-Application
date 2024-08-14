@@ -24,7 +24,7 @@ public class InvitationManager implements InvitationService {
     private final JwtService jwtService;
     @Override
     public void sendEmail(InvitationRequest invitationRequest, HttpServletRequest httpServletRequest) {
-        log.info("Sending mail to "+invitationRequest.candidates().stream().map(CandidateDto::email).toList());
+        log.info("Sending mail to {}",invitationRequest.candidates().stream().map(CandidateDto::email).toList());
         MailInfoDto mailInfoDto = examClientService.getExamForMail(invitationRequest.examId());
         UUID organizationId = UUID.fromString(this.jwtService.
                 getClaims(

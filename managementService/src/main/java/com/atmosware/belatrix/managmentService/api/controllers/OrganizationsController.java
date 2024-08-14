@@ -31,12 +31,12 @@ public class OrganizationsController {
     }
     @PutMapping("/admin/{id}")
     public UpdateOrganizationResponse update(@PathVariable UUID id, @Valid @RequestBody UpdateOrganizationRequest updateOrganizationRequest){
-        return this.organizationService.update_admin(id,updateOrganizationRequest);
+        return this.organizationService.updateAdmin(id,updateOrganizationRequest);
     }
 
     @PutMapping("/organization")
     public UpdateOrganizationResponse update(@Valid @RequestBody UpdateOrganizationRequest updateOrganizationRequest, HttpServletRequest request){
-        return this.organizationService.update_organization(request,updateOrganizationRequest);
+        return this.organizationService.updateOrganization(request,updateOrganizationRequest);
     }
     @DeleteMapping("{id}")
     public DeleteOrganizationResponse delete(@PathVariable UUID id){
