@@ -15,4 +15,5 @@ public interface TestQuestionService {
     AddedQuestionToTestResponse addQuestionToTest(Long questionId,Test test);
     DeletedQuestionFromTestResponse deleteQuestionFromTest(Long questionId, Test test);
     void deleteAll(List<TestQuestion> testQuestions);
+    List<TestQuestion> findAllTestsQuestionIsUsed(Long questionId);
 }

@@ -28,6 +28,10 @@ spring:
 grpc:
   server:
     port: 7676
+  client:
+    examService:
+      address: static://localhost:7677
+      negotiation-type: plaintext
 management:
   endpoints:
     web:

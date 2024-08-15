@@ -2,7 +2,6 @@ package com.atmosware.belatrix.questionService.business.dto.responses.question;
 
 import com.atmosware.belatrix.questionService.business.dto.dtos.OptionDto;
 
-import com.atmosware.belatrix.questionService.entities.enums.Updatable;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +14,5 @@ public class GetByIdQuestionResponse {
     Long id;
     UUID organizationId;
     LocalDateTime createdDate;
-    Updatable updatable;
     List<OptionDto> optionDto;
 }

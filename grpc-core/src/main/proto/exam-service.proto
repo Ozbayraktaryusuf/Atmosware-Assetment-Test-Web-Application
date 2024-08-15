@@ -9,6 +9,7 @@ import "google/protobuf/empty.proto";
 
 service ExamService{
   rpc GetExam(GetExamRequest) returns(GetExamResponse);
+  rpc ControlExamIsStarted(ControlExamIsStartedRequest) returns(ControlExamIsStartedResponse);
 }
 message GetExamRequest{
   int64 examId=1;
@@ -18,4 +19,10 @@ message GetExamResponse{
   string startDate=2;
   string endDate=3;
   string duration=4;
+}
+message ControlExamIsStartedRequest{
+  int64 questionId=1;
+}
+message ControlExamIsStartedResponse{
+  bool isStarted=1;
 }

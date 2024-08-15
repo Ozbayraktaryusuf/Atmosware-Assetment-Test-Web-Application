@@ -6,7 +6,7 @@ import com.atmosware.belatrix.questionService.core.exceptions.types.BusinessExce
 import com.atmosware.belatrix.questionService.core.exceptions.types.NotFoundException;
 import com.atmosware.belatrix.questionService.dataAccess.QuestionRepository;
 import com.atmosware.belatrix.questionService.entities.concretes.Question;
-import com.atmosware.belatrix.questionService.entities.enums.Updatable;
+import com.atmosware.belatrix.questionService.grpc.client.abstracts.ExamClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +18,7 @@ import java.util.UUID;
 public class QuestionBusinessRules {
     private final QuestionRepository questionRepository;
     private final MessageService messageService;
+    private final ExamClientService examClientService;
     public void questionShouldBeExists(Long id){
         Optional<Question> optionalQuestion = this.questionRepository.findById(id);
         if (optionalQuestion.isEmpty()){
@@ -34,7 +35,7 @@ public class QuestionBusinessRules {
         }
     }
     public void questionShouldBeUpdatable(Question question){
-        if (!question.getUpdatable().equals(Updatable.UPDATABLE)){
+        if (this.examClientService.controlQuestionIsUsed(question.getId())){
             throw new BusinessException(messageService.getMessage(Messages.QuestionMessages.QUESTION_IS_NOT_UPDATABLE));
         }
     }

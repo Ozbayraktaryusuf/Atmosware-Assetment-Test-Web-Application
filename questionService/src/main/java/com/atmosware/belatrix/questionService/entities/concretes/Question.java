@@ -1,7 +1,6 @@
 package com.atmosware.belatrix.questionService.entities.concretes;
 
 import com.atmosware.belatrix.questionService.core.entities.BaseEntity;
-import com.atmosware.belatrix.questionService.entities.enums.Updatable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -32,7 +31,4 @@ public class Question extends BaseEntity<Long> {
     @Column(name = "organization_id")
     private UUID organizationId;
 
-    @Column(name = "State")
-    @Enumerated(EnumType.STRING)
-    private Updatable updatable=Updatable.UPDATABLE;
 }

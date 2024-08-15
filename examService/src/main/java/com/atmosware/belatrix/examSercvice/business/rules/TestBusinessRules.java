@@ -7,7 +7,7 @@ import com.atmosware.belatrix.examSercvice.core.exceptions.types.BusinessExcepti
 import com.atmosware.belatrix.examSercvice.core.exceptions.types.NotFoundException;
 import com.atmosware.belatrix.examSercvice.dataAccess.TestRepository;
 import com.atmosware.belatrix.examSercvice.entities.concretes.Test;
-import com.atmosware.belatrix.examSercvice.grpc.clients.abstacts.QuestionClientService;
+import com.atmosware.belatrix.examSercvice.grpc.client.abstacts.QuestionClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

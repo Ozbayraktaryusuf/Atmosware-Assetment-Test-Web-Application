@@ -1,7 +1,6 @@
 package com.atmosware.belatrix.questionService.business.dto.responses.question;
 
 import com.atmosware.belatrix.questionService.business.dto.responses.option.CreatedOptionResponse;
-import com.atmosware.belatrix.questionService.entities.enums.Updatable;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,6 +13,5 @@ public class CreatedQuestionResponse {
     Long id;
     UUID organizationId;
     LocalDateTime createdDate;
-    Updatable updatable;
     List<CreatedOptionResponse> createOptionResponse;
 }
