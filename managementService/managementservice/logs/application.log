@@ -44,3 +44,139 @@
 2024-08-14 10:54:43,288 INFO c.a.b.m.b.c.AuthManager [main] Creating jwt for user@example.com
 2024-08-14 11:07:40,867 INFO c.a.b.m.b.c.UserRoleManager [main] Create user role method started.
 2024-08-14 11:07:40,894 INFO c.a.b.m.b.c.UserRoleManager [main] Update user role method started.
+2024-08-28 16:48:52,329 INFO c.a.b.m.b.c.UserServiceImpl [main] Load by user name method started.
+2024-08-28 16:53:24,340 INFO c.a.b.m.b.c.UserServiceImpl [main] Load by user name method started.
+2024-08-28 16:56:01,404 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending login request for user@example.com.
+2024-08-28 17:10:42,668 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending login request for user@example.com.
+2024-08-28 17:13:44,601 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending login request for user@example.com.
+2024-08-28 17:14:54,848 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-28 17:14:54,854 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when register method summon.
+2024-08-28 17:14:54,856 INFO c.a.b.m.b.c.AuthServiceImpl [main] Register successful.
+2024-08-28 17:15:11,874 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending login request for user@example.com.
+2024-08-28 17:16:01,998 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending login request for user@example.com.
+2024-08-28 17:16:31,362 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending login request for user@example.com.
+2024-08-28 17:17:20,215 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending login request for user@example.com.
+2024-08-28 17:17:20,219 INFO c.a.b.m.b.c.UserServiceImpl [main] Load by user name method started.
+2024-08-28 17:19:11,020 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending login request for user@example.com.
+2024-08-28 17:19:11,024 INFO c.a.b.m.b.c.UserServiceImpl [main] Load by user name method started.
+2024-08-28 17:19:11,026 INFO c.a.b.m.b.c.AuthServiceImpl [main] Creating jwt for user@example.com.
+2024-08-28 17:22:13,250 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending login request for user@example.com.
+2024-08-28 17:22:13,254 INFO c.a.b.m.b.c.UserServiceImpl [main] Load by user name method started.
+2024-08-28 17:22:13,256 INFO c.a.b.m.b.c.AuthServiceImpl [main] Creating jwt for user@example.com.
+2024-08-28 17:25:23,430 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending login request for user@example.com.
+2024-08-28 17:25:23,434 INFO c.a.b.m.b.c.UserServiceImpl [main] Load by user name method started.
+2024-08-28 17:25:23,436 INFO c.a.b.m.b.c.AuthServiceImpl [main] Creating jwt for user@example.com.
+2024-08-28 17:26:31,045 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending login request for user@example.com.
+2024-08-28 17:26:31,048 INFO c.a.b.m.b.c.UserServiceImpl [main] Load by user name method started.
+2024-08-28 17:26:31,051 INFO c.a.b.m.b.c.AuthServiceImpl [main] Creating jwt for user@example.com.
+2024-08-28 17:27:34,145 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending login request for user@example.com.
+2024-08-28 17:27:34,164 INFO c.a.b.m.b.c.UserServiceImpl [main] Load by user name method started.
+2024-08-28 17:27:34,181 INFO c.a.b.m.b.c.AuthServiceImpl [main] Creating jwt for user@example.com.
+2024-08-28 17:28:03,706 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending login request for user@example.com.
+2024-08-28 17:28:03,717 INFO c.a.b.m.b.c.UserServiceImpl [main] Load by user name method started.
+2024-08-28 17:28:27,995 INFO c.a.b.m.b.c.AuthServiceImpl [main] Creating jwt for user@example.com.
+2024-08-28 17:30:39,067 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending login request for user@example.com.
+2024-08-28 17:30:39,076 INFO c.a.b.m.b.c.UserServiceImpl [main] Load by user name method started.
+2024-08-28 17:30:39,079 INFO c.a.b.m.b.c.AuthServiceImpl [main] Creating jwt for user@example.com.
+2024-08-28 17:30:40,230 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending login request for user@example.com.
+2024-08-28 17:30:40,240 INFO c.a.b.m.b.c.UserServiceImpl [main] Load by user name method started.
+2024-08-28 17:30:44,158 INFO c.a.b.m.b.c.AuthServiceImpl [main] Creating jwt for user@example.com.
+2024-08-28 17:41:01,102 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending login request for user@example.com.
+2024-08-28 17:41:01,113 INFO c.a.b.m.b.c.UserServiceImpl [main] Load by user name method started.
+2024-08-28 17:41:05,507 INFO c.a.b.m.b.c.AuthServiceImpl [main] Creating jwt for user@example.com.
+2024-08-28 17:43:17,336 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending login request for user@example.com.
+2024-08-28 17:43:17,346 INFO c.a.b.m.b.c.UserServiceImpl [main] Load by user name method started.
+2024-08-28 17:43:19,799 INFO c.a.b.m.b.c.AuthServiceImpl [main] Creating jwt for user@example.com.
+2024-08-28 17:44:23,933 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending login request for user@example.com.
+2024-08-28 17:44:23,943 INFO c.a.b.m.b.c.UserServiceImpl [main] Load by user name method started.
+2024-08-28 17:44:30,478 INFO c.a.b.m.b.c.AuthServiceImpl [main] Creating jwt for user@example.com.
+2024-08-28 17:45:04,006 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending login request for user@example.com.
+2024-08-28 17:45:04,016 INFO c.a.b.m.b.c.UserServiceImpl [main] Load by user name method started.
+2024-08-28 17:45:05,571 INFO c.a.b.m.b.c.AuthServiceImpl [main] Creating jwt for user@example.com.
+2024-08-28 17:46:26,900 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending login request for user@example.com.
+2024-08-28 17:46:26,914 INFO c.a.b.m.b.c.UserServiceImpl [main] Load by user name method started.
+2024-08-28 17:46:28,525 INFO c.a.b.m.b.c.AuthServiceImpl [main] Creating jwt for user@example.com.
+2024-08-28 17:47:15,991 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending login request for user@example.com.
+2024-08-28 17:47:16,006 INFO c.a.b.m.b.c.UserServiceImpl [main] Load by user name method started.
+2024-08-28 17:47:18,005 INFO c.a.b.m.b.c.AuthServiceImpl [main] Creating jwt for user@example.com.
+2024-08-28 17:48:32,967 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending login request for user@example.com.
+2024-08-28 17:48:32,983 INFO c.a.b.m.b.c.UserServiceImpl [main] Load by user name method started.
+2024-08-28 17:48:35,190 INFO c.a.b.m.b.c.AuthServiceImpl [main] Creating jwt for user@example.com.
+2024-08-28 17:49:46,444 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending login request for user@example.com.
+2024-08-28 17:49:46,459 INFO c.a.b.m.b.c.UserServiceImpl [main] Load by user name method started.
+2024-08-28 17:49:49,511 INFO c.a.b.m.b.c.AuthServiceImpl [main] Creating jwt for user@example.com.
+2024-08-28 17:49:57,827 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending login request for user@example.com.
+2024-08-28 17:49:57,842 INFO c.a.b.m.b.c.UserServiceImpl [main] Load by user name method started.
+2024-08-28 17:50:01,406 INFO c.a.b.m.b.c.AuthServiceImpl [main] Creating jwt for user@example.com.
+2024-08-28 17:51:57,929 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending login request for user@example.com.
+2024-08-28 17:51:57,945 INFO c.a.b.m.b.c.UserServiceImpl [main] Load by user name method started.
+2024-08-28 17:52:12,556 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending login request for user@example.com.
+2024-08-28 17:52:12,570 INFO c.a.b.m.b.c.UserServiceImpl [main] Load by user name method started.
+2024-08-28 17:52:14,916 INFO c.a.b.m.b.c.AuthServiceImpl [main] Creating jwt for user@example.com.
+2024-08-28 17:54:39,871 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-28 17:55:16,069 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-28 17:57:09,215 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-28 17:58:16,048 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-28 18:08:39,710 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-28 18:12:20,547 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-28 18:23:23,131 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-28 18:27:56,654 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-28 18:29:39,324 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-28 18:30:11,751 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-28 18:31:16,647 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-28 18:31:28,714 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-28 18:31:45,207 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-28 18:37:40,256 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-28 20:23:45,074 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-28 20:26:58,228 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-28 20:29:15,456 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-28 20:30:02,086 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-28 20:30:30,437 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-28 20:32:45,681 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-28 20:34:38,884 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-28 20:37:10,386 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-28 20:37:33,372 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-28 20:38:45,238 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-28 20:40:28,019 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-28 20:44:47,167 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-28 20:45:38,545 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-28 20:46:59,346 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-28 20:48:00,934 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-28 20:51:54,989 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-28 20:53:30,825 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-28 20:55:33,166 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-29 14:16:03,874 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-29 14:25:43,667 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-29 14:33:09,339 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-29 14:33:51,089 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-29 14:34:26,779 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-29 14:36:31,045 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-29 14:40:58,799 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-29 14:45:22,490 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-29 14:45:42,095 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-29 14:47:43,925 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-29 14:48:58,489 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-29 14:52:26,988 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-29 14:52:27,224 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when register method summon.
+2024-08-29 14:52:27,226 INFO c.a.b.m.b.c.AuthServiceImpl [main] Register successful.
+2024-08-29 14:54:46,950 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-29 14:54:47,104 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when register method summon.
+2024-08-29 14:54:47,107 INFO c.a.b.m.b.c.AuthServiceImpl [main] Register successful.
+2024-08-29 14:56:00,900 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-29 14:56:01,028 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when register method summon.
+2024-08-29 14:56:01,031 INFO c.a.b.m.b.c.AuthServiceImpl [main] Register successful.
+2024-08-29 14:56:52,897 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-29 14:56:53,035 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when register method summon.
+2024-08-29 14:56:53,037 INFO c.a.b.m.b.c.AuthServiceImpl [main] Register successful.
+2024-08-29 14:58:20,665 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-29 14:58:21,066 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when register method summon.
+2024-08-29 14:58:21,068 INFO c.a.b.m.b.c.AuthServiceImpl [main] Register successful.
+2024-08-29 14:58:39,139 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-29 14:58:39,146 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when register method summon.
+2024-08-29 14:58:39,147 INFO c.a.b.m.b.c.AuthServiceImpl [main] Register successful.
+2024-08-29 16:52:55,708 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-29 16:52:55,716 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when register method summon.
+2024-08-29 16:52:55,717 INFO c.a.b.m.b.c.AuthServiceImpl [main] Register successful.
+2024-08-29 16:52:55,762 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending login request for user@example.com.
+2024-08-29 16:52:55,765 INFO c.a.b.m.b.c.UserServiceImpl [main] Load by user name method started.
+2024-08-29 16:52:55,765 INFO c.a.b.m.b.c.AuthServiceImpl [main] Creating jwt for user@example.com.

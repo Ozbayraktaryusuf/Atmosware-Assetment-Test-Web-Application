@@ -7,7 +7,9 @@ import com.atmosware.belatrix.managmentService.business.dto.requests.user.Update
 import com.atmosware.belatrix.managmentService.business.dto.responses.user.GetByIdUserResponse;
 import com.atmosware.belatrix.managmentService.business.dto.responses.user.UpdateUserResponse;
 import com.atmosware.belatrix.managmentService.business.mappers.UserMapper;
+import com.atmosware.belatrix.managmentService.business.mappers.UserMapperImpl;
 import com.atmosware.belatrix.managmentService.business.rules.UserBusinessRules;
+import com.atmosware.belatrix.managmentService.core.business.abstracts.MessageService;
 import com.atmosware.belatrix.managmentService.core.exceptions.types.NotFoundException;
 import com.atmosware.belatrix.managmentService.dataAccess.UserRepository;
 import com.atmosware.belatrix.managmentService.entities.concretes.Organization;
@@ -33,30 +35,27 @@ import static org.mockito.Mockito.*;
 
 class UserServiceImplTest {
 
-    @Mock
     private UserRepository userRepository;
-
-    @Mock
     private UserMapper userMapper;
-
-    @Mock
+    private MessageService messageService;
     private PasswordEncoder passwordEncoder;
-
-    @Mock
     private HttpServletRequest httpServletRequest;
-
-    @Mock
     private UserBusinessRules userBusinessRules;
-
-    @Mock
     private JwtService jwtService;
-
-    @InjectMocks
     private UserServiceImpl userServiceImpl;
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
+        jwtService = mock(JwtService.class);
+        userRepository = mock(UserRepository.class);
+        messageService = mock(MessageService.class);
+        passwordEncoder = mock(PasswordEncoder.class);
+        httpServletRequest = mock(HttpServletRequest.class);
+
+        userMapper = new UserMapperImpl();
+
+        userBusinessRules = new UserBusinessRules(userRepository, messageService);
+        userServiceImpl = new UserServiceImpl(userRepository, userMapper, passwordEncoder, userBusinessRules, jwtService);
     }
 
     @Test

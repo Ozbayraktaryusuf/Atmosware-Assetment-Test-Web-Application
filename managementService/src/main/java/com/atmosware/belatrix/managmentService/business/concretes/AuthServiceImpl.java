@@ -46,7 +46,7 @@ public class AuthServiceImpl implements AuthService {
                 getClaims(
                         request
                                 .getHeader
-                                        (HttpHeaders.AUTHORIZATION).substring(7))
+                                        (HttpHeaders.AUTHORIZATION).split(" ")[1])
                 .get("organizationId")
                 .toString());
         this.authBusinessRules.userShouldHaveAnOrganization(organizationId);
