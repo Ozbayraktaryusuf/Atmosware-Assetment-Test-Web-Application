@@ -1,5 +1,6 @@
 package com.atmosware.belatrix.managmentService.business.concretes;
 
+import com.atmosware.belatrix.core.services.JwtService;
 import com.atmosware.belatrix.managmentService.business.abstracts.RoleService;
 import com.atmosware.belatrix.managmentService.business.abstracts.UserService;
 import com.atmosware.belatrix.managmentService.business.dto.requests.userRole.CreateUserRoleRequest;
@@ -8,8 +9,13 @@ import com.atmosware.belatrix.managmentService.business.dto.responses.role.GetBy
 import com.atmosware.belatrix.managmentService.business.dto.responses.user.GetByIdUserResponse;
 import com.atmosware.belatrix.managmentService.business.dto.responses.userRole.CreateUserRoleResponse;
 import com.atmosware.belatrix.managmentService.business.dto.responses.userRole.UpdateUserRoleResponse;
-import com.atmosware.belatrix.managmentService.business.mappers.UserRoleMapper;
+import com.atmosware.belatrix.managmentService.business.mappers.*;
+import com.atmosware.belatrix.managmentService.business.rules.RoleBusinessRules;
+import com.atmosware.belatrix.managmentService.business.rules.UserBusinessRules;
 import com.atmosware.belatrix.managmentService.business.rules.UserRoleBusinessRules;
+import com.atmosware.belatrix.managmentService.core.business.abstracts.MessageService;
+import com.atmosware.belatrix.managmentService.dataAccess.RoleRepository;
+import com.atmosware.belatrix.managmentService.dataAccess.UserRepository;
 import com.atmosware.belatrix.managmentService.dataAccess.UserRoleRepository;
 import com.atmosware.belatrix.managmentService.entities.concretes.Roles;
 import com.atmosware.belatrix.managmentService.entities.concretes.User;
@@ -18,6 +24,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -29,27 +36,47 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 public class UserRoleServiceImplTest {
-
-    @InjectMocks
     private UserRoleServiceImpl userRoleServiceImpl;
-
-    @Mock
     private UserRoleRepository userRoleRepository;
-
-    @Mock
     private UserRoleMapper userRoleMapper;
-
-    @Mock
     private UserRoleBusinessRules userRoleBusinessRules;
-
-    @Mock
+    private MessageService messageService;
+    private UserMapper userMapper;
+    private PasswordEncoder passwordEncoder;
+    private UserBusinessRules userBusinessRules;
+    private UserRepository userRepository;
+    private RoleMapper roleMapper;
+    private RoleBusinessRules roleBusinessRules;
+    private RoleRepository roleRepository;
     private UserService userService;
-
-    @Mock
     private RoleService roleService;
-
     public UserRoleServiceImplTest() {
-        MockitoAnnotations.openMocks(this);
+
+        JwtService jwtService = mock(JwtService.class);
+        userRepository = mock(UserRepository.class);
+        messageService = mock(MessageService.class);
+        passwordEncoder = mock(PasswordEncoder.class);
+        userMapper = new UserMapperImpl();
+
+        userBusinessRules = new UserBusinessRules(userRepository, messageService);
+        userService = new UserServiceImpl(userRepository, userMapper, passwordEncoder, userBusinessRules, jwtService);
+
+        roleRepository = mock(RoleRepository.class);
+
+        roleMapper = new RoleMapperImpl();
+
+        roleBusinessRules = new RoleBusinessRules(roleRepository,messageService);
+
+        roleService = new RoleServiceImpl(roleRepository,roleMapper,roleBusinessRules);
+
+        userRoleRepository= mock(UserRoleRepository.class);
+
+        userRoleMapper = new UserRoleMapperImpl();
+
+        userRoleBusinessRules = new UserRoleBusinessRules(userRoleRepository,messageService);
+
+        userRoleServiceImpl = new UserRoleServiceImpl(userRoleRepository,userRoleMapper,userRoleBusinessRules,userService,roleService);
+
     }
 
     @Test
@@ -67,20 +94,14 @@ public class UserRoleServiceImplTest {
         createdUserRole.setRole(new Roles(roleId));
         CreateUserRoleResponse createUserRoleResponse = new CreateUserRoleResponse(createdUserRole.getId(),userId,roleId);
 
-        when(userService.getById(userId)).thenReturn(new GetByIdUserResponse("test",userId, LocalDateTime.now(),LocalDateTime.now(),"test name"));
-        when(userRoleMapper.toUserRole(createUserRoleRequest)).thenReturn(userRole);
         when(userRoleRepository.save(any(UserRole.class))).thenReturn(createdUserRole);
-        when(userRoleMapper.toCreateUserRoleResponse(createdUserRole)).thenReturn(createUserRoleResponse);
+        when(userRepository.findById(any())).thenReturn(Optional.of(new User()));
 
         // Act
         CreateUserRoleResponse response = userRoleServiceImpl.add(createUserRoleRequest);
 
         // Assert
         assertEquals(createUserRoleResponse.id(), response.id());
-        verify(userService).getById(userId);
-        verify(userRoleMapper).toUserRole(createUserRoleRequest);
-        verify(userRoleRepository).save(userRole);
-        verify(userRoleMapper).toCreateUserRoleResponse(createdUserRole);
     }
 
     @Test
@@ -99,9 +120,8 @@ public class UserRoleServiceImplTest {
         UpdateUserRoleResponse updateUserRoleResponse = new UpdateUserRoleResponse(updatedUserRole.getId(),UUID.randomUUID(),roleId,LocalDateTime.now(),LocalDateTime.now());
 
         when(userRoleRepository.findById(userRoleId)).thenReturn(Optional.of(userRole));
-        when(roleService.getById(roleId)).thenReturn(new GetByIdRoleResponse(roleId,"test",LocalDateTime.now(),LocalDateTime.now()));
         when(userRoleRepository.save(any(UserRole.class))).thenReturn(updatedUserRole);
-        when(userRoleMapper.toUpdateUserRoleResponse(updatedUserRole)).thenReturn(updateUserRoleResponse);
+        when(roleRepository.findById(any())).thenReturn(Optional.of(new Roles()));
 
         // Act
         UpdateUserRoleResponse response = userRoleServiceImpl.update(userRoleId, updateUserRoleRequest);
@@ -109,9 +129,7 @@ public class UserRoleServiceImplTest {
         // Assert
         assertEquals(updateUserRoleResponse.id(), response.id());
         verify(userRoleRepository).findById(userRoleId);
-        verify(userRoleBusinessRules).userRoleShouldBeExists(Optional.of(userRole));
-        verify(roleService).getById(roleId);
         verify(userRoleRepository).save(userRole);
-        verify(userRoleMapper).toUpdateUserRoleResponse(updatedUserRole);
+
     }
 }

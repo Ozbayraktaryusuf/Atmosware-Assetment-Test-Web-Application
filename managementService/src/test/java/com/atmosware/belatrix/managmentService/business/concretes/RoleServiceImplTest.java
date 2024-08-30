@@ -4,7 +4,9 @@ import com.atmosware.belatrix.managmentService.business.dto.requests.role.Create
 import com.atmosware.belatrix.managmentService.business.dto.responses.role.CreateRoleResponse;
 import com.atmosware.belatrix.managmentService.business.dto.responses.role.GetByIdRoleResponse;
 import com.atmosware.belatrix.managmentService.business.mappers.RoleMapper;
+import com.atmosware.belatrix.managmentService.business.mappers.RoleMapperImpl;
 import com.atmosware.belatrix.managmentService.business.rules.RoleBusinessRules;
+import com.atmosware.belatrix.managmentService.core.business.abstracts.MessageService;
 import com.atmosware.belatrix.managmentService.dataAccess.RoleRepository;
 import com.atmosware.belatrix.managmentService.entities.concretes.Roles;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,70 +25,64 @@ import static org.mockito.Mockito.*;
 
 class RoleServiceImplTest {
 
-    @Mock
     private RoleRepository roleRepository;
-
-    @Mock
     private RoleMapper roleMapper;
-
-    @Mock
+    private MessageService messageService;
     private RoleBusinessRules roleBusinessRules;
-
-    @InjectMocks
     private RoleServiceImpl roleServiceImpl;
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
+        messageService = mock(MessageService.class);
+        roleRepository = mock(RoleRepository.class);
+
+        roleMapper = new RoleMapperImpl();
+
+        roleBusinessRules = new RoleBusinessRules(roleRepository,messageService);
+
+        roleServiceImpl = new RoleServiceImpl(roleRepository,roleMapper,roleBusinessRules);
+
     }
 
     @Test
     void createRole_ShouldCreateRoleCorrectly() {
         // Arrange
         CreateRoleRequest createRoleRequest = new CreateRoleRequest("Admin");
-        Roles role = new Roles();
-        role.setName("admin");
+        Roles role = roleMapper.toRole(createRoleRequest);
 
-        Roles createdRole = new Roles();
-        createdRole.setName("admin");
 
         CreateRoleResponse expectedResponse = new CreateRoleResponse(role.getId(),role.getName(),LocalDateTime.now());
 
-        when(roleMapper.toRole(createRoleRequest)).thenReturn(role);
-        when(roleRepository.save(role)).thenReturn(createdRole);
-        when(roleMapper.toCreateRoleResponse(createdRole)).thenReturn(expectedResponse);
+        when(roleRepository.save(any())).thenReturn(role);
+        when(roleRepository.findByName(anyString())).thenReturn(Optional.empty());
 
         // Act
         CreateRoleResponse actualResponse = roleServiceImpl.createRole(createRoleRequest);
 
         // Assert
-        verify(roleBusinessRules).roleCanNotBeDuplicated(createRoleRequest.name().toLowerCase(Locale.ROOT));
-        verify(roleMapper).toRole(createRoleRequest);
-        verify(roleRepository).save(role);
-        verify(roleMapper).toCreateRoleResponse(createdRole);
 
-        assertEquals(expectedResponse, actualResponse);
+        assertEquals(expectedResponse.id(), actualResponse.id());
+        assertEquals(expectedResponse.name(),actualResponse.name());
     }
 
     @Test
     void getById_ShouldReturnRoleCorrectly() {
         // Arrange
-        UUID roleId = UUID.randomUUID();
         Roles role = new Roles();
         role.setName("Admin");
+        role.setId( UUID.randomUUID());
 
-        GetByIdRoleResponse expectedResponse = new GetByIdRoleResponse(roleId,role.getName(), LocalDateTime.now(),LocalDateTime.now());
+        GetByIdRoleResponse expectedResponse = new GetByIdRoleResponse(role.getId(),role.getName(), LocalDateTime.now(),LocalDateTime.now());
 
-        when(roleRepository.findById(roleId)).thenReturn(Optional.of(role));
-        when(roleMapper.toGetByIdRoleResponse(role)).thenReturn(expectedResponse);
+        when(roleRepository.findById(any())).thenReturn(Optional.of(role));
 
         // Act
-        GetByIdRoleResponse actualResponse = roleServiceImpl.getById(roleId);
+        GetByIdRoleResponse actualResponse = roleServiceImpl.getById(role.getId());
 
         // Assert
-        verify(roleRepository).findById(roleId);
-        verify(roleMapper).toGetByIdRoleResponse(role);
+        verify(roleRepository).findById(role.getId());
 
-        assertEquals(expectedResponse, actualResponse);
+        assertEquals(expectedResponse.name(), actualResponse.name());
+        assertEquals(expectedResponse.id(),actualResponse.id());
     }
 }

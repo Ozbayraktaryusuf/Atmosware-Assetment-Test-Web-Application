@@ -45,8 +45,7 @@ public class OrganizationServiceImpl implements OrganizationService {
         Organization organization = this.organizationMapper.toOrganization(createOrganizationRequest);
         Organization createdOrganization = this.organizationRepository.save(organization);
 
-        this.userService.add(createOrganizationRequest.registerUserDto(),createdOrganization
-        );
+        this.userService.add(createOrganizationRequest.registerUserDto(),createdOrganization);
 
         return this.organizationMapper.toCreateOrganizationResponse(createdOrganization);
     }

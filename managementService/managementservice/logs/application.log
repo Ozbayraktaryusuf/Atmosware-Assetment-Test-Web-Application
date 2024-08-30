@@ -180,3 +180,172 @@
 2024-08-29 16:52:55,762 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending login request for user@example.com.
 2024-08-29 16:52:55,765 INFO c.a.b.m.b.c.UserServiceImpl [main] Load by user name method started.
 2024-08-29 16:52:55,765 INFO c.a.b.m.b.c.AuthServiceImpl [main] Creating jwt for user@example.com.
+2024-08-30 12:49:46,202 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when create organization method summon.
+2024-08-30 12:50:17,890 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when create organization method summon.
+2024-08-30 12:50:39,038 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when create organization method summon.
+2024-08-30 12:51:01,439 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when create organization method summon.
+2024-08-30 12:51:23,112 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when create organization method summon.
+2024-08-30 12:52:36,259 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when create organization method summon.
+2024-08-30 12:58:38,908 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when create organization method summon.
+2024-08-30 13:00:26,399 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when create organization method summon.
+2024-08-30 13:02:40,380 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when create organization method summon.
+2024-08-30 13:02:54,379 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when create organization method summon.
+2024-08-30 13:04:00,935 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when create organization method summon.
+2024-08-30 13:06:07,365 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when create organization method summon.
+2024-08-30 13:07:16,603 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when create organization method summon.
+2024-08-30 13:08:20,630 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when create organization method summon.
+2024-08-30 13:09:03,022 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when create organization method summon.
+2024-08-30 13:09:53,442 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when create organization method summon.
+2024-08-30 13:58:03,382 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when register method summon.
+2024-08-30 13:58:38,468 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when register method summon.
+2024-08-30 14:02:47,725 INFO c.a.b.m.b.c.UserServiceImpl [main] Create Admin method started.
+2024-08-30 14:05:55,876 INFO c.a.b.m.b.c.UserServiceImpl [main] Create Admin method started.
+2024-08-30 14:31:00,893 INFO c.a.b.m.b.c.UserServiceImpl [main] Get user by id method started.
+2024-08-30 14:31:25,612 INFO c.a.b.m.b.c.UserServiceImpl [main] Get user by id method started.
+2024-08-30 14:32:10,327 INFO c.a.b.m.b.c.UserServiceImpl [main] Load by user name method started.
+2024-08-30 14:33:16,759 INFO c.a.b.m.b.c.UserServiceImpl [main] Load by user name method started.
+2024-08-30 14:34:44,022 INFO c.a.b.m.b.c.UserServiceImpl [main] Delete user method started when delete organization method summon.
+2024-08-30 14:35:09,051 INFO c.a.b.m.b.c.UserServiceImpl [main] Delete user method started when delete organization method summon.
+2024-08-30 14:35:29,293 INFO c.a.b.m.b.c.UserServiceImpl [main] Delete user method started when delete organization method summon.
+2024-08-30 14:39:48,330 INFO c.a.b.m.b.c.UserServiceImpl [main] Update user method started.
+2024-08-30 14:39:55,274 INFO c.a.b.m.b.c.UserServiceImpl [main] Update user method started.
+2024-08-30 14:41:12,750 INFO c.a.b.m.b.c.UserServiceImpl [main] Update user method started.
+2024-08-30 14:45:58,683 INFO c.a.b.m.b.c.UserServiceImpl [main] Update user method started.
+2024-08-30 14:47:12,003 INFO c.a.b.m.b.c.UserServiceImpl [main] Update user method started.
+2024-08-30 14:48:16,772 INFO c.a.b.m.b.c.UserServiceImpl [main] Update user method started.
+2024-08-30 14:51:58,251 INFO c.a.b.m.b.c.UserServiceImpl [main] Update user method started.
+2024-08-30 14:53:42,566 INFO c.a.b.m.b.c.UserServiceImpl [main] Update user method started.
+2024-08-30 14:54:40,574 INFO c.a.b.m.b.c.UserServiceImpl [main] Update user method started.
+2024-08-30 14:55:52,953 INFO c.a.b.m.b.c.UserServiceImpl [main] Update user method started.
+2024-08-30 14:56:17,498 INFO c.a.b.m.b.c.UserServiceImpl [main] Update user method started.
+2024-08-30 14:56:30,355 INFO c.a.b.m.b.c.UserServiceImpl [main] Update user method started.
+2024-08-30 15:00:45,910 INFO c.a.b.m.b.c.UserServiceImpl [main] Update user method started.
+2024-08-30 15:01:16,846 INFO c.a.b.m.b.c.UserServiceImpl [main] Update user method started.
+2024-08-30 15:03:13,423 INFO c.a.b.m.b.c.UserServiceImpl [main] Update user method started.
+2024-08-30 15:09:07,500 INFO c.a.b.m.b.c.UserServiceImpl [main] Update user method started.
+2024-08-30 15:09:20,687 INFO c.a.b.m.b.c.UserServiceImpl [main] Delete user method started when delete organization method summon.
+2024-08-30 15:09:20,805 INFO c.a.b.m.b.c.UserServiceImpl [main] Update user method started.
+2024-08-30 15:09:20,815 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when create organization method summon.
+2024-08-30 15:09:20,819 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when register method summon.
+2024-08-30 15:09:20,822 INFO c.a.b.m.b.c.UserServiceImpl [main] Load by user name method started.
+2024-08-30 15:09:20,826 INFO c.a.b.m.b.c.UserServiceImpl [main] Create Admin method started.
+2024-08-30 15:09:20,831 INFO c.a.b.m.b.c.UserServiceImpl [main] Load by user name method started.
+2024-08-30 15:09:20,835 INFO c.a.b.m.b.c.UserServiceImpl [main] Get user by id method started.
+2024-08-30 15:09:41,515 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-30 15:09:41,522 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when register method summon.
+2024-08-30 15:09:41,523 INFO c.a.b.m.b.c.AuthServiceImpl [main] Register successful.
+2024-08-30 15:09:41,571 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending login request for user@example.com.
+2024-08-30 15:09:41,573 INFO c.a.b.m.b.c.UserServiceImpl [main] Load by user name method started.
+2024-08-30 15:09:41,574 INFO c.a.b.m.b.c.AuthServiceImpl [main] Creating jwt for user@example.com.
+2024-08-30 15:09:45,322 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending register request for user@example.com,
+2024-08-30 15:09:45,330 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when register method summon.
+2024-08-30 15:09:45,331 INFO c.a.b.m.b.c.AuthServiceImpl [main] Register successful.
+2024-08-30 15:09:45,377 INFO c.a.b.m.b.c.AuthServiceImpl [main] Sending login request for user@example.com.
+2024-08-30 15:09:45,379 INFO c.a.b.m.b.c.UserServiceImpl [main] Load by user name method started.
+2024-08-30 15:09:45,379 INFO c.a.b.m.b.c.AuthServiceImpl [main] Creating jwt for user@example.com.
+2024-08-30 15:12:59,746 INFO c.a.b.m.b.c.InvitationServiceImpl [main] Sending mail to [candidate@example.com]
+2024-08-30 15:17:00,388 INFO c.a.b.m.b.c.InvitationServiceImpl [main] Sending mail to [candidate@example.com]
+2024-08-30 15:17:33,905 INFO c.a.b.m.b.c.InvitationServiceImpl [main] Sending mail to [candidate@example.com]
+2024-08-30 15:19:49,201 INFO c.a.b.m.b.c.InvitationServiceImpl [main] Sending mail to [candidate@example.com]
+2024-08-30 15:20:18,338 INFO c.a.b.m.b.c.InvitationServiceImpl [main] Sending mail to [candidate@example.com]
+2024-08-30 15:21:17,064 INFO c.a.b.m.b.c.InvitationServiceImpl [main] Sending mail to [candidate@example.com]
+2024-08-30 15:21:20,626 INFO c.a.b.m.b.c.InvitationServiceImpl [main] Hello candidate@example.com Test Organization organization's Test Exam exam will be held between 10:00:00-12:00:00
+Exam will be 120 minutes 
+Good Luck
+2024-08-30 15:21:20,627 INFO c.a.b.m.b.c.InvitationServiceImpl [main] Mails send.
+2024-08-30 15:22:00,117 INFO c.a.b.m.b.c.InvitationServiceImpl [main] Sending mail to [candidate@example.com]
+2024-08-30 15:22:01,976 INFO c.a.b.m.b.c.InvitationServiceImpl [main] Hello candidate@example.com Test Organization organization's Test Exam exam will be held between 10:00:00-12:00:00
+Exam will be 120 minutes 
+Good Luck
+2024-08-30 15:22:02,470 INFO c.a.b.m.b.c.InvitationServiceImpl [main] Mails send.
+2024-08-30 15:22:40,479 INFO c.a.b.m.b.c.InvitationServiceImpl [main] Sending mail to [candidate@example.com]
+2024-08-30 15:22:40,489 INFO c.a.b.m.b.c.InvitationServiceImpl [main] Hello candidate@example.com Test Organization organization's Test Exam exam will be held between 10:00:00-12:00:00
+Exam will be 120 minutes 
+Good Luck
+2024-08-30 15:22:40,490 INFO c.a.b.m.b.c.InvitationServiceImpl [main] Mails send.
+2024-08-30 15:22:41,465 INFO c.a.b.m.b.c.InvitationServiceImpl [main] Sending mail to [candidate@example.com]
+2024-08-30 15:22:41,489 INFO c.a.b.m.b.c.InvitationServiceImpl [main] Hello candidate@example.com Test Organization organization's Test Exam exam will be held between 10:00:00-12:00:00
+Exam will be 120 minutes 
+Good Luck
+2024-08-30 15:22:41,489 INFO c.a.b.m.b.c.InvitationServiceImpl [main] Mails send.
+2024-08-30 15:22:54,591 INFO c.a.b.m.b.c.InvitationServiceImpl [main] Sending mail to [candidate@example.com]
+2024-08-30 15:22:54,600 INFO c.a.b.m.b.c.InvitationServiceImpl [main] Hello candidate@example.com Test Organization organization's Test Exam exam will be held between 10:00:00-12:00:00
+Exam will be 120 minutes 
+Good Luck
+2024-08-30 15:22:54,600 INFO c.a.b.m.b.c.InvitationServiceImpl [main] Mails send.
+2024-08-30 15:24:25,087 INFO c.a.b.m.b.c.InvitationServiceImpl [main] Sending mail to [candidate@example.com]
+2024-08-30 15:24:25,098 INFO c.a.b.m.b.c.InvitationServiceImpl [main] Hello candidate@example.com Test Organization organization's Test Exam exam will be held between 10:00:00-12:00:00
+Exam will be 120 minutes 
+Good Luck
+2024-08-30 15:24:25,099 INFO c.a.b.m.b.c.InvitationServiceImpl [main] Mails send.
+2024-08-30 15:36:04,085 INFO c.a.b.m.b.c.InvitationServiceImpl [main] Sending mail to [candidate@example.com]
+2024-08-30 15:36:04,094 INFO c.a.b.m.b.c.InvitationServiceImpl [main] Hello candidate@example.com Test Organization organization's Test Exam exam will be held between 10:00:00-12:00:00
+Exam will be 120 minutes 
+Good Luck
+2024-08-30 15:36:04,095 INFO c.a.b.m.b.c.InvitationServiceImpl [main] Mails send.
+2024-08-30 15:38:42,859 INFO c.a.b.m.b.c.OrganizationServiceImpl [main] Add organization method started.
+2024-08-30 15:38:42,863 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when create organization method summon.
+2024-08-30 15:39:00,455 INFO c.a.b.m.b.c.OrganizationServiceImpl [main] Add organization method started.
+2024-08-30 15:39:00,459 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when create organization method summon.
+2024-08-30 15:39:21,875 INFO c.a.b.m.b.c.OrganizationServiceImpl [main] Add organization method started.
+2024-08-30 15:39:21,880 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when create organization method summon.
+2024-08-30 15:39:33,460 INFO c.a.b.m.b.c.OrganizationServiceImpl [main] Add organization method started.
+2024-08-30 15:39:33,466 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when create organization method summon.
+2024-08-30 15:39:49,095 INFO c.a.b.m.b.c.OrganizationServiceImpl [main] Add organization method started.
+2024-08-30 15:39:59,118 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when create organization method summon.
+2024-08-30 15:42:06,165 INFO c.a.b.m.b.c.OrganizationServiceImpl [main] Add organization method started.
+2024-08-30 15:42:06,170 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when create organization method summon.
+2024-08-30 15:42:46,407 INFO c.a.b.m.b.c.OrganizationServiceImpl [main] Add organization method started.
+2024-08-30 15:43:12,765 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when create organization method summon.
+2024-08-30 15:44:04,242 INFO c.a.b.m.b.c.OrganizationServiceImpl [main] Add organization method started.
+2024-08-30 15:44:50,509 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when create organization method summon.
+2024-08-30 15:45:51,483 INFO c.a.b.m.b.c.OrganizationServiceImpl [main] Add organization method started.
+2024-08-30 15:46:29,041 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when create organization method summon.
+2024-08-30 15:48:15,951 INFO c.a.b.m.b.c.OrganizationServiceImpl [main] Add organization method started.
+2024-08-30 15:48:32,675 INFO c.a.b.m.b.c.OrganizationServiceImpl [main] Add organization method started.
+2024-08-30 15:50:03,956 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when create organization method summon.
+2024-08-30 15:50:08,061 INFO c.a.b.m.b.c.OrganizationServiceImpl [main] Add organization method started.
+2024-08-30 15:50:08,066 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when create organization method summon.
+2024-08-30 15:50:21,931 INFO c.a.b.m.b.c.OrganizationServiceImpl [main] Add organization method started.
+2024-08-30 15:50:41,674 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when create organization method summon.
+2024-08-30 15:51:37,200 INFO c.a.b.m.b.c.OrganizationServiceImpl [main] Add organization method started.
+2024-08-30 15:51:37,211 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when create organization method summon.
+2024-08-30 15:52:02,791 INFO c.a.b.m.b.c.OrganizationServiceImpl [main] Add organization method started.
+2024-08-30 15:52:09,649 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when create organization method summon.
+2024-08-30 15:59:38,322 INFO c.a.b.m.b.c.OrganizationServiceImpl [main] Update organization method for organization role started.
+2024-08-30 16:00:20,450 INFO c.a.b.m.b.c.OrganizationServiceImpl [main] Update organization method for organization role started.
+2024-08-30 16:01:46,054 INFO c.a.b.m.b.c.OrganizationServiceImpl [main] Update organization method for admin role started.
+2024-08-30 16:04:02,720 INFO c.a.b.m.b.c.OrganizationServiceImpl [main] Delete organization method started.
+2024-08-30 16:04:02,726 INFO c.a.b.m.b.c.UserServiceImpl [main] Delete user method started when delete organization method summon.
+2024-08-30 16:05:07,590 INFO c.a.b.m.b.c.OrganizationServiceImpl [main] Delete organization method started.
+2024-08-30 16:05:07,596 INFO c.a.b.m.b.c.UserServiceImpl [main] Delete user method started when delete organization method summon.
+2024-08-30 16:06:30,355 INFO c.a.b.m.b.c.OrganizationServiceImpl [main] Get all organizations method started
+2024-08-30 16:07:21,617 INFO c.a.b.m.b.c.OrganizationServiceImpl [main] Add organization method started.
+2024-08-30 16:07:21,623 INFO c.a.b.m.b.c.UserServiceImpl [main] Add user method started when create organization method summon.
+2024-08-30 16:07:21,638 INFO c.a.b.m.b.c.OrganizationServiceImpl [main] Update organization method for admin role started.
+2024-08-30 16:07:21,649 INFO c.a.b.m.b.c.OrganizationServiceImpl [main] Delete organization method started.
+2024-08-30 16:07:21,650 INFO c.a.b.m.b.c.UserServiceImpl [main] Delete user method started when delete organization method summon.
+2024-08-30 16:07:21,660 INFO c.a.b.m.b.c.OrganizationServiceImpl [main] Get all organizations method started
+2024-08-30 16:07:21,779 INFO c.a.b.m.b.c.OrganizationServiceImpl [main] Update organization method for organization role started.
+2024-08-30 16:12:55,869 INFO c.a.b.m.b.c.RoleServiceImpl [main] Create role method started.
+2024-08-30 16:14:07,370 INFO c.a.b.m.b.c.RoleServiceImpl [main] Create role method started.
+2024-08-30 16:15:44,444 INFO c.a.b.m.b.c.RoleServiceImpl [main] Get rule by id method started.
+2024-08-30 16:16:18,817 INFO c.a.b.m.b.c.RoleServiceImpl [main] Get rule by id method started.
+2024-08-30 16:16:28,361 INFO c.a.b.m.b.c.RoleServiceImpl [main] Create role method started.
+2024-08-30 16:16:28,381 INFO c.a.b.m.b.c.RoleServiceImpl [main] Get rule by id method started.
+2024-08-30 16:25:08,170 INFO c.a.b.m.b.c.UserRoleServiceImpl [main] Create user role method started.
+2024-08-30 16:25:08,173 INFO c.a.b.m.b.c.UserServiceImpl [main] Get user by id method started.
+2024-08-30 16:26:06,125 INFO c.a.b.m.b.c.UserRoleServiceImpl [main] Create user role method started.
+2024-08-30 16:26:06,128 INFO c.a.b.m.b.c.UserServiceImpl [main] Get user by id method started.
+2024-08-30 16:26:55,170 INFO c.a.b.m.b.c.UserRoleServiceImpl [main] Create user role method started.
+2024-08-30 16:26:55,172 INFO c.a.b.m.b.c.UserServiceImpl [main] Get user by id method started.
+2024-08-30 16:27:14,036 INFO c.a.b.m.b.c.UserRoleServiceImpl [main] Create user role method started.
+2024-08-30 16:27:14,039 INFO c.a.b.m.b.c.UserServiceImpl [main] Get user by id method started.
+2024-08-30 16:28:08,705 INFO c.a.b.m.b.c.UserRoleServiceImpl [main] Update user role method started.
+2024-08-30 16:28:08,710 INFO c.a.b.m.b.c.RoleServiceImpl [main] Get rule by id method started.
+2024-08-30 16:28:59,505 INFO c.a.b.m.b.c.UserRoleServiceImpl [main] Update user role method started.
+2024-08-30 16:28:59,511 INFO c.a.b.m.b.c.RoleServiceImpl [main] Get rule by id method started.
+2024-08-30 16:29:09,009 INFO c.a.b.m.b.c.UserRoleServiceImpl [main] Create user role method started.
+2024-08-30 16:29:09,011 INFO c.a.b.m.b.c.UserServiceImpl [main] Get user by id method started.
+2024-08-30 16:29:09,030 INFO c.a.b.m.b.c.UserRoleServiceImpl [main] Update user role method started.
+2024-08-30 16:29:09,031 INFO c.a.b.m.b.c.RoleServiceImpl [main] Get rule by id method started.

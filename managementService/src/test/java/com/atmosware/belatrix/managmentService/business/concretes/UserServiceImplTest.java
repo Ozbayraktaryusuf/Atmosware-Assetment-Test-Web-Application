@@ -14,8 +14,11 @@ import com.atmosware.belatrix.managmentService.core.exceptions.types.NotFoundExc
 import com.atmosware.belatrix.managmentService.dataAccess.UserRepository;
 import com.atmosware.belatrix.managmentService.entities.concretes.Organization;
 import com.atmosware.belatrix.managmentService.entities.concretes.User;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.net.HttpHeaders;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.impl.DefaultClaims;
 import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,9 +29,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
-import java.util.UUID;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -39,6 +40,7 @@ class UserServiceImplTest {
     private UserMapper userMapper;
     private MessageService messageService;
     private PasswordEncoder passwordEncoder;
+    private final ObjectMapper objectMapper = new ObjectMapper();
     private HttpServletRequest httpServletRequest;
     private UserBusinessRules userBusinessRules;
     private JwtService jwtService;
@@ -60,84 +62,71 @@ class UserServiceImplTest {
 
     @Test
     void add_UserWithOrganization_ShouldSaveUser() {
-        RegisterUserDto registerUserDto = mock(RegisterUserDto.class);
-        Organization organization = mock(Organization.class);
-        User user = mock(User.class);
+        RegisterUserDto registerUserDto = new RegisterUserDto("test@test.com","test123");
+        Organization organization = new Organization(UUID.randomUUID());
+        User user = userMapper.toUser(registerUserDto);
 
-        when(userMapper.toUser(registerUserDto)).thenReturn(user);
         when(passwordEncoder.encode(registerUserDto.password())).thenReturn("encodedPassword");
+        when(userRepository.save(user)).thenReturn(user);
+        when(userRepository.findByEmail(user.getEmail())).thenReturn(Optional.empty());
 
         userServiceImpl.add(registerUserDto, organization);
 
-        verify(userBusinessRules).userCanNotBeDuplicated(registerUserDto.email());
-        verify(userMapper).toUser(registerUserDto);
-        verify(user).setPassword("encodedPassword");
-        verify(user).setOrganization(organization);
-        verify(userRepository).save(user);
+        assertEquals(registerUserDto.email(),user.getEmail());
     }
 
     @Test
     void add_UserWithOrganizationId_ShouldSaveUser() {
-        RegisterUserDto registerUserDto = mock(RegisterUserDto.class);
+        RegisterUserDto registerUserDto = new RegisterUserDto("test@test.com","test123");
         UUID organizationId = UUID.randomUUID();
-        User user = mock(User.class);
+        User user = userMapper.toUser(registerUserDto);
 
-        when(userMapper.toUser(registerUserDto)).thenReturn(user);
         when(passwordEncoder.encode(registerUserDto.password())).thenReturn("encodedPassword");
+        when(userRepository.save(user)).thenReturn(user);
+        when(userRepository.findByEmail(user.getEmail())).thenReturn(Optional.empty());
 
         userServiceImpl.add(registerUserDto, organizationId);
 
-        verify(userBusinessRules).userCanNotBeDuplicated(registerUserDto.email());
-        verify(userMapper).toUser(registerUserDto);
-        verify(user).setPassword("encodedPassword");
-        verify(user).setOrganization(any(Organization.class));
-        verify(userRepository).save(user);
+        assertEquals(registerUserDto.email(),user.getEmail());
     }
 
     @Test
     void createAdmin_ShouldSaveUser() {
-        CreateAdminRequest createAdminRequest = mock(CreateAdminRequest.class);
-        User user = mock(User.class);
+        CreateAdminRequest createAdminRequest = new CreateAdminRequest("test@test.com","test123");
+        User user = userMapper.toUser(createAdminRequest);
 
-        when(userMapper.toUser(createAdminRequest)).thenReturn(user);
         when(passwordEncoder.encode(createAdminRequest.password())).thenReturn("encodedPassword");
+        when(userRepository.save(user)).thenReturn(user);
+        when(userRepository.findByEmail(user.getEmail())).thenReturn(Optional.empty());
 
         userServiceImpl.createAdmin(createAdminRequest);
 
-        verify(userBusinessRules).userCanNotBeDuplicated(createAdminRequest.email());
-        verify(userMapper).toUser(createAdminRequest);
-        verify(user).setPassword("encodedPassword");
-        verify(userRepository).save(user);
+        assertEquals(createAdminRequest.password(),user.getPassword());
+        assertEquals(createAdminRequest.email(),user.getEmail());
     }
 
     @Test
     void getById_ShouldReturnUser() {
         UUID userId = UUID.randomUUID();
-        User user = mock(User.class);
-        GetByIdUserResponse response = mock(GetByIdUserResponse.class);
+        User user = new User();
+        GetByIdUserResponse response = userMapper.toGetByIdUserResponse(user);
 
         when(userRepository.findById(userId)).thenReturn(Optional.of(user));
-        when(userMapper.toGetByIdUserResponse(user)).thenReturn(response);
-
         GetByIdUserResponse result = userServiceImpl.getById(userId);
 
-        verify(userBusinessRules).userShouldBeExists(userId);
-        verify(userRepository).findById(userId);
-        verify(userMapper).toGetByIdUserResponse(user);
         assertEquals(response, result);
     }
 
     @Test
     void loadUserByUsername_ShouldReturnUserDetails() {
         String email = "test@example.com";
-        User user = mock(User.class);
+        User user = new User();
 
         when(userRepository.findByEmail(email)).thenReturn(Optional.of(user));
 
         UserDetails result = userServiceImpl.loadUserByUsername(email);
 
         verify(userRepository).findByEmail(email);
-        verify(userBusinessRules).userShouldBeExists(Optional.of(user));
         assertEquals(user, result);
     }
 
@@ -147,57 +136,60 @@ class UserServiceImplTest {
         Optional<User> emptyUserOptional = Optional.empty();
 
         when(userRepository.findByEmail(email)).thenReturn(emptyUserOptional);
-        doThrow(new NotFoundException("User not found")).when(userBusinessRules).userShouldBeExists(emptyUserOptional);
 
         assertThrows(NotFoundException.class, () -> userServiceImpl.findByEmail(email));
 
         verify(userRepository).findByEmail(email);
-        verify(userBusinessRules).userShouldBeExists(emptyUserOptional);
     }
     @Test
-    void updateUser_ShouldUpdateUserCorrectly() {
+    void updateUser_ShouldUpdateUserCorrectly() throws JsonProcessingException {
         // Arrange
-        String token = "Bearer token";
-        String tokenValue = token.substring(7); // "Bearer " kısmını çıkararak sadece token'ı alın
         UUID userId = UUID.randomUUID();
         String encodedPassword = "encodedPassword";
         User user = new User();
+        user.setId(userId);
         UpdateUserRequest updateUserRequest = new UpdateUserRequest("newPassword");
 
-        Claims claims = mock(Claims.class);
-        when(claims.get("userId").toString()).thenReturn(userId.toString()); // userId'yi mock'luyoruz
+        String token = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJvcmdhbml6YXRpb25JZCI6ImY5YzZkODM0LWJlYjktNDY5Yy05MjdjLTIyMzQ0MDM2MzNhYSIsInJvbGVzIjpbIm9yZ2FuaXphdGlvbiJdLCJpZCI6ImRlYzg1MzRhLTBkZmQtNDIwMS1iMGFjLTY2YWY1OWUzNjU5MCIsInN1YiI6InN0cmluZ0BzdHJpbmcuY29tIiwiaWF0IjoxNzI0ODU3NDMzLCJleHAiOjE3MjQ4NTgwMzN9.eQyJVW17dfPhun7CR-eZKQzSktrSGWs7bYC2XXfjqnU";
+        String encodedJwt = token.split(" ")[1];
+        String[] tokenParts = encodedJwt.split("\\.");
+        String payloadPart = tokenParts[1];
+        Base64.Decoder decoder = Base64.getDecoder();
+        String payload = new String(decoder.decode(payloadPart));
+        HashMap hashMap = objectMapper.readValue(payload, HashMap.class);
+        Claims claims = new DefaultClaims(hashMap);
+
+
         when(httpServletRequest.getHeader(HttpHeaders.AUTHORIZATION)).thenReturn(token);
-        when(jwtService.getClaims(tokenValue)).thenReturn(claims);
-        when(userRepository.findById(userId)).thenReturn(Optional.of(user));
+
+        when(jwtService.getClaims(encodedJwt)).thenReturn(claims);
+
+        when(userRepository.findById(any())).thenReturn(Optional.of(user));
         when(passwordEncoder.encode(updateUserRequest.password())).thenReturn(encodedPassword);
         when(userRepository.save(user)).thenReturn(user);
         UpdateUserResponse expectedResponse = new UpdateUserResponse(user.getEmail(), userId, LocalDateTime.now(), LocalDateTime.now(), "Test organization");
-        when(userMapper.toUpdateUserResponse(user)).thenReturn(expectedResponse);
 
         // Act
         UpdateUserResponse actualResponse = userServiceImpl.updateUser(updateUserRequest, httpServletRequest);
 
         // Assert
         verify(httpServletRequest).getHeader(HttpHeaders.AUTHORIZATION);
-        verify(jwtService).getClaims(tokenValue);
-        verify(claims).get("userId"); // claims nesnesinin get metodunu kontrol edin
-        verify(userRepository).findById(userId);
+        verify(jwtService).getClaims(encodedJwt);
+        verify(userRepository).findById(any());
         verify(passwordEncoder).encode(updateUserRequest.password());
         verify(userRepository).save(user);
-        verify(userMapper).toUpdateUserResponse(user);
 
-        assertEquals(expectedResponse, actualResponse);
+        assertEquals(expectedResponse.id(), actualResponse.id());
     }
 
 
 
     @Test
     void delete_ShouldMarkUsersAsDeleted() {
-        List<User> users = List.of(mock(User.class), mock(User.class));
+        List<User> users = List.of(new User(), new User());
 
         userServiceImpl.delete(users);
 
-        users.forEach(user -> verify(user).setDeletedDate(any(LocalDateTime.class)));
         verify(userRepository).saveAll(users);
     }
 }

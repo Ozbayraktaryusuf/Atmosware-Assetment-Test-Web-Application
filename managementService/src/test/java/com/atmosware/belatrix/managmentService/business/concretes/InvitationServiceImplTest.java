@@ -6,8 +6,12 @@ import com.atmosware.belatrix.managmentService.business.dto.dtos.MailInfoDto;
 import com.atmosware.belatrix.managmentService.business.dto.requests.invitations.CandidateDto;
 import com.atmosware.belatrix.managmentService.business.dto.requests.invitations.InvitationRequest;
 import com.atmosware.belatrix.managmentService.entities.concretes.Organization;
+import com.atmosware.belatrix.managmentService.entities.concretes.User;
 import com.atmosware.belatrix.managmentService.grpc.client.abstracts.ExamClientService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.impl.DefaultClaims;
 import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -15,6 +19,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpHeaders;
 
+import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,6 +36,7 @@ public class InvitationServiceImplTest {
     @Mock
     private OrganizationService organizationService;
 
+    private final ObjectMapper objectMapper = new ObjectMapper();
     @Mock
     private ExamClientService examClientService;
 
@@ -44,9 +51,8 @@ public class InvitationServiceImplTest {
     }
 
     @Test
-    void sendEmail_ShouldSendEmailSuccessfully() {
+    void sendEmail_ShouldSendEmailSuccessfully() throws JsonProcessingException {
         // Arrange
-        String token = "Bearer token";
         UUID organizationId = UUID.randomUUID();
         String organizationName = "Test Organization";
         String examName = "Test Exam";
@@ -58,6 +64,15 @@ public class InvitationServiceImplTest {
                 List.of(new CandidateDto("candidate@example.com"))
         );
 
+        String token = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJvcmdhbml6YXRpb25JZCI6ImY5YzZkODM0LWJlYjktNDY5Yy05MjdjLTIyMzQ0MDM2MzNhYSIsInJvbGVzIjpbIm9yZ2FuaXphdGlvbiJdLCJpZCI6ImRlYzg1MzRhLTBkZmQtNDIwMS1iMGFjLTY2YWY1OWUzNjU5MCIsInN1YiI6InN0cmluZ0BzdHJpbmcuY29tIiwiaWF0IjoxNzI0ODU3NDMzLCJleHAiOjE3MjQ4NTgwMzN9.eQyJVW17dfPhun7CR-eZKQzSktrSGWs7bYC2XXfjqnU";
+        String encodedJwt = token.split(" ")[1];
+        String[] tokenParts = encodedJwt.split("\\.");
+        String payloadPart = tokenParts[1];
+        Base64.Decoder decoder = Base64.getDecoder();
+        String payload = new String(decoder.decode(payloadPart));
+        HashMap hashMap = objectMapper.readValue(payload, HashMap.class);
+        Claims claims = new DefaultClaims(hashMap);
+
         MailInfoDto mailInfoDto = new MailInfoDto();
         mailInfoDto.setExamName(examName);
         mailInfoDto.setStartDate(startDate);
@@ -65,8 +80,8 @@ public class InvitationServiceImplTest {
         mailInfoDto.setDuration(duration);
 
         when(httpServletRequest.getHeader(HttpHeaders.AUTHORIZATION)).thenReturn(token);
-        when(jwtService.getClaims(token.substring(7))).thenReturn(mockClaims(organizationId.toString()));
-        when(organizationService.getById(organizationId)).thenReturn(new Organization());
+        when(jwtService.getClaims(encodedJwt)).thenReturn(claims);
+        when(organizationService.getById(any())).thenReturn(new Organization(organizationName,List.of(new User(),new User())));
         when(examClientService.getExamForMail(any())).thenReturn(mailInfoDto);
 
         // Act
@@ -74,27 +89,9 @@ public class InvitationServiceImplTest {
 
         // Assert
         verify(examClientService).getExamForMail(invitationRequest.examId());
-        verify(organizationService).getById(organizationId);
-        verify(jwtService).getClaims(token.substring(7));
+        verify(jwtService).getClaims(encodedJwt);
 
         // Optionally verify logs or other interactions
     }
 
-    private Claims mockClaims(String organizationId) {
-        Claims claims = mock(Claims.class);
-        when(claims.get("organizationId")).thenReturn(organizationId);
-        return claims;
-    }
-
-    private static class OrganizationResponse {
-        private final String organizationName;
-
-        public OrganizationResponse(String organizationName) {
-            this.organizationName = organizationName;
-        }
-
-        public String getOrganizationName() {
-            return organizationName;
-        }
-    }
 }

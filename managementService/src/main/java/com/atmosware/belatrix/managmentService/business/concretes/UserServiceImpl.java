@@ -110,7 +110,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UpdateUserResponse updateUser(UpdateUserRequest updateUserRequest, @NonNull HttpServletRequest httpServletRequest) {
         log.info("Update user method started.");
-        String token = httpServletRequest.getHeader(HttpHeaders.AUTHORIZATION).substring(7);
+        String token = httpServletRequest.getHeader(HttpHeaders.AUTHORIZATION).split(" ")[1];
 
         User user = this.userRepository
                 .findById
