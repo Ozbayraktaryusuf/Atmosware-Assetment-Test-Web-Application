@@ -178,7 +178,7 @@ public class TestServiceImpl implements TestService {
     @Override
     @Transactional
     //TODO: test id'yi PathVariable olarak almak mı daha iyi yoksa request içinde mi?
-    public AddedQuestionToTestResponse addQuestionToTestResponse(AddQuestionToTestRequest addQuestionToTestRequest) {
+    public AddedQuestionToTestResponse addQuestionToTest(AddQuestionToTestRequest addQuestionToTestRequest) {
         log.info("Add question to test method started.");
 
         Optional<Test> optionalTest = this.testRepository.findById(addQuestionToTestRequest.testId());
@@ -191,7 +191,7 @@ public class TestServiceImpl implements TestService {
 
     @Override
     @Transactional
-    public AddedQuestionToTestResponse addQuestionToTestResponseOrganization(AddQuestionToTestRequest addQuestionToTestRequest, HttpServletRequest httpServletRequest) {
+    public AddedQuestionToTestResponse addQuestionToTestOrganization(AddQuestionToTestRequest addQuestionToTestRequest, HttpServletRequest httpServletRequest) {
         log.info("Add question to test for specific organization method started.");
         Optional<Test> optionalTest = this.testRepository.findById(addQuestionToTestRequest.testId());
 

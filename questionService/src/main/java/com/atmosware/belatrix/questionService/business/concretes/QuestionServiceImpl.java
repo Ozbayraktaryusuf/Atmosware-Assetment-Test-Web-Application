@@ -141,6 +141,8 @@ public class QuestionServiceImpl implements QuestionService {
         log.info("Delete question method started.");
 
         Question question = getQuestionById(id);
+        this.questionBusinessRules.questionShouldBeUpdatable(question);
+
         question.setDeletedDate(LocalDateTime.now());
         this.optionService.delete(question);
 
@@ -159,6 +161,8 @@ public class QuestionServiceImpl implements QuestionService {
         this.questionBusinessRules.questionShouldBelongToSameOrganization(id, organizationId);
 
         Question question = this.questionRepository.findByIdAndOrganizationId(id, organizationId).get();
+        this.questionBusinessRules.questionShouldBeUpdatable(question);
+
         question.setDeletedDate(LocalDateTime.now());
         this.optionService.delete(question);
 
@@ -184,6 +188,7 @@ public class QuestionServiceImpl implements QuestionService {
 
         this.questionBusinessRules.questionShouldBelongToSameOrganization(id, organizationId);
         Question question = this.questionRepository.findById(id).get();
+        this.questionBusinessRules.questionShouldBeUpdatable(question);
 
         return this.optionService.addOption(addOptionRequest, question);
     }
@@ -193,6 +198,7 @@ public class QuestionServiceImpl implements QuestionService {
         log.info("Delete option from question method started.");
 
         Question question =getQuestionById(id);
+        this.questionBusinessRules.questionShouldBeUpdatable(question);
 
         return this.optionService.deleteOption(deleteOptionRequest, question);
     }
@@ -207,6 +213,7 @@ public class QuestionServiceImpl implements QuestionService {
 
         this.questionBusinessRules.questionShouldBelongToSameOrganization(id, organizationId);
         Question question = this.questionRepository.findById(id).get();
+        this.questionBusinessRules.questionShouldBeUpdatable(question);
 
         return this.optionService.deleteOption(deleteOptionRequest, question);
     }

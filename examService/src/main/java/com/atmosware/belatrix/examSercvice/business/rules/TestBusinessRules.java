@@ -44,7 +44,7 @@ public class TestBusinessRules {
     }
 
     public void testShouldBeStartedButNotEnded(Test test) {
-        if (test.getStartDate().isBefore(LocalDateTime.now()) && test.getEndDate().isAfter(LocalDateTime.now())) {
+        if (test.getStartDate().isAfter(LocalDateTime.now()) && test.getEndDate().isAfter(LocalDateTime.now())) {
             throw new BusinessException(messageService.getMessage(Messages.TestMessages.TEST_SHOULD_BE_STARTED_BUT_NOT_ENDED));
         }
     }

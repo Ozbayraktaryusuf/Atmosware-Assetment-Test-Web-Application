@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.SQLRestriction;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,6 +17,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "test_rules")
+@SQLRestriction(value = "deleted_date is null")
 public class TestRule extends BaseEntity<Long> {
     @ManyToOne()
     @JoinColumn(name = "rule_id",nullable = false)

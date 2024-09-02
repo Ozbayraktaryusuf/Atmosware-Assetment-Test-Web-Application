@@ -1,4 +1,11 @@
 package com.atmosware.belatrix.examSercvice.business.dtos.requests.rule;
 
-public record UpdateRuleRequest() {
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
+public record UpdateRuleRequest(
+        @Size(min = 5,max =150 )
+        @NotNull
+        String description
+) {
 }

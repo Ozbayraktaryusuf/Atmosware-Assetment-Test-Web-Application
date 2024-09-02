@@ -62,7 +62,7 @@ public class TestQuestionServiceImpl implements TestQuestionService {
     public DeletedQuestionFromTestResponse deleteQuestionFromTest(Long questionId, Test test) {
         log.info("Delete question from test method summoned.");
 
-        Optional<TestQuestion> optionalTestQuestion = this.testQuestionRepository.findByTestIdAndQuestionId(questionId, test.getId());
+        Optional<TestQuestion> optionalTestQuestion = this.testQuestionRepository.findByTestIdAndQuestionId(test.getId(),questionId);
         this.testQuestionBusinessRule.testQuestionShouldBeExists(optionalTestQuestion);
         this.testQuestionBusinessRule.questionCanNotObtainOptionsLessThanTwo(test.getTestQuestions());
 

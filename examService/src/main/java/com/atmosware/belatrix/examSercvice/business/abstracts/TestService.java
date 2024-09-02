@@ -32,9 +32,9 @@ public interface TestService {
 
     DeleteTestResponse deleteOrganization(Long id, HttpServletRequest httpServletRequest);
 
-    AddedQuestionToTestResponse addQuestionToTestResponse(AddQuestionToTestRequest addQuestionToTestRequest);
+    AddedQuestionToTestResponse addQuestionToTest(AddQuestionToTestRequest addQuestionToTestRequest);
 
-    AddedQuestionToTestResponse addQuestionToTestResponseOrganization(AddQuestionToTestRequest addQuestionToTestRequest, HttpServletRequest httpServletRequest);
+    AddedQuestionToTestResponse addQuestionToTestOrganization(AddQuestionToTestRequest addQuestionToTestRequest, HttpServletRequest httpServletRequest);
 
     DeletedQuestionFromTestResponse deleteQuestionFromTest(DeleteQuestionFromTestRequest deleteQuestionFromTestRequest);
 

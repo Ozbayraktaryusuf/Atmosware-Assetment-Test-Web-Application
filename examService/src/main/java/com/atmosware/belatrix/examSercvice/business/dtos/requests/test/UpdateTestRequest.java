@@ -1,5 +1,6 @@
 package com.atmosware.belatrix.examSercvice.business.dtos.requests.test;
 
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -14,7 +15,7 @@ public record UpdateTestRequest(
         @NotNull
         LocalDateTime endDate,
         @NotNull
-        @Size(max = 60)
+        @Max(value = 120,message = "Exam can't be longer than 120 minutes.")
         Long duration
 ) {
 }
