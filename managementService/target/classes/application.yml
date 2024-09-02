@@ -1,53 +1,8 @@
-eureka:
-  client:
-    fetchRegistry: true
-    registerWithEureka: true
-    serviceUrl:
-      defaultZone: http://localhost:5000/eureka
-  instance:
-    instance-id: ${spring.application.name}:${instanceId:${random.value}}
-    preferIpAddress: true
-server:
-  port: 5001
 spring:
   application:
     name: management-service
-  datasource:
-    url: jdbc:postgresql://localhost:5432/gyt_management
-    username: postgres
-    password: 12345
-  jpa:
-    hibernate:
-      ddl-auto: update
-    properties:
-      jakarta:
-        persistence:
-          validation:
-            mode: none
-    show-sql: true
-grpc:
-  server:
-    port: 7678
-  client:
-    examService:
-      address: static://localhost:7677
-      negotiation-type: plaintext
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  endpoint:
-    prometheus:
-      enabled: true
-    health:
-      show-details: always
-jwt:
-  secret:
-    key: C53m0R5fXD2VXQwoWbV6Rhqk44l/fY0n6rk67028lFw9ZCU9nIpc0V6N1S7hNGHSj6nNGKszIHMUCGxOwatyQXtcA+HmkiCGtO19bhhVEEhfDVxdYP/PLDTnolseuAMP9bYYmXPUXZ/79iRq90kIsM37Uiw/Q3xFFjHObjzzD78ZP8ucmaavcEBTeW9dpOieMvyS7Zdz4ut/slMtIpq1gKBKBw+r3e3sUbUGmoINGJoBsPEQflbE10J1aTRLLREq1EmUNw9VZmVOtCrVErwKawkQFVniWieqAeQze+OY1BfkjYI11lhO7Y7LyOl3Vx35EezWhrYj8ceajsnEr7CIMg==
-  expiration:
-    ms: 600000
-refreshToken:
-  expiration:
-    days: 10
-  cookie-key: refresh-token
+  cloud:
+    config:
+      profile: dev
+  config:
+    import: configserver:http://localhost:8050/

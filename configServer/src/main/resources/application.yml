@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/Ozbayraktaryusuf/Atmosware-Assetment-Test-Web-Application-Config.git
+server:
+  port: 8050

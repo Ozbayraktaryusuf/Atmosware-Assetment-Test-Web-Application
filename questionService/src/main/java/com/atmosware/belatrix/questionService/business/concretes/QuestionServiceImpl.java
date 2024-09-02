@@ -237,7 +237,7 @@ public class QuestionServiceImpl implements QuestionService {
         log.info("Get question by id for specific organization method started.");
 
         UUID organizationId = this.extractOrganizationIdFromToken(request);
-        this.questionBusinessRules.questionShouldBelongToSameOrganization(id, organizationId);
+        this.questionBusinessRules.questionCanNotBeViewableIfBelongsToAnotherOrganization(id, organizationId);
 
         Question question = getQuestionById(id);
 

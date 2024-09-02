@@ -1,29 +1,8 @@
-server:
-  port: 5002
-eureka:
-  client:
-    fetchRegistry: true
-    registerWithEureka: true
-    serviceUrl:
-      defaultZone: http://localhost:5000/eureka
-  instance:
-    instance-id: ${spring.application.name}:${instanceId:${random.value}}
-    preferIpAddress: true
 spring:
   application:
     name: gateway-service
   cloud:
-    gateway:
-      routes[0]:
-        id: management-service
-        predicates[0]: Path=/management-service/api/v1/**
-        uri: lb://management-service
-      routes[1]:
-        id: question-service
-        predicates[0]: Path=/question-service/api/v1/**
-        uri: lb://question-service
-      routes[2]:
-        id: exam-service
-        predicates[0]: Path=/exam-service/api/v1/**
-        uri: lb://exam-service
-
+    config:
+      profile: dev
+  config:
+    import: configserver:http://localhost:8050

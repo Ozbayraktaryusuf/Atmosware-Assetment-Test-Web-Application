@@ -34,6 +34,12 @@ public class QuestionBusinessRules {
             throw new BusinessException(messageService.getMessage(Messages.QuestionMessages.QUESTION_SHOULD_BE_BELONGED_TO_ORGANIZATION));
         }
     }
+    public void questionCanNotBeViewableIfBelongsToAnotherOrganization(Long id, UUID organizationId){
+        Question question = this.questionRepository.findById(id).get();
+        if (!(question.getOrganizationId() ==null) && !question.getOrganizationId().equals(organizationId)){
+            throw new BusinessException(messageService.getMessage(Messages.QuestionMessages.QUESTION_SHOULD_BE_BELONGED_TO_ORGANIZATION));
+        }
+    }
     public void questionShouldBeUpdatable(Question question){
         if (this.examClientService.controlQuestionIsUsed(question.getId())){
             throw new BusinessException(messageService.getMessage(Messages.QuestionMessages.QUESTION_IS_NOT_UPDATABLE));
